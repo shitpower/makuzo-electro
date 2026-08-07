@@ -157,7 +157,7 @@ export function AdminShell({ onLogout, children }) {
             aria-label="Makuzo Admin"
           >
             <span className="relative block size-8 shrink-0 overflow-hidden rounded-lg bg-[var(--bg-elevated)]">
-              <Image src="/img/Logo_Makuzo.webp" alt="" fill sizes="32px" className="object-contain p-1" />
+              <Image src="/img/Makuzo-logo.webp" alt="" fill sizes="32px" className="object-contain p-1" />
             </span>
             {sidebarOpen ? (
               <span>

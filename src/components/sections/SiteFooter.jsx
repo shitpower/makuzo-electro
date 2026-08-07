@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { MakuzoLogo } from "@/components/ui/MakuzoLogo";
+
 const DEFAULT_NAV = {
   ru: [
     { label: "Услуги", href: "#services" },
@@ -36,11 +38,8 @@ export function SiteFooter({ content = {}, locale }) {
       <div className="container-site flex flex-col gap-10 md:min-h-[224px] md:gap-12">
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:gap-12">
           <div className="flex max-w-[360px] flex-col gap-4">
-            <Link
-              href="/"
-              className="font-[family-name:var(--font-display)] text-[22px] font-bold tracking-[0.08em] text-white"
-            >
-              MAKUZO
+            <Link href="/" className="focus-ring inline-block rounded-sm">
+              <MakuzoLogo variant="second" className="h-8 w-auto md:h-9" />
             </Link>
             {content.brandText ? (
               <p className="font-[family-name:var(--font-body)] text-[13px] leading-[1.45] text-[var(--on-dark-mute)]">

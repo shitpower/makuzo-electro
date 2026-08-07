@@ -53,7 +53,7 @@ export function ServicesSection({ content }) {
                     />
                   </span>
                   <FiArrowRight
-                    className={`hidden size-6 shrink-0 text-[var(--ink)] transition-transform md:block ${isOpen ? "rotate-90" : ""}`}
+                    className={`btn-arrow hidden size-6 text-[var(--ink)] transition-transform md:block ${isOpen ? "rotate-90" : ""}`}
                     aria-hidden
                   />
                 </button>

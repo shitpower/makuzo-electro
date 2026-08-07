@@ -107,7 +107,7 @@ export function normalizeCmsMediaSrc(url) {
   }
 
   if (s === "/img/MainImg.png") return "/img/MainImg.webp";
-  if (s === "/img/Logo_Makuzo.png") return "/img/Logo_Makuzo.webp";
+  if (s === "/img/Logo_Makuzo.png" || s === "/img/Logo_Makuzo.webp") return "/img/Makuzo-logo.webp";
 
   return s;
 }

@@ -34,16 +34,16 @@ export async function generateMetadata() {
       url: siteUrl,
       title,
       description,
-      images: [{ url: "/img/Logo_Makuzo.webp", width: 512, height: 512, alt: "Makuzo" }],
+      images: [{ url: "/img/Makuzo-logo.webp", width: 560, height: 373, alt: "Makuzo" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/img/Logo_Makuzo.webp"],
+      images: ["/img/Makuzo-logo.webp"],
     },
     robots: { index: true, follow: true },
-    icons: { icon: "/img/Logo_Makuzo.webp" },
+    icons: { icon: "/img/Makuzo-logo.webp" },
   };
 }
 

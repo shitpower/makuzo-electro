@@ -28,5 +28,18 @@ export default function sitemap() {
         },
       },
     },
+    {
+      url: `${siteUrl}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.4,
+      alternates: {
+        languages: {
+          ru: `${siteUrl}/privacy?lang=ru`,
+          lv: `${siteUrl}/privacy?lang=lv`,
+          en: `${siteUrl}/privacy?lang=en`,
+        },
+      },
+    },
   ];
 }

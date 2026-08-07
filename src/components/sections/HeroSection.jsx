@@ -2,7 +2,7 @@
 
 import { FiArrowDown } from "react-icons/fi";
 
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ButtonLabel } from "@/components/ui/ButtonLabel";
 import { SiteImage } from "@/components/ui/SiteImage";
 
 function HighlightedTitle({ title, highlight }) {
@@ -25,8 +25,9 @@ function HighlightedTitle({ title, highlight }) {
 export function HeroSection({ content, locale, phone }) {
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : content.ctaHref || "#contacts";
 
+  // Plain <section>: LCP (h1 + bg image) must render at opacity 1 without waiting for JS/framer-motion.
   return (
-    <AnimatedSection className="relative flex min-h-[560px] items-center bg-[#111111] py-14 sm:py-16 lg:min-h-[1050px] lg:py-20">
+    <section className="relative flex min-h-[560px] items-center bg-[#111111] py-14 sm:py-16 lg:min-h-[1050px] lg:py-20">
       <div
         className="absolute inset-0 overflow-hidden"
         style={{
@@ -48,7 +49,7 @@ export function HeroSection({ content, locale, phone }) {
       </div>
 
       <div className="container-site relative z-10 lg:-mt-14">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-white/45 sm:text-[11px] sm:tracking-[0.14em]">
+        <p className="hero-secondary text-[10px] font-semibold uppercase tracking-[0.1em] text-white/45 sm:text-[11px] sm:tracking-[0.14em]">
           {content.locationTag}
         </p>
 
@@ -60,12 +61,12 @@ export function HeroSection({ content, locale, phone }) {
           {content.subtitle}
         </p>
 
-        <div className="mt-6 flex w-full max-w-md flex-col gap-3 sm:mt-[34px] sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:gap-[28px]">
+        <div className="hero-secondary mt-6 flex w-full max-w-md flex-col gap-3 sm:mt-[34px] sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:gap-[28px]">
           <a
             href={content.ctaHref || telHref}
-            className="btn-primary inline-flex min-h-12 w-full sm:h-[42px] sm:min-h-0 sm:w-auto sm:!px-7 sm:!py-0 sm:text-[13px]"
+            className="btn-primary inline-flex min-h-12 w-full items-center justify-center gap-2 sm:h-[42px] sm:min-h-0 sm:w-auto sm:!px-7 sm:!py-0 sm:text-[13px]"
           >
-            {content.ctaText}
+            <ButtonLabel arrow>{content.ctaText}</ButtonLabel>
           </a>
           <a
             href="#services"
@@ -97,11 +98,11 @@ export function HeroSection({ content, locale, phone }) {
       {/* Scroll button — white circle, copper arrow */}
       <a
         href="#design"
-        className="scroll-arrow absolute bottom-6 left-1/2 z-20 grid size-12 place-items-center rounded-full bg-white sm:bottom-[48px] sm:size-[59px]"
+        className="hero-secondary scroll-arrow absolute bottom-6 left-1/2 z-20 grid size-12 place-items-center rounded-full bg-white sm:bottom-[48px] sm:size-[59px]"
         aria-label={locale === "en" ? "Scroll down" : locale === "lv" ? "Ritināt lejup" : "Прокрутить"}
       >
         <FiArrowDown strokeWidth={2.5} className="text-[18px] text-[var(--signal)] sm:text-[23px]" aria-hidden />
       </a>
-    </AnimatedSection>
+    </section>
   );
 }

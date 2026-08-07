@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ButtonLabel } from "@/components/ui/ButtonLabel";
 import { SiteImage } from "@/components/ui/SiteImage";
 import { getSectionByKey } from "@/db/queries";
 import { getSectionContent, getSiteLocaleServer } from "@/lib/site-locale";
@@ -93,8 +94,10 @@ export default async function DesignPage() {
                 {content.closing}
               </p>
             ) : null}
-            <Link href="/#contacts" className="btn-primary mt-4 inline-flex w-fit">
-              {isEn ? "Discuss a project" : isLv ? "Apspriest projektu" : "Обсудить проект"}
+            <Link href="/#contacts" className="btn-primary mt-4 inline-flex w-fit items-center justify-center gap-2">
+              <ButtonLabel arrow>
+                {isEn ? "Discuss a project" : isLv ? "Apspriest projektu" : "Обсудить проект"}
+              </ButtonLabel>
             </Link>
           </div>
 

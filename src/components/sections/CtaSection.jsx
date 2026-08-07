@@ -1,4 +1,5 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ButtonLabel } from "@/components/ui/ButtonLabel";
 
 function resolveCtaTitle(content) {
   if (content.titleLine1) {
@@ -76,9 +77,9 @@ export function CtaSection({ content, phone }) {
 
             <a
               href={telHref}
-              className="btn-primary mt-8 w-fit !h-[33px] !min-w-[109px] !rounded-[100px] !bg-[var(--signal)] !px-[19px] !py-0 !text-[13px] !font-bold !leading-[19px]"
+              className="btn-primary mt-8 inline-flex w-fit items-center justify-center gap-2 !h-[33px] !min-w-[109px] !rounded-[100px] !bg-[var(--signal)] !px-[19px] !py-0 !text-[13px] !font-bold !leading-none"
             >
-              {content.buttonText}
+              <ButtonLabel arrow>{content.buttonText}</ButtonLabel>
             </a>
           </div>
         </div>

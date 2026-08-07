@@ -21,11 +21,11 @@ export const DEFAULT_SECTIONS = [
       titleHighlight: "любой сложности",
       subtitle:
         "Современные инженерные решения по электрификации промышленных, коммерческих, общественных и частных объектов. Пять направлений: электромонтаж, электроизмерения, слаботочные системы, электрощиты и автоматизация.",
-      ctaText: "Обсудить проект →",
+      ctaText: "Обсудить проект",
       ctaSecondaryText: "Смотреть услуги",
       ctaHref: "#contacts",
       bgImageUrl:
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80",
+        "/img/hero-bg.webp",
     },
     contentLv: {
       locationTag: "RĪGA · LATVIJA",
@@ -33,11 +33,11 @@ export const DEFAULT_SECTIONS = [
       titleHighlight: "jebkurā sarežģītībā",
       subtitle:
         "Mūsdienīgi inženiertehniskie risinājumi rūpniecības, komerciālo, publisko un privāto objektu elektroinstalācijai. Pieci virzieni: elektroinstalācija, elektromērījumi, vājstrāvas sistēmas, elektrosadales skapji un automatizācija.",
-      ctaText: "Apspriest projektu →",
+      ctaText: "Apspriest projektu",
       ctaSecondaryText: "Skatīt pakalpojumus",
       ctaHref: "#contacts",
       bgImageUrl:
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80",
+        "/img/hero-bg.webp",
     },
     contentEn: {
       locationTag: "RIGA · LATVIA",
@@ -45,11 +45,11 @@ export const DEFAULT_SECTIONS = [
       titleHighlight: "any complexity",
       subtitle:
         "Modern engineering solutions for electrification of industrial, commercial, public and private facilities. Five areas: electrical installation, electrical measurements, low-current systems, electrical switchboards and automation.",
-      ctaText: "Discuss project →",
+      ctaText: "Discuss project",
       ctaSecondaryText: "View services",
       ctaHref: "#contacts",
       bgImageUrl:
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80",
+        "/img/hero-bg.webp",
     },
   },
   {
@@ -511,31 +511,34 @@ export const DEFAULT_SECTIONS = [
       label: "ПРОЕКТЫ",
       title: "Наши проекты",
       description:
-        "Электрификация торговых центров, складов, производств и частных объектов — фотографии с реальных площадок.",
+        "От квартир и частных домов до магазинов, складов и производственных площадок — типы объектов, с которыми мы работаем.",
       items: [
         {
-          tag: "ПРОМЫШЛЕННОСТЬ",
-          title: "Электроснабжение производственного комплекса",
-          meta: "Рига · 2025",
-          description: "Силовые сети, щитовое оборудование и автоматика цеха.",
+          tag: "ЧАСТНЫЙ СЕКТОР",
+          title: "Квартиры, дома и городская среда",
+          meta: "Жилая застройка",
+          description:
+            "Электромонтаж в квартирах и частных домах, уличное освещение, благоустройство дворов, парков и общественных зон.",
           imageUrl:
-            "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "КОММЕРЦИЯ",
-          title: "Торговый центр — полный цикл электромонтажа",
-          meta: "Рига · 2024",
-          description: "Освещение, слаботочные системы и диспетчеризация.",
+          tag: "ИНДУСТРИАЛЬНОЕ",
+          title: "Магазины, склады и торговые объекты",
+          meta: "Коммерция и логистика",
+          description:
+            "Освещение, силовые и слаботочные сети для магазинов, складов, офисов и коммерческих помещений.",
           imageUrl:
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "ЧАСТНЫЙ ОБЪЕКТ",
-          title: "Умный дом под ключ",
-          meta: "Юрмала · 2024",
-          description: "Проектирование, монтаж и настройка систем умного дома.",
+          tag: "ПРОМЗОНА",
+          title: "Производство и конвейерные линии",
+          meta: "Промышленные площадки",
+          description:
+            "Электроснабжение цехов, промышленных линий и конвейерного оборудования — от щитов до автоматики производства.",
           imageUrl:
-            "https://images.unsplash.com/photo-1558002039-63fffd1e2c8b?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80",
         },
       ],
     },
@@ -543,31 +546,34 @@ export const DEFAULT_SECTIONS = [
       label: "PROJEKTI",
       title: "Mūsu projekti",
       description:
-        "Tirdzniecības centru, noliktavu, ražošanas objektu un privāto ēku elektroinstalācija — fotogrāfijas no reāliem objektiem.",
+        "No dzīvokļiem un privātmājām līdz veikaliem, noliktavām un ražošanas objektiem — projektu veidi, ar kuriem strādājam.",
       items: [
         {
-          tag: "RŪPNIECĪBA",
-          title: "Ražošanas kompleksa elektroapgāde",
-          meta: "Rīga · 2025",
-          description: "Spēka tīkli, skapju aprīkojums un ceha automatizācija.",
+          tag: "PRIVĀTAIS SEKTORS",
+          title: "Dzīvokļi, mājas un pilsētvide",
+          meta: "Dzīvojamā vide",
+          description:
+            "Elektroinstalācija dzīvokļos un privātmājās, ielu apgaismojums, pagalmu, parku un publisko zonu labiekārtošana.",
           imageUrl:
-            "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "KOMERCIĀLAIS",
-          title: "Tirdzniecības centrs — pilns elektroinstalācijas cikls",
-          meta: "Rīga · 2024",
-          description: "Apgaismojums, vājstrāvas sistēmas un dispečerizācija.",
+          tag: "INDUSTRIĀLAIS",
+          title: "Veikali, noliktavas un tirdzniecības objekti",
+          meta: "Komercija un loģistika",
+          description:
+            "Apgaismojums, spēka un vājstrāvas tīkli veikaliem, noliktavām, birojiem un komerciālām telpām.",
           imageUrl:
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "PRIVĀTAIS OBJEKTS",
-          title: "Viedā māja «atslēgas rokā»",
-          meta: "Jūrmala · 2024",
-          description: "Projektēšana, montāža un viedās mājas sistēmu konfigurācija.",
+          tag: "RŪPNIECĪBAS ZONA",
+          title: "Ražošana un konveijera līnijas",
+          meta: "Rūpniecības objekti",
+          description:
+            "Ražošanas cehu, industriālo līniju un konveijera iekārtu elektroapgāde — no skapjiem līdz ražošanas automatizācijai.",
           imageUrl:
-            "https://images.unsplash.com/photo-1558002039-63fffd1e2c8b?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80",
         },
       ],
     },
@@ -575,31 +581,34 @@ export const DEFAULT_SECTIONS = [
       label: "PROJECTS",
       title: "Our projects",
       description:
-        "Electrification of shopping malls, warehouses, production facilities and private properties — photos from real job sites.",
+        "From apartments and private homes to shops, warehouses and production sites — the types of projects we work on.",
       items: [
         {
-          tag: "INDUSTRY",
-          title: "Power supply for production complex",
-          meta: "Riga · 2025",
-          description: "Power networks, panel equipment and shop floor automation.",
+          tag: "PRIVATE SECTOR",
+          title: "Apartments, homes and urban environment",
+          meta: "Residential",
+          description:
+            "Electrical work in apartments and private homes, street lighting, courtyards, parks and public spaces.",
           imageUrl:
-            "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "COMMERCIAL",
-          title: "Shopping mall — full electrical installation cycle",
-          meta: "Riga · 2024",
-          description: "Lighting, low-current systems and building management.",
+          tag: "INDUSTRIAL",
+          title: "Shops, warehouses and retail facilities",
+          meta: "Commerce and logistics",
+          description:
+            "Lighting, power and low-current systems for shops, warehouses, offices and commercial premises.",
           imageUrl:
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
         },
         {
-          tag: "PRIVATE PROPERTY",
-          title: "Turnkey smart home",
-          meta: "Jurmala · 2024",
-          description: "Design, installation and configuration of smart home systems.",
+          tag: "INDUSTRIAL ZONE",
+          title: "Production and conveyor lines",
+          meta: "Manufacturing sites",
+          description:
+            "Power supply for workshops, industrial lines and conveyor equipment — from panels to production automation.",
           imageUrl:
-            "https://images.unsplash.com/photo-1558002039-63fffd1e2c8b?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80",
         },
       ],
     },
@@ -763,7 +772,7 @@ export const DEFAULT_SECTIONS = [
         { label: "Контакты", href: "#contacts" },
       ],
       copyrightLocation: "Все права защищены.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Политика конфиденциальности", href: "#" }],
+      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Политика конфиденциальности", href: "/privacy" }],
     },
     contentLv: {
       brandText:
@@ -779,7 +788,7 @@ export const DEFAULT_SECTIONS = [
         { label: "Kontakti", href: "#contacts" },
       ],
       copyrightLocation: "Visas tiesības aizsargātas.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privātuma politika", href: "#" }],
+      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privātuma politika", href: "/privacy" }],
     },
     contentEn: {
       brandText:
@@ -795,7 +804,7 @@ export const DEFAULT_SECTIONS = [
         { label: "Contacts", href: "#contacts" },
       ],
       copyrightLocation: "All rights reserved.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privacy policy", href: "#" }],
+      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privacy policy", href: "/privacy" }],
     },
   },
 ];

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiMenu, FiX, FiPhone } from "react-icons/fi";
 
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
+import { MakuzoLogo } from "@/components/ui/MakuzoLogo";
 
 export function SiteHeader({ locale, phone }) {
   const isLv = locale === "lv";
@@ -75,11 +76,8 @@ export function SiteHeader({ locale, phone }) {
   return (
     <header className="relative z-50 bg-white">
       <div className="container-site flex h-[72px] items-center justify-between gap-3 sm:h-20 md:h-[124px]">
-        <Link
-          href="/"
-          className="shrink-0 text-[24px] font-extrabold tracking-[-0.01em] text-[var(--ink)] sm:text-[26px] md:text-[28px]"
-        >
-          MAKUZO
+        <Link href="/" className="focus-ring shrink-0 rounded-sm">
+          <MakuzoLogo className="h-7 w-auto sm:h-8 md:h-9" priority />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex md:gap-8" aria-label={menuLabel}>

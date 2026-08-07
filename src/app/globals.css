@@ -57,10 +57,10 @@
 @theme inline {
   --font-sans: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space), var(--font-mulish), "Space Grotesk", "Mulish", ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-plex), var(--font-mulish), "IBM Plex Sans", "Mulish", ui-sans-serif, system-ui, sans-serif;
-  --font-admin: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-admin-display: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
-  --font-stat-number: var(--font-bebas), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-admin: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-admin-display: var(--font-space), var(--font-mulish), "Space Grotesk", "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-stat-number: var(--font-space), var(--font-mulish), "Space Grotesk", "Mulish", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Wrapped in @layer base so Tailwind utilities (which live in @layer utilities)
@@ -142,7 +142,7 @@
 
   .font-stat-number {
     font-family: var(--font-stat-number);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   .section-label {
@@ -161,6 +161,29 @@
     font-weight: 700;
     line-height: 1.1;
     color: var(--ink);
+  }
+
+  .legal-page-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.625rem, 6.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .legal-page-heading {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .legal-prose {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
   }
 
   .font-admin {
@@ -317,9 +340,24 @@
     font-family: var(--font-sans);
     font-size: 0.9375rem;
     font-weight: 700;
+    line-height: 1;
     border: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-arrow {
+    width: 1.125em;
+    height: 1.125em;
+    flex-shrink: 0;
+    display: block;
+    transform: translateY(0.5px);
+  }
+
+  .btn-primary > .btn-arrow,
+  .btn-ghost > .btn-arrow,
+  .btn-outline-ink > .btn-arrow {
+    margin: 0;
   }
 
   .btn-primary:hover {
@@ -345,6 +383,7 @@
     font-family: var(--font-sans);
     font-size: 0.9375rem;
     font-weight: 700;
+    line-height: 1;
     border: 1px solid rgba(255, 255, 255, 0.6);
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
@@ -366,6 +405,7 @@
     color: var(--ink);
     font-size: 0.8125rem;
     font-weight: 600;
+    line-height: 1;
     border: 1px solid var(--line);
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
@@ -462,6 +502,17 @@
     color: var(--status-error);
   }
 
+  /* Hero secondary chrome: visible by default (no JS). Soft entrance only when motion allowed. */
+  .hero-secondary {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-secondary {
+      animation: hero-secondary-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+
   .scroll-arrow {
     animation: bounce-down 2s ease-in-out infinite;
   }
@@ -478,6 +529,21 @@
     .scroll-arrow {
       animation: none;
     }
+
+    .hero-secondary {
+      animation: none;
+    }
+  }
+}
+
+@keyframes hero-secondary-in {
+  from {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

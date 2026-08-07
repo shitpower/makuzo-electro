@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ButtonLabel } from "@/components/ui/ButtonLabel";
 import { SiteImage } from "@/components/ui/SiteImage";
 
 export function DesignSection({ content }) {
@@ -21,9 +21,8 @@ export function DesignSection({ content }) {
           <p className="max-w-[520px] font-[family-name:var(--font-body)] text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.5] text-[var(--mute)]">
             {content.teaser}
           </p>
-          <Link href={content.ctaHref || "/design"} className="btn-primary mt-2 inline-flex w-fit gap-2">
-            {content.ctaText || "Подробнее"}
-            <FiArrowRight aria-hidden />
+          <Link href={content.ctaHref || "/design"} className="btn-primary mt-2 inline-flex w-fit items-center justify-center gap-2">
+            <ButtonLabel arrow>{content.ctaText || "Подробнее"}</ButtonLabel>
           </Link>
         </div>
 

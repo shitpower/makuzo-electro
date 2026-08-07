@@ -9,12 +9,19 @@ const LOCALES = [
   { code: "en", label: "EN" },
 ];
 
+const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
+
+/** Module-scope helper — avoids react-hooks/immutability on document.cookie inside the component. */
+function writeLocaleCookie(next) {
+  globalThis.document.cookie = `locale=${next};path=/;max-age=${LOCALE_MAX_AGE};samesite=lax`;
+}
+
 export function LocaleSwitcher({ locale }) {
   const router = useRouter();
   const pathname = usePathname();
 
   function switchLocale(next) {
-    document.cookie = `locale=${next};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    writeLocaleCookie(next);
     router.push(`${pathname}?lang=${next}`);
     router.refresh();
   }

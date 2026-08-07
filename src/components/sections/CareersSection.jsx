@@ -1,6 +1,7 @@
 import { FiArrowRight } from "react-icons/fi";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ButtonLabel } from "@/components/ui/ButtonLabel";
 
 export function CareersSection({ content }) {
   const roles = content?.roles || [];
@@ -16,8 +17,8 @@ export function CareersSection({ content }) {
           <p className="max-w-[520px] font-[family-name:var(--font-body)] text-[17px] leading-[1.5] text-[var(--on-dark-mute)]">
             {content.description}
           </p>
-          <a href={content.buttonHref || "#contacts"} className="btn-primary w-fit">
-            {content.buttonText}
+          <a href={content.buttonHref || "#contacts"} className="btn-primary inline-flex w-fit items-center justify-center gap-2">
+            <ButtonLabel arrow>{content.buttonText}</ButtonLabel>
           </a>
         </div>
 
@@ -38,7 +39,7 @@ export function CareersSection({ content }) {
                   {role.meta}
                 </span>
               </div>
-              <FiArrowRight className="size-5 shrink-0 text-[var(--gold)]" aria-hidden />
+              <FiArrowRight className="btn-arrow size-5 text-[var(--gold)]" aria-hidden />
             </a>
           ))}
         </div>
