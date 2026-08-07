@@ -22,13 +22,13 @@
   --status-warning: #f59e0b;
   --status-info: #38bdf8;
 
-  /* Brand — Makuzo Figma */
-  --accent: #a86a3d;
-  --accent-bright: #b87a4d;
-  --accent-muted: rgba(168, 106, 61, 0.12);
-  --signal: #a86a3d;
-  --mark: #a86a3d;
-  --gold: #e8a317;
+  /* Brand — temporary red (was copper #a86a3d) */
+  --accent: #c62828;
+  --accent-bright: #e53935;
+  --accent-muted: rgba(198, 40, 40, 0.12);
+  --signal: #c62828;
+  --mark: #c62828;
+  --gold: #e53935;
 
   /* Public site (Makuzo) */
   --ink: #111111;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { getDetailVisibility } from "@/lib/contact-details";
 import {
   formatCompanyAddressShort,
   normalizeCompanyProfile,
@@ -16,9 +17,16 @@ export function ContactsSection({ content, locale, company }) {
   const phone = content?.phones?.[0] || profile.phone || "";
   const email = content?.email || profile.email || "";
   const address = content?.address || formatCompanyAddressShort(profile, locale);
+  const hours = content?.hoursWeekday || "";
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "#";
   const labels = content?.detailLabels || {};
   const detailsVisible = Boolean(content?.detailsVisible);
+  const visibility = getDetailVisibility(content);
+  const showPhone = detailsVisible && visibility.phone && Boolean(phone);
+  const showEmail = detailsVisible && visibility.email && Boolean(email);
+  const showAddress = detailsVisible && visibility.address && Boolean(address);
+  const showHours = detailsVisible && visibility.hours && Boolean(hours);
+  const showDetails = showPhone || showEmail || showAddress || showHours;
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -101,9 +109,9 @@ export function ContactsSection({ content, locale, company }) {
             ) : null}
           </div>
 
-          {detailsVisible ? (
+          {showDetails ? (
             <div className="flex w-full max-w-[240px] flex-col gap-7 pt-2 lg:pt-10">
-              {phone ? (
+              {showPhone ? (
                 <div className="flex flex-col gap-1.5">
                   <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
                     {labels.phone || "ТЕЛЕФОН"}
@@ -116,7 +124,7 @@ export function ContactsSection({ content, locale, company }) {
                   </a>
                 </div>
               ) : null}
-              {email ? (
+              {showEmail ? (
                 <div className="flex flex-col gap-1.5">
                   <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
                     {labels.email || "EMAIL"}
@@ -129,7 +137,7 @@ export function ContactsSection({ content, locale, company }) {
                   </a>
                 </div>
               ) : null}
-              {address ? (
+              {showAddress ? (
                 <div className="flex flex-col gap-1.5">
                   <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
                     {labels.address || "АДРЕС"}
@@ -139,13 +147,13 @@ export function ContactsSection({ content, locale, company }) {
                   </span>
                 </div>
               ) : null}
-              {content.hoursWeekday ? (
+              {showHours ? (
                 <div className="flex flex-col gap-1.5">
                   <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
                     {labels.hours || "ЧАСЫ"}
                   </span>
                   <span className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white">
-                    {content.hoursWeekday}
+                    {hours}
                   </span>
                 </div>
               ) : null}

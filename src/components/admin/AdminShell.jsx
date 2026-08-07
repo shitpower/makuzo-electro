@@ -16,6 +16,7 @@ import {
   FiLogOut,
   FiMail,
   FiMoreHorizontal,
+  FiPhone,
   FiSettings,
   FiShield,
   FiUser,
@@ -34,6 +35,12 @@ const NAV_GROUPS = [
       { href: "/admin", label: "Обзор", icon: FiHome, match: (p) => p === "/admin" },
       { href: "/admin/content", label: "Контент", icon: FiLayout, match: (p) => p === "/admin/content" },
       { href: "/admin/footer", label: "Футер", icon: FiColumns, match: (p) => p === "/admin/footer" },
+      {
+        href: "/admin/contact-info",
+        label: "Контакты",
+        icon: FiPhone,
+        match: (p) => p === "/admin/contact-info",
+      },
       {
         href: "/admin/company",
         label: "Компания",
@@ -83,6 +90,7 @@ const MOBILE_PRIMARY = [
 ];
 
 const MOBILE_MORE = [
+  { href: "/admin/contact-info", label: "Контакты", icon: FiPhone },
   { href: "/admin/company", label: "Компания", icon: FiBriefcase },
   { href: "/admin/media", label: "Медиа", icon: FiImage },
   { href: "/admin/audit", label: "Журнал", icon: FiShield },

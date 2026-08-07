@@ -21,7 +21,7 @@ export const SECTION_HELPERS = {
   projects: "Карточки проектов с фотографиями.",
   about: "Блок «О компании»: статистика, фото и три преимущества.",
   careers: "Вакансии и призыв присоединиться.",
-  contacts: "Тёмный блок контактов и CTA.",
+  contacts: "Заголовок и CTA секции. Список телефон/email/адрес/часы — вкладка «Контакты».",
   footer: "Бренд, навигация и копирайт. Реквизиты и Instagram — во вкладке «Компания».",
 };
 
@@ -392,30 +392,18 @@ export function renderSectionFields(key, content, onChange) {
     case "contacts":
       return (
         <>
-          <label className="flex min-h-11 items-center gap-3 text-sm text-[var(--text-secondary)]">
-            <input
-              type="checkbox"
-              checked={Boolean(content.detailsVisible)}
-              onChange={(e) => onChange({ detailsVisible: e.target.checked })}
-            />
-            Показывать блок контактов (телефон / email / адрес / часы)
-          </label>
-          <p className="text-xs text-[var(--text-muted)]">
-            Телефон, email и адрес подтягиваются из вкладки «Компания», если поля секции пустые.
+          <p className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/50 px-3 py-2 text-xs text-[var(--text-muted)]">
+            Список «телефон / email / адрес / часы» и видимость пунктов — во вкладке{" "}
+            <a href="/admin/contact-info" className="text-[var(--accent)] underline">
+              Контакты
+            </a>
+            .
           </p>
           <Field label="Лейбл" value={content.label} onChange={(v) => onChange({ label: v })} />
           <Field label="Заголовок" value={content.title} onChange={(v) => onChange({ title: v })} />
           <Field label="Описание" value={content.description} onChange={(v) => onChange({ description: v })} multiline />
           <Field label="Кнопка «Написать»" value={content.primaryCta} onChange={(v) => onChange({ primaryCta: v })} />
           <Field label="Кнопка «Позвонить»" value={content.secondaryCta} onChange={(v) => onChange({ secondaryCta: v })} />
-          <Field label="Адрес (override)" value={content.address} onChange={(v) => onChange({ address: v })} />
-          <Field
-            label="Телефоны override (через запятую)"
-            value={(content.phones || []).join(", ")}
-            onChange={(v) => onChange({ phones: v.split(",").map((p) => p.trim()).filter(Boolean) })}
-          />
-          <Field label="Email (override)" value={content.email} onChange={(v) => onChange({ email: v })} />
-          <Field label="Часы работы" value={content.hoursWeekday} onChange={(v) => onChange({ hoursWeekday: v })} />
         </>
       );
 
