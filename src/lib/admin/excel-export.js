@@ -1,12 +1,12 @@
-import * as XLSX from "xlsx";
-
 /**
  * Build an .xlsx ArrayBuffer from a sheet name and row objects.
+ * xlsx is loaded only when this function runs (not at module eval) — smaller cold start.
  * @param {string} sheetName
  * @param {Record<string, string | number | boolean | null | undefined>[]} rows
- * @returns {ArrayBuffer}
+ * @returns {Promise<ArrayBuffer>}
  */
-export function buildExcelBuffer(sheetName, rows) {
+export async function buildExcelBuffer(sheetName, rows) {
+  const XLSX = await import("xlsx");
   const worksheet = XLSX.utils.json_to_sheet(rows);
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, sheetName.slice(0, 31));

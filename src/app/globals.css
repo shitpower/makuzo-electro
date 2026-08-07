@@ -547,6 +547,16 @@
   }
 }
 
+/* Below-fold: no opacity:0 — content visible on first paint */
+@keyframes section-in {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes bounce-down {
   0%,
   100% {

@@ -1,17 +1,20 @@
 import Image from "next/image";
 import clsx from "clsx";
 
-/** Wordmark aspect ≈ 560×178 — transparent variants for light/dark surfaces. */
+/**
+ * Transparent wordmarks (no plate background).
+ * default = black+red for light UI; second = white+red for dark UI (footer).
+ */
 const LOGOS = {
   default: {
     src: "/img/logo-on-light.webp",
-    width: 560,
-    height: 178,
+    width: 1120,
+    height: 305,
   },
   second: {
     src: "/img/logo-on-dark.webp",
-    width: 560,
-    height: 178,
+    width: 1120,
+    height: 324,
   },
 };
 

@@ -5,6 +5,7 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
+/** Shared shell for login + panel (login skips sidebar via pathname). */
 export default function AdminLayout({ children }) {
   return (
     <div className="font-admin h-dvh overflow-hidden bg-[var(--bg-base)] text-[var(--text-primary)] antialiased">

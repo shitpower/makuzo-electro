@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { eq } from "drizzle-orm";
 
 import { getDb } from "@/db/client";
@@ -23,7 +24,7 @@ export async function listSections() {
   return db.select().from(sections).orderBy(sections.id);
 }
 
-export async function getSectionByKey(key) {
+export const getSectionByKey = cache(async (key) => {
   if (shouldUseMemoryStore()) {
     return getSectionByKeyMemory(key);
   }
@@ -34,9 +35,9 @@ export async function getSectionByKey(key) {
     .from(sections)
     .where(eq(sections.key, key))
     .then((rows) => rows[0] ?? null);
-}
+});
 
-export async function getVisibleSectionsMap() {
+export const getVisibleSectionsMap = cache(async () => {
   const all = await listSections();
   const map = {};
   for (const section of all) {
@@ -45,7 +46,7 @@ export async function getVisibleSectionsMap() {
     }
   }
   return map;
-}
+});
 
 /**
  * @param {string} key
@@ -79,7 +80,7 @@ function withNormalizedSettings(row) {
   };
 }
 
-export async function getSiteSettings() {
+export const getSiteSettings = cache(async () => {
   if (shouldUseMemoryStore()) {
     return withNormalizedSettings(getSiteSettingsMemory());
   }
@@ -89,7 +90,7 @@ export async function getSiteSettings() {
   if (row) return withNormalizedSettings(row);
   const inserted = await db.insert(siteSettings).values({ id: 1 }).returning();
   return withNormalizedSettings(inserted[0]);
-}
+});
 
 /** @returns {Promise<import("@/lib/company-profile").DEFAULT_COMPANY_PROFILE>} */
 export async function getCompanyProfile() {

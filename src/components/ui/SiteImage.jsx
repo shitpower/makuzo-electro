@@ -3,7 +3,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 
-import { normalizeCmsMediaSrc } from "@/lib/github-assets";
+import { normalizeCmsMediaSrc } from "@/lib/cms-media-src";
 
 export function SiteImage({
   src,

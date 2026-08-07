@@ -34,7 +34,7 @@ export async function generateMetadata() {
       url: siteUrl,
       title,
       description,
-      images: [{ url: "/img/logo-on-light.webp", width: 560, height: 178, alt: "Makuzo" }],
+      images: [{ url: "/img/logo-on-light.webp", width: 1120, height: 305, alt: "Makuzo" }],
     },
     twitter: {
       card: "summary_large_image",

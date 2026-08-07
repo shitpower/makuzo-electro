@@ -1,32 +1,22 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import clsx from "clsx";
 
-export function AnimatedSection({ children, className, id, delay = 0 }) {
+/**
+ * Below-fold entrance animation via CSS — no framer-motion, no opacity:0 on SSR.
+ * Content is visible immediately (LCP/CLS safe); motion only enhances after paint.
+ */
+export function AnimatedSection({ children, className, id }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return (
-      <section id={id} ref={ref} className={clsx(className)}>
-        {children}
-      </section>
-    );
-  }
 
   return (
-    <motion.section
+    <section
       id={id}
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={clsx(className)}
+      className={clsx("motion-safe:animate-[section-in_0.55s_ease-out]", className)}
     >
       {children}
-    </motion.section>
+    </section>
   );
 }

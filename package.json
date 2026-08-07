@@ -29,16 +29,15 @@
     "db:migrate-en": "node scripts/migrate-add-en.js",
     "db:create-admin": "node scripts/create-admin-user.js",
     "db:setup": "node scripts/db-setup.js",
-    "db:reset": "node scripts/db-reset.js"
+    "db:reset": "node scripts/db-reset.js",
+    "analyze": "node scripts/analyze.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",
-    "framer-motion": "^12.40.0",
     "iron-session": "^8.0.4",
-    "nanoid": "^5.1.11",
     "next": "^16.2.6",
     "octokit": "^4.1.4",
     "react": "^19.2.6",
@@ -51,8 +50,8 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.2",
     "@lhci/cli": "^0.15.1",
+    "@next/bundle-analyzer": "^16.3.0",
     "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4.3.0",
     "drizzle-kit": "^0.31.10",

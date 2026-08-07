@@ -52,7 +52,7 @@ export async function GET(request) {
           : "",
     }));
 
-    const buffer = buildExcelBuffer("Журнал", rows);
+    const buffer = await buildExcelBuffer("Журнал", rows);
     const filename = excelFilename("makuzo-audit");
 
     await createAuditEvent({
