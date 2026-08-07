@@ -1,0 +1,502 @@
+@import "tailwindcss";
+
+:root {
+  /* Admin panel (dark theme) */
+  --bg-void: #0a0a0a;
+  --bg-base: #141414;
+  --bg-surface: #1a1a1a;
+  --bg-card: #1c1c1c;
+  --bg-elevated: #242424;
+  --bg-elevated-hover: #2a2a2a;
+  --bg-modal: #1f1f1f;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text-primary: #ffffff;
+  --text-secondary: #e4e4e7;
+  --text-muted: #c4c4cc;
+  --text-disabled: #a1a1aa;
+  --text-placeholder: #a1a1aa;
+  --status-error: #ef4444;
+  --status-success: #22c55e;
+  --status-warning: #f59e0b;
+  --status-info: #38bdf8;
+
+  /* Brand — Makuzo Figma */
+  --accent: #a86a3d;
+  --accent-bright: #b87a4d;
+  --accent-muted: rgba(168, 106, 61, 0.12);
+  --signal: #a86a3d;
+  --mark: #a86a3d;
+  --gold: #e8a317;
+
+  /* Public site (Makuzo) */
+  --ink: #111111;
+  --ink-muted: #6e6e6e;
+  --ink-faint: rgba(17, 17, 17, 0.45);
+  --mute: #6e6e6e;
+  --line: #e8e8e8;
+  --line-light: #e8e8e8;
+  --mist: #f5f5f5;
+  --surface-tint: #f5f5f5;
+  --hero-dark: #111111;
+  --careers-dark: #2c2c2c;
+  --careers-panel: #373737;
+  --footer-dark: #111111;
+  --on-dark-mute: #a1a1a1;
+  --on-dark-line: #3a3a3a;
+
+  /* Figma content width is 1200px on the 1440px canvas (~8% side gutter).
+     On wide monitors a hard 1200-1280px cap plus fixed padding stacks into a
+     huge empty side margin, so the cap is raised and the fixed gutter is kept
+     modest - content fills the viewport up to ~1600px before any extra
+     centering margin kicks in. */
+  --container-max: 1600px;
+}
+
+@theme inline {
+  --font-sans: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space), var(--font-mulish), "Space Grotesk", "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-plex), var(--font-mulish), "IBM Plex Sans", "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-admin: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-admin-display: var(--font-mulish), "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-stat-number: var(--font-bebas), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Wrapped in @layer base so Tailwind utilities (which live in @layer utilities)
+   can override these resets -unlayered rules always win over layered ones
+   regardless of selector specificity, which was silently defeating classes
+   like `text-white` on <a> elements. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: clip;
+    max-width: 100%;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: normal;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Wrapped in @layer components so Tailwind utilities (e.g. `hidden`,
+   `sm:inline-flex`, `text-white`) can still override these custom classes.
+   Unlayered rules always win over layered ones regardless of specificity —
+   without this, e.g. `.btn-primary`'s `display: inline-flex` unconditionally
+   defeated the `hidden sm:inline-flex` utilities used to hide the header call
+   button on mobile, no matter the breakpoint. */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: clamp(0.875rem, 3vw, 2rem);
+    min-width: 0;
+  }
+
+  .section-pad {
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-stat-number {
+    font-family: var(--font-stat-number);
+    font-weight: 400;
+  }
+
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .font-admin {
+    font-family: var(--font-admin);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .font-admin h1,
+  .font-admin h2,
+  .font-admin h3,
+  .font-admin h4 {
+    font-family: var(--font-admin-display);
+    color: var(--text-primary);
+    font-weight: 800;
+  }
+
+  .font-admin p,
+  .font-admin li,
+  .font-admin label,
+  .font-admin span,
+  .font-admin small,
+  .font-admin strong,
+  .font-admin em,
+  .font-admin dt,
+  .font-admin dd {
+    color: inherit;
+  }
+
+  .font-admin .admin-label {
+    color: var(--text-secondary);
+  }
+
+  .font-admin .admin-helper {
+    color: var(--text-primary);
+    opacity: 0.85;
+  }
+
+  .font-admin .admin-muted {
+    color: var(--text-primary);
+    opacity: 0.75;
+  }
+
+  .font-admin table,
+  .font-admin thead,
+  .font-admin tbody,
+  .font-admin tr,
+  .font-admin th,
+  .font-admin td {
+    color: var(--text-primary);
+  }
+
+  .font-admin .admin-input,
+  .font-admin input,
+  .font-admin textarea,
+  .font-admin select {
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
+    font-family: inherit;
+  }
+
+  .font-admin select.admin-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e4e4e7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 0.875rem;
+  }
+
+  .font-admin .admin-input::placeholder,
+  .font-admin input::placeholder,
+  .font-admin textarea::placeholder {
+    color: var(--text-placeholder);
+    opacity: 1;
+  }
+
+  .font-admin select option {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+
+  .font-admin button:not(:disabled) {
+    color: inherit;
+  }
+
+  /* Admin buttons: square radius (site .btn-primary stays pill) */
+  .font-admin .btn-primary {
+    border-radius: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+  }
+
+  .admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-default);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s, opacity 0.15s;
+  }
+
+  .admin-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--bg-elevated);
+  }
+
+  .admin-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .admin-btn-primary {
+    border-color: transparent;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .admin-btn-primary:hover:not(:disabled) {
+    border-color: transparent;
+    background: var(--accent-bright);
+  }
+
+  .admin-btn-ghost {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text-secondary);
+  }
+
+  .admin-btn-ghost:hover:not(:disabled) {
+    border-color: transparent;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 9999px;
+    background: var(--signal);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-bright);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 9999px;
+    background: transparent;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .btn-outline-ink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6875rem 1.75rem;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-outline-ink:hover {
+    border-color: var(--ink);
+    background: var(--surface-tint);
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .matte-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+
+  .admin-input {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-default);
+    background-color: var(--bg-surface);
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+
+  .admin-input::placeholder {
+    color: var(--text-placeholder);
+  }
+
+  /* Native OS select arrow leaks past border-radius; use a clipped custom chevron. */
+  select.admin-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    overflow: hidden;
+    padding-right: 2.25rem;
+    background-color: var(--bg-surface);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e4e4e7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 0.875rem;
+  }
+
+  .admin-label {
+    display: grid;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .admin-card {
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+  }
+
+  .admin-card-elevated {
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-default);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+  }
+
+  .admin-card:hover {
+    border-color: var(--border-default);
+  }
+
+  .admin-touch {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .admin-helper {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    opacity: 0.85;
+  }
+
+  .admin-field-error {
+    font-size: 0.75rem;
+    color: var(--status-error);
+  }
+
+  .scroll-arrow {
+    animation: bounce-down 2s ease-in-out infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee-scroll 32s linear infinite reverse;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+
+    .scroll-arrow {
+      animation: none;
+    }
+  }
+}
+
+@keyframes bounce-down {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
