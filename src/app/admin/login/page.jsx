@@ -71,7 +71,7 @@ function AdminLoginForm() {
       ) : null}
 
       <label className="admin-label">
-        Email (логин)
+        Login
         <input
           type="email"
           value={email}
@@ -79,7 +79,6 @@ function AdminLoginForm() {
           disabled={loading}
           autoComplete="email"
           className="admin-input focus-ring"
-          placeholder="admin@makuzo.local"
           autoFocus
           required
         />
