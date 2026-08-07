@@ -14,7 +14,7 @@ const LOGOS = {
   second: {
     src: "/img/logo-on-dark.webp",
     width: 1120,
-    height: 324,
+    height: 262,
   },
 };
 
