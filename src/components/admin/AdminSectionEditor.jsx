@@ -41,6 +41,18 @@ export function AdminSectionEditor({ section, onSaved }) {
       setContentEn((prev) => ({ ...prev, map: patch.map }));
       return;
     }
+    if (section.key === "contacts" && patch.detailsVisible !== undefined) {
+      setContentRu((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      setContentLv((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      setContentEn((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      return;
+    }
+    if (section.key === "about" && patch.statsVisible !== undefined) {
+      setContentRu((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      setContentLv((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      setContentEn((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      return;
+    }
     if (section.key === "footer" && patch.logoUrl !== undefined) {
       setContentRu((prev) => ({ ...prev, logoUrl: patch.logoUrl }));
       setContentLv((prev) => ({ ...prev, logoUrl: patch.logoUrl }));

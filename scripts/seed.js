@@ -96,6 +96,7 @@ async function seed() {
         seoDescLv: DEFAULT_SITE_SETTINGS.seoDescLv,
         seoDescEn: DEFAULT_SITE_SETTINGS.seoDescEn,
         sectionSpacing: DEFAULT_SITE_SETTINGS.sectionSpacing,
+        companyProfile: DEFAULT_SITE_SETTINGS.companyProfile,
         updatedAt: new Date(),
       })
       .where(eq(siteSettings.id, 1));

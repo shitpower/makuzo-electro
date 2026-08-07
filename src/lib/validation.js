@@ -5,6 +5,28 @@ const sectionSpacingSchema = z.object({
   overrides: z.record(z.string(), z.number().int().min(0).max(400)),
 });
 
+export const companyProfileSchema = z.object({
+  legalName: z.string().trim().min(1).max(160),
+  regNumber: z.string().trim().min(1).max(64),
+  builderRegNumber: z.string().trim().max(64).optional().or(z.literal("")),
+  email: z.string().trim().email().max(160),
+  phone: z.string().trim().min(5).max(32),
+  streetAddress: z.string().trim().min(1).max(200),
+  cityRu: z.string().trim().min(1).max(80),
+  cityLv: z.string().trim().min(1).max(80),
+  cityEn: z.string().trim().min(1).max(80),
+  country: z.string().trim().min(2).max(8),
+  countryNameRu: z.string().trim().min(1).max(80),
+  countryNameLv: z.string().trim().min(1).max(80),
+  countryNameEn: z.string().trim().min(1).max(80),
+  postalCode: z.string().trim().max(32).optional().or(z.literal("")),
+  latitude: z.number().min(-90).max(90),
+  longitude: z.number().min(-180).max(180),
+  instagramUrl: z.string().trim().max(500).optional().or(z.literal("")),
+  instagramVisible: z.boolean(),
+  footerCompanyVisible: z.boolean(),
+});
+
 export const adminLoginSchema = z.object({
   email: z.string().email("Укажите корректный email"),
   password: z.string().min(1, "Пароль обязателен").max(128),
@@ -33,6 +55,7 @@ export const siteSettingsSchema = z.object({
   seoDescLv: z.string().max(320).optional(),
   seoDescEn: z.string().max(320).optional(),
   sectionSpacing: sectionSpacingSchema.optional(),
+  companyProfile: companyProfileSchema.optional(),
 });
 
 export const adminProfileSchema = z

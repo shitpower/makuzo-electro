@@ -4,6 +4,7 @@ import { SiteImage } from "@/components/ui/SiteImage";
 export function AboutSection({ content }) {
   const stats = content?.stats || [];
   const features = content?.features || [];
+  const statsVisible = Boolean(content?.statsVisible);
 
   return (
     <AnimatedSection id="about" className="bg-white pb-16 pt-14 md:pb-24 md:pt-20">
@@ -18,16 +19,18 @@ export function AboutSection({ content }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-6">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-2">
-              <p className="font-stat-number text-[clamp(2.5rem,8vw,4.5rem)] leading-none text-[var(--signal)]">
-                {stat.value}
-              </p>
-              <p className="text-[15px] leading-[19px] text-[var(--ink)] opacity-65">{stat.label}</p>
-            </div>
-          ))}
-        </div>
+        {statsVisible && stats.length > 0 ? (
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-6">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col gap-2">
+                <p className="font-stat-number text-[clamp(2.5rem,8vw,4.5rem)] leading-none text-[var(--signal)]">
+                  {stat.value}
+                </p>
+                <p className="text-[15px] leading-[19px] text-[var(--ink)] opacity-65">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
 
         {content.imageUrl ? (
           <div className="relative aspect-[16/7] w-full overflow-hidden rounded-[2px] bg-[var(--mist)]">

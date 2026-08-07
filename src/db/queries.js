@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { getDb } from "@/db/client";
 import { sections, siteSettings } from "@/db/schema";
+import { normalizeCompanyProfile } from "@/lib/company-profile";
 import { assertDatabaseConfigured, shouldUseMemoryStore } from "@/lib/db-policy";
 import {
   getAllSectionsMemory,
@@ -70,36 +71,55 @@ export async function updateSection(key, patch) {
   return updated[0] ?? null;
 }
 
+function withNormalizedSettings(row) {
+  if (!row) return row;
+  return {
+    ...row,
+    companyProfile: normalizeCompanyProfile(row.companyProfile),
+  };
+}
+
 export async function getSiteSettings() {
   if (shouldUseMemoryStore()) {
-    return getSiteSettingsMemory();
+    return withNormalizedSettings(getSiteSettingsMemory());
   }
   assertDatabaseConfigured();
   const db = getDb();
   const row = await db.select().from(siteSettings).where(eq(siteSettings.id, 1)).then((r) => r[0]);
-  if (row) return row;
+  if (row) return withNormalizedSettings(row);
   const inserted = await db.insert(siteSettings).values({ id: 1 }).returning();
-  return inserted[0];
+  return withNormalizedSettings(inserted[0]);
+}
+
+/** @returns {Promise<import("@/lib/company-profile").DEFAULT_COMPANY_PROFILE>} */
+export async function getCompanyProfile() {
+  const settings = await getSiteSettings();
+  return normalizeCompanyProfile(settings?.companyProfile);
 }
 
 /**
  * @param {Partial<import("@/db/schema").siteSettings.$inferInsert>} patch
  */
 export async function updateSiteSettings(patch) {
+  const normalized =
+    patch.companyProfile !== undefined
+      ? { ...patch, companyProfile: normalizeCompanyProfile(patch.companyProfile) }
+      : patch;
+
   if (shouldUseMemoryStore()) {
-    return updateSiteSettingsMemory(patch);
+    return withNormalizedSettings(updateSiteSettingsMemory(normalized));
   }
   assertDatabaseConfigured();
   const db = getDb();
   const existing = await getSiteSettings();
   if (!existing) {
-    const inserted = await db.insert(siteSettings).values({ id: 1, ...patch }).returning();
-    return inserted[0];
+    const inserted = await db.insert(siteSettings).values({ id: 1, ...normalized }).returning();
+    return withNormalizedSettings(inserted[0]);
   }
   const updated = await db
     .update(siteSettings)
-    .set({ ...patch, updatedAt: new Date() })
+    .set({ ...normalized, updatedAt: new Date() })
     .where(eq(siteSettings.id, 1))
     .returning();
-  return updated[0];
+  return withNormalizedSettings(updated[0]);
 }

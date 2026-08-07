@@ -55,6 +55,7 @@ export const siteSettings = pgTable("site_settings", {
   seoDescLv: text("seo_desc_lv"),
   seoDescEn: text("seo_desc_en"),
   sectionSpacing: jsonb("section_spacing").notNull().default(sql`'{"defaultGap":80,"overrides":{}}'::jsonb`),
+  companyProfile: jsonb("company_profile").notNull().default(sql`'{}'::jsonb`),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

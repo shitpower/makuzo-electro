@@ -1,6 +1,11 @@
 import Link from "next/link";
 
 import { MakuzoLogo } from "@/components/ui/MakuzoLogo";
+import {
+  DEFAULT_COMPANY_PROFILE,
+  formatCompanyLines,
+  normalizeCompanyProfile,
+} from "@/lib/company-profile";
 
 const DEFAULT_NAV = {
   ru: [
@@ -23,15 +28,25 @@ const DEFAULT_NAV = {
   ],
 };
 
-export function SiteFooter({ content = {}, locale }) {
+export function SiteFooter({ content = {}, locale, company }) {
   const year = new Date().getFullYear();
   const isLv = locale === "lv";
   const isEn = locale === "en";
+  const profile = normalizeCompanyProfile(company || DEFAULT_COMPANY_PROFILE);
   const navLinks = content.navLinks?.length
     ? content.navLinks
     : DEFAULT_NAV[isEn ? "en" : isLv ? "lv" : "ru"];
-  const companyLines = content.companyLines || ["SIA MAKUZO"];
-  const legalLinks = content.legalLinks || [];
+  const companyLines = formatCompanyLines(profile, locale);
+  const privacyLabel =
+    content.privacyLabel ||
+    (isEn ? "Privacy policy" : isLv ? "Privātuma politika" : "Политика конфиденциальности");
+  const privacyHref = content.privacyHref || "/privacy";
+
+  const legalLinks = [];
+  if (profile.instagramVisible && profile.instagramUrl) {
+    legalLinks.push({ label: "Instagram", href: profile.instagramUrl, external: true });
+  }
+  legalLinks.push({ label: privacyLabel, href: privacyHref, external: false });
 
   return (
     <footer className="bg-[#111111] pb-8 pt-14 text-white md:min-h-[320px] md:pb-12 md:pt-20">
@@ -39,7 +54,7 @@ export function SiteFooter({ content = {}, locale }) {
         <div className="flex flex-col justify-between gap-10 lg:flex-row lg:gap-12">
           <div className="flex max-w-[360px] flex-col gap-4">
             <Link href="/" className="focus-ring inline-block rounded-sm">
-              <MakuzoLogo variant="second" className="h-9 w-auto md:h-11" />
+              <MakuzoLogo variant="second" className="h-12 w-auto sm:h-14 md:h-16" />
             </Link>
             {content.brandText ? (
               <p className="font-[family-name:var(--font-body)] text-[13px] leading-[1.45] text-[var(--on-dark-mute)]">
@@ -48,7 +63,7 @@ export function SiteFooter({ content = {}, locale }) {
             ) : null}
           </div>
 
-          <div className="flex flex-wrap gap-12 sm:gap-20 lg:gap-24">
+            <div className="flex flex-wrap gap-12 sm:gap-20 lg:gap-24">
             <div className="flex flex-col gap-3">
               <p className="font-[family-name:var(--font-display)] text-[13px] font-medium tracking-[0.06em] text-[var(--signal)]">
                 {content.navTitle || (isEn ? "SECTIONS" : isLv ? "SADAĻAS" : "РАЗДЕЛЫ")}
@@ -64,29 +79,44 @@ export function SiteFooter({ content = {}, locale }) {
               </ul>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <p className="font-[family-name:var(--font-display)] text-[13px] font-medium tracking-[0.06em] text-[var(--signal)]">
-                {content.companyTitle || (isEn ? "COMPANY" : isLv ? "UZŅĒMUMS" : "КОМПАНИЯ")}
-              </p>
-              <ul className="flex flex-col gap-3 font-[family-name:var(--font-body)] text-[14px] text-[var(--on-dark-mute)]">
-                {companyLines.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-            </div>
+            {profile.footerCompanyVisible ? (
+              <div className="flex flex-col gap-3">
+                <p className="font-[family-name:var(--font-display)] text-[13px] font-medium tracking-[0.06em] text-[var(--signal)]">
+                  {content.companyTitle || (isEn ? "COMPANY" : isLv ? "UZŅĒMUMS" : "КОМПАНИЯ")}
+                </p>
+                <ul className="flex flex-col gap-3 font-[family-name:var(--font-body)] text-[14px] text-[var(--on-dark-mute)]">
+                  {companyLines.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
 
         <div className="flex flex-col justify-between gap-4 border-t border-[var(--on-dark-line)] pt-6 sm:flex-row sm:items-center">
           <p className="font-[family-name:var(--font-body)] text-[12px] text-[var(--on-dark-mute)]">
-            © {year} MAKUZO. {content.copyrightLocation || ""}
+            © {year} {profile.legalName.replace(/^SIA\s+/i, "") || "MAKUZO"}.{" "}
+            {content.copyrightLocation || ""}
           </p>
           <div className="flex flex-wrap gap-6 font-[family-name:var(--font-body)] text-[12px] text-[var(--on-dark-mute)]">
-            {legalLinks.map((link) => (
-              <a key={link.label} href={link.href || "#"} className="transition hover:text-white">
-                {link.label}
-              </a>
-            ))}
+            {legalLinks.map((link) =>
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.label} href={link.href || "#"} className="transition hover:text-white">
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
         </div>
       </div>

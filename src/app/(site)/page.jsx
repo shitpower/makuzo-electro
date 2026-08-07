@@ -10,7 +10,8 @@ import { getSectionContent, getSiteLocaleServer } from "@/lib/site-locale";
 
 export default async function HomePage() {
   const locale = await getSiteLocaleServer();
-  const [sectionsMap] = await Promise.all([getVisibleSectionsMap(), getSiteSettings()]);
+  const [sectionsMap, settings] = await Promise.all([getVisibleSectionsMap(), getSiteSettings()]);
+  const company = settings.companyProfile;
 
   const hero = getSectionContent(sectionsMap.hero, locale);
   const design = getSectionContent(sectionsMap.design, locale);
@@ -19,7 +20,7 @@ export default async function HomePage() {
   const about = getSectionContent(sectionsMap.about, locale);
   const careers = getSectionContent(sectionsMap.careers, locale);
   const contacts = getSectionContent(sectionsMap.contacts, locale);
-  const phone = contacts?.phones?.[0] || "";
+  const phone = contacts?.phones?.[0] || company?.phone || "";
 
   return (
     <>
@@ -29,7 +30,9 @@ export default async function HomePage() {
       {sectionsMap.projects ? <ProjectsSection content={projects} /> : null}
       {sectionsMap.about ? <AboutSection content={about} /> : null}
       {sectionsMap.careers ? <CareersSection content={careers} /> : null}
-      {sectionsMap.contacts ? <ContactsSection content={contacts} locale={locale} /> : null}
+      {sectionsMap.contacts ? (
+        <ContactsSection content={contacts} locale={locale} company={company} />
+      ) : null}
     </>
   );
 }

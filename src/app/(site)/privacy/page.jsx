@@ -2,12 +2,14 @@ import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { getCompanyProfile } from "@/db/queries";
 import { getPrivacyPolicyContent } from "@/lib/privacy-policy-content";
 import { getSiteLocaleServer } from "@/lib/site-locale";
 
 export async function generateMetadata() {
   const locale = await getSiteLocaleServer();
-  const content = getPrivacyPolicyContent(locale);
+  const company = await getCompanyProfile();
+  const content = getPrivacyPolicyContent(locale, company);
 
   return {
     title: content.metaTitle,
@@ -26,7 +28,8 @@ export async function generateMetadata() {
 
 export default async function PrivacyPage() {
   const locale = await getSiteLocaleServer();
-  const content = getPrivacyPolicyContent(locale);
+  const company = await getCompanyProfile();
+  const content = getPrivacyPolicyContent(locale, company);
   const updatedLabel =
     locale === "en" ? "Last updated:" : locale === "lv" ? "Atjaunināts:" : "Обновлено:";
 

@@ -47,6 +47,18 @@ function SectionEditor({ section }) {
       setContentEn((prev) => ({ ...prev, map: patch.map }));
       return;
     }
+    if (section.key === "contacts" && patch.detailsVisible !== undefined) {
+      setContentRu((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      setContentLv((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      setContentEn((prev) => ({ ...prev, detailsVisible: patch.detailsVisible }));
+      return;
+    }
+    if (section.key === "about" && patch.statsVisible !== undefined) {
+      setContentRu((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      setContentLv((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      setContentEn((prev) => ({ ...prev, statsVisible: patch.statsVisible }));
+      return;
+    }
     if (section.key === "footer" && patch.logoUrl !== undefined) {
       setContentRu((prev) => ({ ...prev, logoUrl: patch.logoUrl }));
       setContentLv((prev) => ({ ...prev, logoUrl: patch.logoUrl }));
@@ -179,14 +191,15 @@ function SectionEditor({ section }) {
 const SPACING_TAB_KEY = "__spacing__";
 
 export function AdminContentClient({ sections, sectionSpacing }) {
-  const [openKey, setOpenKey] = useState(sections[0]?.key || "hero");
+  const contentSections = sections.filter((s) => s.key !== "footer");
+  const [openKey, setOpenKey] = useState(contentSections[0]?.key || "hero");
   const { activeLocale } = useAdminStore();
 
   return (
     <div className="space-y-5 p-4 lg:p-6">
       <PageHeader
         title="Контент"
-        subtitle="Управление секциями лендинга. Каждая карточка соответствует блоку на сайте."
+        subtitle="Управление секциями лендинга. Футер и реквизиты компании — отдельные вкладки в меню."
         actions={
           <a
             href={`/?lang=${activeLocale}`}
@@ -201,7 +214,7 @@ export function AdminContentClient({ sections, sectionSpacing }) {
       />
 
       <div className="flex flex-wrap gap-2">
-        {sections.map((section) => (
+        {contentSections.map((section) => (
           <button
             key={section.key}
             type="button"
@@ -233,7 +246,7 @@ export function AdminContentClient({ sections, sectionSpacing }) {
       {openKey === SPACING_TAB_KEY ? (
         <AdminSectionSpacingPanel initialSpacing={sectionSpacing} />
       ) : (
-        sections
+        contentSections
           .filter((s) => s.key === openKey)
           .map((section) => <SectionEditor key={section.key} section={section} />)
       )}

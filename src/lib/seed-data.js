@@ -184,6 +184,7 @@ export const DEFAULT_SECTIONS = [
       title: "Кто мы",
       description:
         "Работаем с торговыми центрами, больницами, складами, промышленными предприятиями, госучреждениями и частными домами по всей Латвии.",
+      statsVisible: false,
       stats: [
         { value: "15+", label: "лет опыта в отрасли" },
         { value: "500+", label: "объектов по всей LV" },
@@ -212,6 +213,7 @@ export const DEFAULT_SECTIONS = [
       title: "Kas mēs esam",
       description:
         "Strādājam ar tirdzniecības centriem, slimnīcām, noliktavām, rūpniecības uzņēmumiem, valsts iestādēm un privātmājām visā Latvijā.",
+      statsVisible: false,
       stats: [
         { value: "15+", label: "gadu pieredze nozarē" },
         { value: "500+", label: "objekti visā Latvijā" },
@@ -240,6 +242,7 @@ export const DEFAULT_SECTIONS = [
       title: "Who we are",
       description:
         "We work with shopping malls, hospitals, warehouses, industrial enterprises, government institutions and private homes throughout Latvia.",
+      statsVisible: false,
       stats: [
         { value: "15+", label: "years of industry experience" },
         { value: "500+", label: "projects across Latvia" },
@@ -668,8 +671,9 @@ export const DEFAULT_SECTIONS = [
       description: "Напишите или позвоните — подготовим техническое решение и смету под ваш объект.",
       primaryCta: "Написать",
       secondaryCta: "Позвонить",
+      detailsVisible: false,
       address: "Kaibalas iela 25, Rīga",
-      phones: ["+371 29 907 994"],
+      phones: ["+371 23887028"],
       email: "info@makuzo.lv",
       hoursWeekday: "Пн.–Пт. 8:00–17:00",
       hoursSaturday: "",
@@ -699,8 +703,9 @@ export const DEFAULT_SECTIONS = [
         "Rakstiet vai zvaniet — sagatavosim tehnisko risinājumu un tāmi jūsu objektam.",
       primaryCta: "Rakstīt",
       secondaryCta: "Zvanīt",
+      detailsVisible: false,
       address: "Kaibalas iela 25, Rīga",
-      phones: ["+371 29 907 994"],
+      phones: ["+371 23887028"],
       email: "info@makuzo.lv",
       hoursWeekday: "P.–Pk. 8:00–17:00",
       hoursSaturday: "",
@@ -730,8 +735,9 @@ export const DEFAULT_SECTIONS = [
         "Write or call — we will prepare a technical solution and estimate for your facility.",
       primaryCta: "Write",
       secondaryCta: "Call",
+      detailsVisible: false,
       address: "Kaibalas iela 25, Rīga",
-      phones: ["+371 29 907 994"],
+      phones: ["+371 23887028"],
       email: "info@makuzo.lv",
       hoursWeekday: "Mon–Fri 8:00–17:00",
       hoursSaturday: "",
@@ -763,7 +769,6 @@ export const DEFAULT_SECTIONS = [
         "Инженерные решения для электрификации и слаботочных систем — промышленным, коммерческим и частным объектам по всей Латвии.",
       navTitle: "РАЗДЕЛЫ",
       companyTitle: "КОМПАНИЯ",
-      companyLines: ["SIA MAKUZO", "Рег. № 40103386423", "Būvkomersants Nr. 13248"],
       navLinks: [
         { label: "Дизайн", href: "#design" },
         { label: "Услуги", href: "#services" },
@@ -772,14 +777,14 @@ export const DEFAULT_SECTIONS = [
         { label: "Контакты", href: "#contacts" },
       ],
       copyrightLocation: "Все права защищены.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Политика конфиденциальности", href: "/privacy" }],
+      privacyLabel: "Политика конфиденциальности",
+      privacyHref: "/privacy",
     },
     contentLv: {
       brandText:
         "Inženiertehniskie risinājumi elektroinstalācijai un vājstrāvas sistēmām — rūpniecības, komerciāliem un privātiem objektiem visā Latvijā.",
       navTitle: "SADAĻAS",
       companyTitle: "UZŅĒMUMS",
-      companyLines: ["SIA MAKUZO", "Reg. Nr. 40103386423", "Būvkomersants Nr. 13248"],
       navLinks: [
         { label: "Dizains", href: "#design" },
         { label: "Pakalpojumi", href: "#services" },
@@ -788,14 +793,14 @@ export const DEFAULT_SECTIONS = [
         { label: "Kontakti", href: "#contacts" },
       ],
       copyrightLocation: "Visas tiesības aizsargātas.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privātuma politika", href: "/privacy" }],
+      privacyLabel: "Privātuma politika",
+      privacyHref: "/privacy",
     },
     contentEn: {
       brandText:
         "Engineering solutions for electrification and low-current systems — for industrial, commercial and private facilities throughout Latvia.",
       navTitle: "SECTIONS",
       companyTitle: "COMPANY",
-      companyLines: ["SIA MAKUZO", "Reg. № 40103386423", "Būvkomersants Nr. 13248"],
       navLinks: [
         { label: "Design", href: "#design" },
         { label: "Services", href: "#services" },
@@ -804,7 +809,8 @@ export const DEFAULT_SECTIONS = [
         { label: "Contacts", href: "#contacts" },
       ],
       copyrightLocation: "All rights reserved.",
-      legalLinks: [{ label: "Instagram", href: "#" }, { label: "Privacy policy", href: "/privacy" }],
+      privacyLabel: "Privacy policy",
+      privacyHref: "/privacy",
     },
   },
 ];
@@ -821,4 +827,25 @@ export const DEFAULT_SITE_SETTINGS = {
   seoDescEn:
     "Electrical installation, measurements, low-current systems, switchboards and automation. Riga, Latvia.",
   sectionSpacing: { defaultGap: 0, overrides: {} },
+  companyProfile: {
+    legalName: "SIA MAKUZO",
+    regNumber: "40103386423",
+    builderRegNumber: "13248",
+    email: "info@makuzo.lv",
+    phone: "+371 23887028",
+    streetAddress: "Kaibalas iela 25",
+    cityRu: "Рига",
+    cityLv: "Rīga",
+    cityEn: "Riga",
+    country: "LV",
+    countryNameRu: "Латвия",
+    countryNameLv: "Latvija",
+    countryNameEn: "Latvia",
+    postalCode: "LV-1035",
+    latitude: 56.9678,
+    longitude: 24.1725,
+    instagramUrl: "",
+    instagramVisible: false,
+    footerCompanyVisible: false,
+  },
 };

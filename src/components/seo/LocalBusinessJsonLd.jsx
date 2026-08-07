@@ -1,44 +1,47 @@
 import { getOsmOpenUrl, resolveMapConfig } from "@/lib/map-config";
-import { SITE_LOCATION } from "@/lib/site-location";
+import {
+  formatCompanyAddressShort,
+  getCompanyCity,
+  normalizeCompanyProfile,
+} from "@/lib/company-profile";
 
-export function LocalBusinessJsonLd({ locale, contacts, settings }) {
+export function LocalBusinessJsonLd({ locale, contacts, settings, company }) {
   const isLv = locale === "lv";
   const isEn = locale === "en";
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://makuzo.lv";
+  const profile = normalizeCompanyProfile(company);
   const map = resolveMapConfig(contacts?.map);
-  const addressText = contacts?.address || "";
-  const locality = isLv
-    ? SITE_LOCATION.locality.lv
-    : isEn
-      ? SITE_LOCATION.locality.en
-      : SITE_LOCATION.locality.ru;
+  const locality = getCompanyCity(profile, locale);
   const description = isLv
     ? settings?.seoDescLv
     : isEn
       ? settings?.seoDescEn
       : settings?.seoDescRu;
 
+  const phones = contacts?.phones?.length ? contacts.phones : [profile.phone].filter(Boolean);
+  const email = contacts?.email || profile.email;
+  const addressText = contacts?.address || formatCompanyAddressShort(profile, locale);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Electrician",
-    name: map.placeName || "Makuzo",
+    name: map.placeName || profile.legalName || "Makuzo",
     url: siteUrl,
     image: `${siteUrl}/img/logo-on-light.webp`,
-    telephone: contacts?.phones || [],
-    email: contacts?.email || "info@makuzo.lv",
+    telephone: phones,
+    email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: addressText.includes(",")
-        ? addressText.split(",").slice(1).join(",").trim()
-        : SITE_LOCATION.streetAddress,
+      streetAddress: profile.streetAddress,
       addressLocality: locality,
-      postalCode: SITE_LOCATION.postalCode,
-      addressCountry: SITE_LOCATION.country,
+      postalCode: profile.postalCode,
+      addressCountry: profile.country,
+      streetAddressFull: addressText,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: map.latitude,
-      longitude: map.longitude,
+      latitude: map.latitude || profile.latitude,
+      longitude: map.longitude || profile.longitude,
     },
     hasMap: getOsmOpenUrl(map),
     openingHoursSpecification: [

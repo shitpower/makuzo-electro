@@ -5,8 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
+  FiBriefcase,
   FiChevronLeft,
   FiChevronRight,
+  FiColumns,
   FiExternalLink,
   FiHome,
   FiImage,
@@ -31,6 +33,13 @@ const NAV_GROUPS = [
     items: [
       { href: "/admin", label: "Обзор", icon: FiHome, match: (p) => p === "/admin" },
       { href: "/admin/content", label: "Контент", icon: FiLayout, match: (p) => p === "/admin/content" },
+      { href: "/admin/footer", label: "Футер", icon: FiColumns, match: (p) => p === "/admin/footer" },
+      {
+        href: "/admin/company",
+        label: "Компания",
+        icon: FiBriefcase,
+        match: (p) => p === "/admin/company",
+      },
       { href: "/admin/media", label: "Медиа", icon: FiImage, match: (p) => p === "/admin/media" },
     ],
   },
@@ -64,7 +73,7 @@ const NAV_GROUPS = [
 const MOBILE_PRIMARY = [
   { href: "/admin", label: "Обзор", icon: FiHome, match: (p) => p === "/admin" },
   { href: "/admin/content", label: "Контент", icon: FiLayout, match: (p) => p === "/admin/content" },
-  { href: "/admin/media", label: "Медиа", icon: FiImage, match: (p) => p === "/admin/media" },
+  { href: "/admin/footer", label: "Футер", icon: FiColumns, match: (p) => p === "/admin/footer" },
   {
     href: "/admin/inquiries",
     label: "Заявки",
@@ -74,6 +83,8 @@ const MOBILE_PRIMARY = [
 ];
 
 const MOBILE_MORE = [
+  { href: "/admin/company", label: "Компания", icon: FiBriefcase },
+  { href: "/admin/media", label: "Медиа", icon: FiImage },
   { href: "/admin/audit", label: "Журнал", icon: FiShield },
   { href: "/admin/settings", label: "Настройки", icon: FiSettings },
   { href: "/admin/profile", label: "Профиль", icon: FiUser },

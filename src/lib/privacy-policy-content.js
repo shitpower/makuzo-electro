@@ -1,4 +1,8 @@
-/** Privacy policy copy for /privacy — ru, lv, en */
+import {
+  formatCompanyAddress,
+  formatRegLabel,
+  normalizeCompanyProfile,
+} from "@/lib/company-profile";
 
 export const PRIVACY_POLICY = {
   ru: {
@@ -17,7 +21,7 @@ export const PRIVACY_POLICY = {
         paragraphs: [
           "Оператором персональных данных является SIA MAKUZO (рег. № 40103386423, Būvkomersants Nr. 13248).",
           "Адрес: Kaibalas iela 25, Rīga, Latvija.",
-          "Контакты: info@makuzo.lv, +371 29 907 994.",
+          "Контакты: info@makuzo.lv, +371 23887028.",
         ],
       },
       {
@@ -98,7 +102,7 @@ export const PRIVACY_POLICY = {
       {
         title: "11. Контакты",
         paragraphs: [
-          "По вопросам обработки персональных данных обращайтесь: info@makuzo.lv или +371 29 907 994.",
+          "По вопросам обработки персональных данных обращайтесь: info@makuzo.lv или +371 23887028.",
         ],
       },
     ],
@@ -119,7 +123,7 @@ export const PRIVACY_POLICY = {
         paragraphs: [
           "Personas datu pārzinis ir SIA MAKUZO (reģ. Nr. 40103386423, Būvkomersants Nr. 13248).",
           "Adrese: Kaibalas iela 25, Rīga, Latvija.",
-          "Kontakti: info@makuzo.lv, +371 29 907 994.",
+          "Kontakti: info@makuzo.lv, +371 23887028.",
         ],
       },
       {
@@ -200,7 +204,7 @@ export const PRIVACY_POLICY = {
       {
         title: "11. Kontakti",
         paragraphs: [
-          "Jautājumos par personas datu apstrādi sazinieties: info@makuzo.lv vai +371 29 907 994.",
+          "Jautājumos par personas datu apstrādi sazinieties: info@makuzo.lv vai +371 23887028.",
         ],
       },
     ],
@@ -221,7 +225,7 @@ export const PRIVACY_POLICY = {
         paragraphs: [
           "The data controller is SIA MAKUZO (Reg. No. 40103386423, Būvkomersants Nr. 13248).",
           "Address: Kaibalas iela 25, Rīga, Latvia.",
-          "Contact: info@makuzo.lv, +371 29 907 994.",
+          "Contact: info@makuzo.lv, +371 23887028.",
         ],
       },
       {
@@ -300,15 +304,63 @@ export const PRIVACY_POLICY = {
       {
         title: "11. Contact",
         paragraphs: [
-          "For questions about personal data processing, contact: info@makuzo.lv or +371 29 907 994.",
+          "For questions about personal data processing, contact: info@makuzo.lv or +371 23887028.",
         ],
       },
     ],
   },
 };
 
-export function getPrivacyPolicyContent(locale) {
-  if (locale === "lv") return PRIVACY_POLICY.lv;
-  if (locale === "en") return PRIVACY_POLICY.en;
-  return PRIVACY_POLICY.ru;
+export function getPrivacyPolicyContent(locale, company) {
+  const profile = normalizeCompanyProfile(company);
+  const base =
+    locale === "lv" ? PRIVACY_POLICY.lv : locale === "en" ? PRIVACY_POLICY.en : PRIVACY_POLICY.ru;
+  const content = structuredClone(base);
+  const reg = formatRegLabel(profile, locale);
+  const address = formatCompanyAddress(profile, locale);
+  const contactsLine = `${profile.email}, ${profile.phone}`;
+
+  if (content.sections?.[0]) {
+    if (locale === "lv") {
+      content.sections[0].paragraphs = [
+        `Personas datu pārzinis ir ${profile.legalName} (${reg}).`,
+        `Adrese: ${address}.`,
+        `Kontakti: ${contactsLine}.`,
+      ];
+    } else if (locale === "en") {
+      content.sections[0].paragraphs = [
+        `The data controller is ${profile.legalName} (${reg}).`,
+        `Address: ${address}.`,
+        `Contact: ${contactsLine}.`,
+      ];
+    } else {
+      content.sections[0].paragraphs = [
+        `Оператором персональных данных является ${profile.legalName} (${reg}).`,
+        `Адрес: ${address}.`,
+        `Контакты: ${contactsLine}.`,
+      ];
+    }
+  }
+
+  const last = content.sections?.[content.sections.length - 1];
+  if (last) {
+    if (locale === "lv") {
+      last.paragraphs = [
+        `Jautājumos par personas datu apstrādi sazinieties: ${profile.email} vai ${profile.phone}.`,
+      ];
+    } else if (locale === "en") {
+      last.paragraphs = [
+        `For questions about personal data processing, contact: ${profile.email} or ${profile.phone}.`,
+      ];
+    } else {
+      last.paragraphs = [
+        `По вопросам обработки персональных данных обращайтесь: ${profile.email} или ${profile.phone}.`,
+      ];
+    }
+  }
+
+  content.intro = content.intro.replaceAll("SIA MAKUZO", profile.legalName);
+  content.metaDescription = content.metaDescription.replaceAll("SIA MAKUZO", profile.legalName);
+
+  return content;
 }

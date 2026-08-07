@@ -54,15 +54,22 @@ export default async function SiteLayout({ children }) {
   const footerSection = await getSectionByKey("footer");
   const contacts = getSectionContent(contactsSection, locale) || {};
   const footer = getSectionContent(footerSection, locale) || {};
-  const phone = contacts.phones?.[0] || "";
+  const phone = contacts.phones?.[0] || settings.companyProfile?.phone || "";
 
   return (
     <>
-      <LocalBusinessJsonLd locale={locale} contacts={contacts} settings={settings} />
+      <LocalBusinessJsonLd
+        locale={locale}
+        contacts={contacts}
+        settings={settings}
+        company={settings.companyProfile}
+      />
       <Toaster position="top-right" />
       <SiteHeader locale={locale} phone={phone} />
       <main className="min-h-screen bg-white">{children}</main>
-      <SiteFooter content={footer} locale={locale} />
+      {footerSection?.visible !== false ? (
+        <SiteFooter content={footer} locale={locale} company={settings.companyProfile} />
+      ) : null}
     </>
   );
 }

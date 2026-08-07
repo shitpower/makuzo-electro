@@ -4,13 +4,21 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import {
+  formatCompanyAddressShort,
+  normalizeCompanyProfile,
+} from "@/lib/company-profile";
 
-export function ContactsSection({ content, locale }) {
+export function ContactsSection({ content, locale, company }) {
   const isLv = locale === "lv";
   const isEn = locale === "en";
-  const phone = content?.phones?.[0] || "";
+  const profile = normalizeCompanyProfile(company);
+  const phone = content?.phones?.[0] || profile.phone || "";
+  const email = content?.email || profile.email || "";
+  const address = content?.address || formatCompanyAddressShort(profile, locale);
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "#";
   const labels = content?.detailLabels || {};
+  const detailsVisible = Boolean(content?.detailsVisible);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -93,48 +101,56 @@ export function ContactsSection({ content, locale }) {
             ) : null}
           </div>
 
-          <div className="flex w-full max-w-[240px] flex-col gap-7 pt-2 lg:pt-10">
-            <div className="flex flex-col gap-1.5">
-              <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                {labels.phone || "ТЕЛЕФОН"}
-              </span>
-              <a
-                href={telHref}
-                className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white"
-              >
-                {phone}
-              </a>
+          {detailsVisible ? (
+            <div className="flex w-full max-w-[240px] flex-col gap-7 pt-2 lg:pt-10">
+              {phone ? (
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
+                    {labels.phone || "ТЕЛЕФОН"}
+                  </span>
+                  <a
+                    href={telHref}
+                    className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white"
+                  >
+                    {phone}
+                  </a>
+                </div>
+              ) : null}
+              {email ? (
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
+                    {labels.email || "EMAIL"}
+                  </span>
+                  <a
+                    href={`mailto:${email}`}
+                    className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white"
+                  >
+                    {email}
+                  </a>
+                </div>
+              ) : null}
+              {address ? (
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
+                    {labels.address || "АДРЕС"}
+                  </span>
+                  <span className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white">
+                    {address}
+                  </span>
+                </div>
+              ) : null}
+              {content.hoursWeekday ? (
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
+                    {labels.hours || "ЧАСЫ"}
+                  </span>
+                  <span className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white">
+                    {content.hoursWeekday}
+                  </span>
+                </div>
+              ) : null}
             </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                {labels.email || "EMAIL"}
-              </span>
-              <a
-                href={`mailto:${content.email}`}
-                className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white"
-              >
-                {content.email}
-              </a>
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                {labels.address || "АДРЕС"}
-              </span>
-              <span className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white">
-                {content.address}
-              </span>
-            </div>
-            {content.hoursWeekday ? (
-              <div className="flex flex-col gap-1.5">
-                <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                  {labels.hours || "ЧАСЫ"}
-                </span>
-                <span className="font-[family-name:var(--font-display)] text-[20px] font-medium text-white">
-                  {content.hoursWeekday}
-                </span>
-              </div>
-            ) : null}
-          </div>
+          ) : null}
         </div>
 
         <div className="h-px w-full bg-[var(--on-dark-line)]" />

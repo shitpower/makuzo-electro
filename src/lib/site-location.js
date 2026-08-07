@@ -1,11 +1,17 @@
-/** Default location: Kaibalas iela 25, Rīga, Latvia. */
+import { DEFAULT_COMPANY_PROFILE } from "@/lib/company-profile";
+
+/** @deprecated Prefer company profile from site settings via getCompanyProfile(). */
 export const SITE_LOCATION = {
-  streetAddress: "Kaibalas iela 25",
-  locality: { ru: "Рига", lv: "Rīga", en: "Riga" },
-  country: "LV",
-  postalCode: "LV-1035",
-  latitude: 56.9678,
-  longitude: 24.1725,
+  streetAddress: DEFAULT_COMPANY_PROFILE.streetAddress,
+  locality: {
+    ru: DEFAULT_COMPANY_PROFILE.cityRu,
+    lv: DEFAULT_COMPANY_PROFILE.cityLv,
+    en: DEFAULT_COMPANY_PROFILE.cityEn,
+  },
+  country: DEFAULT_COMPANY_PROFILE.country,
+  postalCode: DEFAULT_COMPANY_PROFILE.postalCode,
+  latitude: DEFAULT_COMPANY_PROFILE.latitude,
+  longitude: DEFAULT_COMPANY_PROFILE.longitude,
 };
 
 export function formatSiteAddress(locale = "ru") {

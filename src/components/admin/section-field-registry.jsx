@@ -22,7 +22,7 @@ export const SECTION_HELPERS = {
   about: "Блок «О компании»: статистика, фото и три преимущества.",
   careers: "Вакансии и призыв присоединиться.",
   contacts: "Тёмный блок контактов и CTA.",
-  footer: "Бренд, разделы, реквизиты компании.",
+  footer: "Бренд, навигация и копирайт. Реквизиты и Instagram — во вкладке «Компания».",
 };
 
 function Field({ label, value, onChange, multiline = false, helper }) {
@@ -164,6 +164,14 @@ export function renderSectionFields(key, content, onChange) {
           <Field label="Лейбл" value={content.label} onChange={(v) => onChange({ label: v })} />
           <Field label="Заголовок" value={content.title} onChange={(v) => onChange({ title: v })} />
           <Field label="Описание" value={content.description} onChange={(v) => onChange({ description: v })} multiline />
+          <label className="flex min-h-11 items-center gap-3 text-sm text-[var(--text-secondary)]">
+            <input
+              type="checkbox"
+              checked={Boolean(content.statsVisible)}
+              onChange={(e) => onChange({ statsVisible: e.target.checked })}
+            />
+            Показывать блок статистики (15+, 500+, …)
+          </label>
           <MediaPickerField
             label="Фото секции (между статистикой и преимуществами)"
             value={content.imageUrl}
@@ -384,18 +392,29 @@ export function renderSectionFields(key, content, onChange) {
     case "contacts":
       return (
         <>
+          <label className="flex min-h-11 items-center gap-3 text-sm text-[var(--text-secondary)]">
+            <input
+              type="checkbox"
+              checked={Boolean(content.detailsVisible)}
+              onChange={(e) => onChange({ detailsVisible: e.target.checked })}
+            />
+            Показывать блок контактов (телефон / email / адрес / часы)
+          </label>
+          <p className="text-xs text-[var(--text-muted)]">
+            Телефон, email и адрес подтягиваются из вкладки «Компания», если поля секции пустые.
+          </p>
           <Field label="Лейбл" value={content.label} onChange={(v) => onChange({ label: v })} />
           <Field label="Заголовок" value={content.title} onChange={(v) => onChange({ title: v })} />
           <Field label="Описание" value={content.description} onChange={(v) => onChange({ description: v })} multiline />
           <Field label="Кнопка «Написать»" value={content.primaryCta} onChange={(v) => onChange({ primaryCta: v })} />
           <Field label="Кнопка «Позвонить»" value={content.secondaryCta} onChange={(v) => onChange({ secondaryCta: v })} />
-          <Field label="Адрес" value={content.address} onChange={(v) => onChange({ address: v })} />
+          <Field label="Адрес (override)" value={content.address} onChange={(v) => onChange({ address: v })} />
           <Field
-            label="Телефоны (через запятую)"
+            label="Телефоны override (через запятую)"
             value={(content.phones || []).join(", ")}
             onChange={(v) => onChange({ phones: v.split(",").map((p) => p.trim()).filter(Boolean) })}
           />
-          <Field label="Email" value={content.email} onChange={(v) => onChange({ email: v })} />
+          <Field label="Email (override)" value={content.email} onChange={(v) => onChange({ email: v })} />
           <Field label="Часы работы" value={content.hoursWeekday} onChange={(v) => onChange({ hoursWeekday: v })} />
         </>
       );
@@ -403,19 +422,30 @@ export function renderSectionFields(key, content, onChange) {
     case "footer":
       return (
         <>
+          <p className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)]/50 px-3 py-2 text-xs text-[var(--text-muted)]">
+            Реквизиты (рег. номер, адрес) и Instagram управляются в{" "}
+            <a href="/admin/company" className="text-[var(--accent)] underline">
+              Компания
+            </a>
+            .
+          </p>
           <Field label="Текст о бренде" value={content.brandText} onChange={(v) => onChange({ brandText: v })} multiline />
           <Field label="Заголовок разделов" value={content.navTitle} onChange={(v) => onChange({ navTitle: v })} />
           <Field label="Заголовок компании" value={content.companyTitle} onChange={(v) => onChange({ companyTitle: v })} />
           <Field
-            label="Строки компании (каждая с новой строки)"
-            value={(content.companyLines || []).join("\n")}
-            onChange={(v) => onChange({ companyLines: v.split("\n").map((s) => s.trim()).filter(Boolean) })}
-            multiline
-          />
-          <Field
-            label="Копирайт (после © год MAKUZO.)"
+            label="Копирайт (после © год.)"
             value={content.copyrightLocation}
             onChange={(v) => onChange({ copyrightLocation: v })}
+          />
+          <Field
+            label="Текст ссылки на политику"
+            value={content.privacyLabel}
+            onChange={(v) => onChange({ privacyLabel: v })}
+          />
+          <Field
+            label="Href политики"
+            value={content.privacyHref}
+            onChange={(v) => onChange({ privacyHref: v })}
           />
           {(content.navLinks || []).map((link, i) => (
             <div key={i} className="space-y-2 rounded-lg border border-[var(--border-subtle)] p-4">
