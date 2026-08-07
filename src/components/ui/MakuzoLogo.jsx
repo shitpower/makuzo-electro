@@ -1,14 +1,15 @@
 import Image from "next/image";
 import clsx from "clsx";
 
+/** Wordmark aspect ≈ 560×178 — transparent variants for light/dark surfaces. */
 const LOGOS = {
   default: {
-    src: "/img/Makuzo-logo.webp",
+    src: "/img/logo-on-light.webp",
     width: 560,
-    height: 373,
+    height: 178,
   },
   second: {
-    src: "/img/Makuzo-logo-second.webp",
+    src: "/img/logo-on-dark.webp",
     width: 560,
     height: 178,
   },
@@ -24,8 +25,8 @@ export function MakuzoLogo({ className, priority = false, variant = "default" })
       width={logo.width}
       height={logo.height}
       priority={priority}
-      sizes="(max-width: 768px) 120px, 140px"
-      className={clsx("h-auto w-auto object-contain", className)}
+      sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 280px"
+      className={clsx("w-auto object-contain", className)}
     />
   );
 }

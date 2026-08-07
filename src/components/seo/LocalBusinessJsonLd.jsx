@@ -23,7 +23,7 @@ export function LocalBusinessJsonLd({ locale, contacts, settings }) {
     "@type": "Electrician",
     name: map.placeName || "Makuzo",
     url: siteUrl,
-    image: `${siteUrl}/img/Makuzo-logo.webp`,
+    image: `${siteUrl}/img/logo-on-light.webp`,
     telephone: contacts?.phones || [],
     email: contacts?.email || "info@makuzo.lv",
     address: {

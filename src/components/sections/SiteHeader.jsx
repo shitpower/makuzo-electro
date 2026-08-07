@@ -76,8 +76,8 @@ export function SiteHeader({ locale, phone }) {
   return (
     <header className="relative z-50 bg-white">
       <div className="container-site flex h-[72px] items-center justify-between gap-3 sm:h-20 md:h-[124px]">
-        <Link href="/" className="focus-ring shrink-0 rounded-sm">
-          <MakuzoLogo className="h-7 w-auto sm:h-8 md:h-9" priority />
+        <Link href="/" className="focus-ring flex shrink-0 items-center rounded-sm">
+          <MakuzoLogo className="h-9 w-auto sm:h-10 md:h-14 lg:h-16" priority />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex md:gap-8" aria-label={menuLabel}>
