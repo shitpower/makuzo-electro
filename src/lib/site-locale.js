@@ -131,9 +131,15 @@ export function getSectionContent(section, locale) {
   }
 
   if (section.key === "about" || section.key === "design") {
+    const gallery = Array.isArray(primary?.gallery)
+      ? primary.gallery
+      : Array.isArray(fallback?.gallery)
+        ? fallback.gallery
+        : [];
     return {
       ...primary,
       imageUrl: pickMediaUrl(primary?.imageUrl) || pickMediaUrl(fallback?.imageUrl) || "",
+      gallery: gallery.map((url) => pickMediaUrl(url)).filter(Boolean),
     };
   }
 

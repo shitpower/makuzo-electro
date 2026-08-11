@@ -101,11 +101,73 @@ export function renderSectionFields(key, content, onChange) {
             />
             <Field label="Вступление" value={content.intro} onChange={(v) => onChange({ intro: v })} multiline />
             <Field
+              label="Заголовок блока"
+              value={content.sectionTitle}
+              onChange={(v) => onChange({ sectionTitle: v })}
+            />
+            <Field
               label="Абзацы (каждый с новой строки)"
               value={(content.paragraphs || []).join("\n\n")}
               onChange={(v) =>
                 onChange({
                   paragraphs: v
+                    .split(/\n\s*\n/)
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Галерея (URL по строке)"
+              value={(content.gallery || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  gallery: v
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              multiline
+              helper="Например /img/design-template-mount.jpg"
+            />
+            <Field
+              label="Лейбл процесса"
+              value={content.processLabel}
+              onChange={(v) => onChange({ processLabel: v })}
+            />
+            <Field
+              label="Шаги процесса (по строке)"
+              value={(content.processSteps || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  processSteps: v
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Примечание после процесса"
+              value={content.processNote}
+              onChange={(v) => onChange({ processNote: v })}
+              multiline
+            />
+            <Field label="Кнопка «Подробнее»" value={content.detailCta} onChange={(v) => onChange({ detailCta: v })} />
+            <Field
+              label="Заголовок окна «Подробнее»"
+              value={content.detailTitle}
+              onChange={(v) => onChange({ detailTitle: v })}
+            />
+            <Field
+              label="Текст окна «Подробнее» (абзацы через пустую строку)"
+              value={(content.detailBody || []).join("\n\n")}
+              onChange={(v) =>
+                onChange({
+                  detailBody: v
                     .split(/\n\s*\n/)
                     .map((s) => s.trim())
                     .filter(Boolean),
@@ -137,22 +199,9 @@ export function renderSectionFields(key, content, onChange) {
               onChange={(v) => onChange({ cultureTitle: v })}
             />
             <Field
-              label="Вступление культуры"
+              label="Текст культуры работ"
               value={content.cultureIntro}
               onChange={(v) => onChange({ cultureIntro: v })}
-              multiline
-            />
-            <Field
-              label="Пункты культуры (по строке)"
-              value={(content.cultureItems || []).join("\n")}
-              onChange={(v) =>
-                onChange({
-                  cultureItems: v
-                    .split("\n")
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-                })
-              }
               multiline
             />
             <Field label="Заключение" value={content.closing} onChange={(v) => onChange({ closing: v })} multiline />
