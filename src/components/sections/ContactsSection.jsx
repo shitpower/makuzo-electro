@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { FiX } from "react-icons/fi";
 import { toast } from "sonner";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -74,6 +75,114 @@ function ContactsSchematic({ locale }) {
   );
 }
 
+function InquiryModal({ open, onClose, content, locale, form, setForm, loading, onSubmit }) {
+  const titleId = useId();
+  const firstFieldRef = useRef(null);
+  const isLv = locale === "lv";
+  const isEn = locale === "en";
+  const title =
+    content.formTitle || (isEn ? "Leave a request" : isLv ? "Iesniegt pieteikumu" : "Оставить заявку");
+  const closeLabel = isEn ? "Close" : isLv ? "Aizvērt" : "Закрыть";
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    firstFieldRef.current?.focus();
+
+    function onKeyDown(event) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6">
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/70 backdrop-blur-[2px]"
+        aria-label={closeLabel}
+        onClick={onClose}
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="relative z-[1] flex max-h-[min(92dvh,720px)] w-full max-w-md flex-col overflow-hidden rounded-t-[12px] border border-[var(--on-dark-line)] bg-[#161616] sm:rounded-[8px]"
+      >
+        <div className="flex items-start justify-between gap-4 border-b border-[var(--on-dark-line)] px-5 py-4 sm:px-6">
+          <div className="flex flex-col gap-2">
+            <span className="h-[2px] w-8 bg-[var(--signal)]" aria-hidden />
+            <h3
+              id={titleId}
+              className="font-[family-name:var(--font-display)] text-[20px] font-bold leading-tight text-white"
+            >
+              {title}
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="focus-ring grid size-10 shrink-0 place-items-center rounded-lg text-[var(--on-dark-mute)] transition hover:bg-white/5 hover:text-white"
+            aria-label={closeLabel}
+          >
+            <FiX size={20} aria-hidden />
+          </button>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6"
+        >
+          <input
+            ref={firstFieldRef}
+            className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
+            placeholder={content.formNameLabel}
+            value={form.name}
+            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+            required
+            autoComplete="name"
+          />
+          <input
+            className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
+            placeholder={content.formPhoneLabel}
+            value={form.phone}
+            onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+            required
+            autoComplete="tel"
+          />
+          <input
+            type="email"
+            className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
+            placeholder={content.formEmailLabel}
+            value={form.email}
+            onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+            autoComplete="email"
+          />
+          <textarea
+            rows={4}
+            className="min-h-[110px] resize-y rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
+            placeholder={content.formMessageLabel}
+            value={form.message}
+            onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+          />
+          <button type="submit" className="btn-primary mt-1 w-full sm:w-fit" disabled={loading}>
+            <ButtonLabel>{content.formSubmitLabel}</ButtonLabel>
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export function ContactsSection({ content, locale, company }) {
   const isLv = locale === "lv";
   const isEn = locale === "en";
@@ -102,6 +211,10 @@ export function ContactsSection({ content, locale, company }) {
     : isLv
       ? "Elektrība. Automātika. Inženiersistēmas."
       : "Электрика. Автоматика. Инженерные системы.";
+
+  function closeModal() {
+    if (!loading) setShowForm(false);
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -202,7 +315,7 @@ export function ContactsSection({ content, locale, company }) {
             <button
               type="button"
               className="btn-primary inline-flex items-center justify-center gap-2"
-              onClick={() => setShowForm((v) => !v)}
+              onClick={() => setShowForm(true)}
             >
               <ButtonLabel arrow>
                 {content.primaryCta || (isEn ? "Write to us" : isLv ? "Rakstīt mums" : "Написать нам")}
@@ -212,46 +325,21 @@ export function ContactsSection({ content, locale, company }) {
               {content.secondaryCta || (isEn ? "Call" : isLv ? "Zvanīt" : "Позвонить")}
             </a>
           </div>
-
-          {showForm ? (
-            <form onSubmit={onSubmit} className="mt-2 grid max-w-md gap-3">
-              <input
-                className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
-                placeholder={content.formNameLabel}
-                value={form.name}
-                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                required
-              />
-              <input
-                className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
-                placeholder={content.formPhoneLabel}
-                value={form.phone}
-                onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                required
-              />
-              <input
-                type="email"
-                className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
-                placeholder={content.formEmailLabel}
-                value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-              />
-              <textarea
-                rows={3}
-                className="rounded-lg border border-[var(--on-dark-line)] bg-transparent px-4 py-3 text-sm text-white placeholder:text-[var(--on-dark-mute)]"
-                placeholder={content.formMessageLabel}
-                value={form.message}
-                onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-              />
-              <button type="submit" className="btn-primary w-fit" disabled={loading}>
-                <ButtonLabel>{content.formSubmitLabel}</ButtonLabel>
-              </button>
-            </form>
-          ) : null}
         </div>
 
         <ContactsSchematic locale={locale} />
       </div>
+
+      <InquiryModal
+        open={showForm}
+        onClose={closeModal}
+        content={content}
+        locale={locale}
+        form={form}
+        setForm={setForm}
+        loading={loading}
+        onSubmit={onSubmit}
+      />
     </AnimatedSection>
   );
 }
