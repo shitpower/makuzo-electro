@@ -167,7 +167,7 @@ export function DesignPageContent({ content, locale }) {
       </div>
 
       {/* 01 — Intro + hero photo */}
-      <section className="container-site grid items-center gap-8 pb-12 pt-4 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:pb-16">
+      <section className="container-site grid items-center gap-8 pb-10 pt-4 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:pb-12">
         <div className="flex flex-col gap-5">
           <p className="section-label">
             {content.pageTitle || content.label || (isEn ? "DESIGN" : isLv ? "DIZAINS" : "ДИЗАЙН")}
@@ -200,7 +200,7 @@ export function DesignPageContent({ content, locale }) {
         </div>
 
         {heroImage ? (
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] bg-[var(--mist)] lg:aspect-[5/4]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] bg-[var(--mist)]">
             <SiteImage
               src={heroImage}
               alt={content.headline || content.pageTitle || ""}
@@ -214,67 +214,69 @@ export function DesignPageContent({ content, locale }) {
       </section>
 
       {/* 02 — Templates 1:1 + process */}
-      <section className="border-y border-[var(--line)] bg-[var(--mist)]">
-        <div className="container-site grid gap-8 py-12 lg:grid-cols-2 lg:items-center lg:gap-14 lg:py-16">
-          <div className="flex flex-col gap-5">
-            <p className="font-[family-name:var(--font-display)] text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--signal)]">
-              {content.featureEyebrow || "1:1"}
+      <section className="container-site grid gap-8 border-t border-[var(--line)] py-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-12">
+        <div className="flex flex-col gap-5">
+          <p className="font-[family-name:var(--font-display)] text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--signal)]">
+            {content.featureEyebrow || "1:1"}
+          </p>
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-[var(--ink)]">
+            {content.featureTitle || (isEn ? "1:1 templates" : isLv ? "Veidnes 1:1" : "Шаблоны 1:1")}
+          </h2>
+          {content.featureText ? (
+            <p className="max-w-[36rem] font-[family-name:var(--font-body)] text-[16px] leading-[1.6] text-[var(--mute)]">
+              {content.featureText}
             </p>
-            <h2 className="font-[family-name:var(--font-display)] text-[clamp(1.5rem,3vw,2.25rem)] font-bold text-[var(--ink)]">
-              {content.featureTitle || (isEn ? "1:1 templates" : isLv ? "Veidnes 1:1" : "Шаблоны 1:1")}
-            </h2>
-            {content.featureText ? (
-              <p className="max-w-[36rem] font-[family-name:var(--font-body)] text-[16px] leading-[1.6] text-[var(--mute)]">
-                {content.featureText}
-              </p>
-            ) : null}
-            {(content.paragraphs || []).map((text) => (
-              <p key={text.slice(0, 40)} className="max-w-[36rem] font-[family-name:var(--font-body)] text-[15px] leading-[1.6] text-[var(--mute)]">
-                {text}
-              </p>
-            ))}
-            {content.designerNote ? (
-              <p className="max-w-[36rem] border-l-2 border-[var(--signal)] pl-4 font-[family-name:var(--font-body)] text-[15px] leading-[1.55] text-[var(--ink)]">
-                {content.designerNote}
-              </p>
-            ) : null}
-            {processSteps.length ? (
-              <div className="mt-2 flex flex-col gap-3">
-                {content.processLabel ? (
-                  <p className="font-[family-name:var(--font-display)] text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--mute)]">
-                    {content.processLabel}
-                  </p>
-                ) : null}
-                <p className="font-[family-name:var(--font-display)] text-[15px] font-semibold uppercase tracking-[0.04em] text-[var(--ink)] sm:text-[16px]">
-                  {processSteps.map((step, i) => (
-                    <span key={step}>
-                      {i > 0 ? <span className="mx-2 text-[var(--signal)]" aria-hidden>→</span> : null}
-                      {step}
-                    </span>
-                  ))}
+          ) : null}
+          {(content.paragraphs || []).map((text) => (
+            <p key={text.slice(0, 40)} className="max-w-[36rem] font-[family-name:var(--font-body)] text-[15px] leading-[1.6] text-[var(--mute)]">
+              {text}
+            </p>
+          ))}
+          {content.designerNote ? (
+            <p className="max-w-[36rem] border-l-2 border-[var(--signal)] pl-4 font-[family-name:var(--font-body)] text-[15px] leading-[1.55] text-[var(--ink)]">
+              {content.designerNote}
+            </p>
+          ) : null}
+          {processSteps.length ? (
+            <div className="mt-2 flex flex-col gap-3">
+              {content.processLabel ? (
+                <p className="font-[family-name:var(--font-display)] text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--mute)]">
+                  {content.processLabel}
                 </p>
-              </div>
-            ) : null}
-          </div>
-
-          {featureImage ? (
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] bg-white">
-              <SiteImage
-                src={featureImage}
-                alt={content.featureTitle || ""}
-                fill
-                sizes="(max-width: 1024px) 100vw, 48vw"
-                className="object-cover"
-              />
+              ) : null}
+              <p className="font-[family-name:var(--font-display)] text-[15px] font-semibold uppercase tracking-[0.04em] text-[var(--ink)] sm:text-[16px]">
+                {processSteps.map((step, i) => (
+                  <span key={step}>
+                    {i > 0 ? (
+                      <span className="mx-2 text-[var(--signal)]" aria-hidden>
+                        →
+                      </span>
+                    ) : null}
+                    {step}
+                  </span>
+                ))}
+              </p>
             </div>
           ) : null}
         </div>
+
+        {featureImage ? (
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] bg-[var(--mist)]">
+            <SiteImage
+              src={featureImage}
+              alt={content.featureTitle || ""}
+              fill
+              sizes="(max-width: 1024px) 100vw, 48vw"
+              className="object-cover"
+            />
+          </div>
+        ) : null}
       </section>
 
       {/* 03 — Advantage cards */}
       {advantageCards.length ? (
-        <section className="container-site py-12 md:py-16">
-          <h2 className="mb-8 font-[family-name:var(--font-display)] text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[var(--ink)]">
+        <section className="container-site border-t border-[var(--line)] py-10 md:py-12">
+          <h2 className="mb-6 font-[family-name:var(--font-display)] text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[var(--ink)]">
             {content.advantagesTitle || (isEn ? "What you get" : isLv ? "Ko tas dod" : "Наши преимущества")}
           </h2>
           <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
@@ -298,7 +300,7 @@ export function DesignPageContent({ content, locale }) {
       ) : null}
 
       {/* Closing + culture */}
-      <section className="container-site flex flex-col gap-8 pb-12 md:pb-16">
+      <section className="container-site flex flex-col gap-6 border-t border-[var(--line)] py-10 md:py-12">
         {content.closing ? (
           <p className="max-w-[720px] border-l-2 border-[var(--signal)] pl-5 font-[family-name:var(--font-display)] text-[clamp(1.0625rem,2vw,1.25rem)] font-medium leading-[1.45] text-[var(--ink)]">
             {content.closing}
@@ -306,7 +308,7 @@ export function DesignPageContent({ content, locale }) {
         ) : null}
 
         {(content.cultureTitle || content.cultureIntro) && (
-          <div className="max-w-[640px] border-t border-[var(--line)] pt-6">
+          <div className="max-w-[640px]">
             {content.cultureTitle ? (
               <h2 className="font-[family-name:var(--font-display)] text-[16px] font-bold text-[var(--ink)]">
                 {content.cultureTitle}
@@ -323,9 +325,9 @@ export function DesignPageContent({ content, locale }) {
 
       {/* Gallery preview */}
       {preview.length ? (
-        <section className="border-t border-[var(--line)] bg-[var(--mist)]">
-          <div className="container-site flex flex-col gap-6 py-12 md:py-16">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <section className="border-t border-[var(--line)]">
+          <div className="container-site flex flex-col gap-5 py-10 md:py-12">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="section-label">
                   {content.galleryLabel || (isEn ? "GALLERY" : isLv ? "GALERIJA" : "ГАЛЕРЕЯ")}
@@ -335,9 +337,14 @@ export function DesignPageContent({ content, locale }) {
                     (isEn ? "Work in photos" : isLv ? "Darbs fotogrāfijās" : "Как это выглядит")}
                 </h2>
               </div>
-              <Link href={withLocale(locale, "/design/gallery")} className="btn-ghost w-fit">
-                {content.galleryCta ||
-                  (isEn ? "View full gallery" : isLv ? "Skatīt visu galeriju" : "Смотреть всю галерею")}
+              <Link
+                href={withLocale(locale, "/design/gallery")}
+                className="btn-primary inline-flex w-fit items-center justify-center gap-2"
+              >
+                <ButtonLabel arrow>
+                  {content.galleryCta ||
+                    (isEn ? "View all" : isLv ? "Skatīt visu" : "Посмотреть все")}
+                </ButtonLabel>
               </Link>
             </div>
             <DesignGalleryGrid
