@@ -37,5 +37,5 @@ export function proxy(request) {
  * API / static / images never hit this proxy.
  */
 export const config = {
-  matcher: ["/", "/design", "/privacy"],
+  matcher: ["/", "/design", "/privacy", "/smart-home"],
 };

@@ -8,6 +8,7 @@ export const SECTION_KEYS = [
   "about",
   "careers",
   "contacts",
+  "smartHome",
   "footer",
 ];
 
@@ -780,6 +781,271 @@ export const DEFAULT_SECTIONS = [
     },
   },
   {
+    key: "smartHome",
+    visible: true,
+    contentRu: {
+      label: "УМНЫЙ ДОМ",
+      title: "Умный дом",
+      pageTitle: "Умный дом на Wi‑Fi",
+      subtitle:
+        "Рекомендуем и внедряем устройства, которым достаточно питания и Wi‑Fi — без сложного хаба как обязательного условия.",
+      pillPower: "Питание",
+      ctaText: "Обсудить проект",
+      imageUrl:
+        "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1600&q=80",
+      stepsLabel: "КАК ЭТО РАБОТАЕТ",
+      stepsTitle: "Три шага до умного пространства",
+      steps: [
+        {
+          title: "Питание",
+          text: "Устройство подключается к сети 230V или к розетке — как обычный электроприбор.",
+        },
+        {
+          title: "Wi‑Fi",
+          text: "Связь с домом и приложением идёт по Wi‑Fi. Не нужен отдельный Zigbee‑хаб «чтобы хоть что‑то заработало».",
+        },
+        {
+          title: "Сценарии",
+          text: "Свет, розетки, датчики и автоматизации настраиваются под ваш объект — мы помогаем на этапе проекта и монтажа.",
+        },
+      ],
+      categoriesLabel: "КАТЕГОРИИ",
+      categoriesTitle: "Что рекомендуем и внедряем",
+      categoriesIntro:
+        "Не интернет‑магазин — инженерный подбор и установка под вашу электрику и задачи объекта.",
+      categories: [
+        {
+          title: "Свет",
+          text: "Лампы, реле и сценарии освещения: включение по расписанию, присутствию или с телефона.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Розетки и реле",
+          text: "Управление нагрузками, учёт энергии, отключение «забытых» приборов удалённо.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Датчики",
+          text: "Движение, открытие дверей, температура и влажность — сигналы для автоматизаций и безопасности.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Камеры и безопасность",
+          text: "Видеонаблюдение и оповещения, согласованные с электрикой и слаботочными трассами объекта.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Шторы и приводы",
+          text: "Моторизация штор и роллет с управлением по Wi‑Fi и сценариями «утро / вечер / отпуск».",
+          imageUrl:
+            "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80",
+        },
+      ],
+      roomsLabel: "ГДЕ ЭТО РАБОТАЕТ",
+      roomsTitle: "Сценарии для реальных объектов",
+      rooms: [
+        {
+          title: "Квартира и дом",
+          text: "Свет и розетки по сценариям, датчики протечки и открытия, удалённый контроль во время отпуска.",
+        },
+        {
+          title: "Офис",
+          text: "Экономия энергии вне рабочих часов, зоны освещения, простой контроль без сложной BMS.",
+        },
+        {
+          title: "Склад и производство",
+          text: "Мониторинг зон, оповещения, управление отдельными нагрузками через понятный Wi‑Fi‑контур.",
+        },
+        {
+          title: "Коммерческие помещения",
+          text: "Витрины, залы, подсобки — единый подход: питание, сеть и сценарии под режим работы.",
+        },
+      ],
+      closingPill: " Питание + Wi‑Fi",
+      closingTitle: "Сделаем объект умнее?",
+      closingText:
+        "Подберём линейку устройств под вашу электрику, смонтируем и настроим сценарии. Напишите или позвоните — обсудим задачу.",
+    },
+    contentLv: {
+      label: "VIEDĀ MĀJA",
+      title: "Viedā māja",
+      pageTitle: "Viedā māja ar Wi‑Fi",
+      subtitle:
+        "Iesakām un uzstādām ierīces, kurām pietiek ar barošanu un Wi‑Fi — bez sarežģīta huba kā obligāta priekšnoteikuma.",
+      pillPower: "Barošana",
+      ctaText: "Apspriest projektu",
+      imageUrl:
+        "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1600&q=80",
+      stepsLabel: "KĀ TAS STRĀDĀ",
+      stepsTitle: "Trīs soļi līdz viedai telpai",
+      steps: [
+        {
+          title: "Barošana",
+          text: "Ierīce tiek pieslēgta 230V tīklam vai kontaktligzdai — kā parasts elektroaparāts.",
+        },
+        {
+          title: "Wi‑Fi",
+          text: "Savienojums ar mājokli un lietotni notiek caur Wi‑Fi. Nav nepieciešams atsevišķs Zigbee hubs «lai kaut kas strādātu».",
+        },
+        {
+          title: "Scenāriji",
+          text: "Apgaismojums, kontaktligzdas, sensori un automatizācijas tiek pielāgotas jūsu objektam — palīdzam projektā un montāžā.",
+        },
+      ],
+      categoriesLabel: "KATEGORIJAS",
+      categoriesTitle: "Ko iesakām un uzstādām",
+      categoriesIntro:
+        "Nav interneta veikals — inženiertehniska atlase un uzstādīšana atbilstoši jūsu elektroinstalācijai un uzdevumiem.",
+      categories: [
+        {
+          title: "Apgaismojums",
+          text: "Spuldzes, releji un apgaismojuma scenāriji: ieslēgšana pēc grafika, klātbūtnes vai no tālruņa.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Kontaktligzdas un releji",
+          text: "Slodžu vadība, enerģijas uzskaite, «aizmirsto» ierīču atslēgšana attālināti.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Sensori",
+          text: "Kustība, durvju atvēršana, temperatūra un mitrums — signāli automatizācijai un drošībai.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Kameras un drošība",
+          text: "Videonovērošana un paziņojumi, saskaņoti ar objekta elektroinstalāciju un vājstrāvas trasēm.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Aizkari un piedziņas",
+          text: "Aizkaru un rolešu motorizācija ar Wi‑Fi vadību un scenārijiem «rīts / vakars / atvaļinājums».",
+          imageUrl:
+            "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80",
+        },
+      ],
+      roomsLabel: "KUR TAS STRĀDĀ",
+      roomsTitle: "Scenāriji reālām telpām",
+      rooms: [
+        {
+          title: "Dzīvoklis un māja",
+          text: "Gaisma un kontaktligzdas pēc scenārijiem, noplūdes un atvēršanas sensori, attālināta kontrole atvaļinājumā.",
+        },
+        {
+          title: "Birojs",
+          text: "Enerģijas taupīšana ārpus darba laika, apgaismojuma zonas, vienkārša kontrole bez sarežģītas BMS.",
+        },
+        {
+          title: "Noliktava un ražošana",
+          text: "Zonu monitorings, paziņojumi, atsevišķu slodžu vadība caur skaidru Wi‑Fi kontūru.",
+        },
+        {
+          title: "Komerciālas telpas",
+          text: "Vitrīnas, zāles, palīgtelpas — vienota pieeja: barošana, tīkls un scenāriji atbilstoši darba režīmam.",
+        },
+      ],
+      closingPill: " Barošana + Wi‑Fi",
+      closingTitle: "Padarīsim jūsu objektu viedāku?",
+      closingText:
+        "Izvēlēsimies ierīču lineāru atbilstoši jūsu elektroinstalācijai, uzstādīsim un noskaņosim scenārijus. Rakstiet vai zvaniet — apspriedīsim uzdevumu.",
+    },
+    contentEn: {
+      label: "SMART HOME",
+      title: "Smart home",
+      pageTitle: "Wi‑Fi smart home",
+      subtitle:
+        "We recommend and install devices that only need power and Wi‑Fi — no complex hub as a hard requirement.",
+      pillPower: "Power",
+      ctaText: "Discuss a project",
+      imageUrl:
+        "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1600&q=80",
+      stepsLabel: "HOW IT WORKS",
+      stepsTitle: "Three steps to a smart space",
+      steps: [
+        {
+          title: "Power",
+          text: "The device connects to 230V mains or a wall outlet — like any regular appliance.",
+        },
+        {
+          title: "Wi‑Fi",
+          text: "It talks to your home and app over Wi‑Fi. You do not need a separate Zigbee hub just to get started.",
+        },
+        {
+          title: "Scenes",
+          text: "Lighting, outlets, sensors and automations are tuned to your facility — we help at design and installation.",
+        },
+      ],
+      categoriesLabel: "CATEGORIES",
+      categoriesTitle: "What we recommend and install",
+      categoriesIntro:
+        "Not an online shop — engineering selection and installation matched to your electrics and goals.",
+      categories: [
+        {
+          title: "Lighting",
+          text: "Bulbs, relays and lighting scenes: schedules, occupancy, or phone control.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Outlets and relays",
+          text: "Load control, energy awareness, remote cut-off for devices left on.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Sensors",
+          text: "Motion, door contact, temperature and humidity — inputs for automation and safety.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Cameras and security",
+          text: "Video and alerts coordinated with power and low-current routing on site.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+        },
+        {
+          title: "Curtains and drives",
+          text: "Motorised curtains and blinds with Wi‑Fi control and morning / evening / away scenes.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80",
+        },
+      ],
+      roomsLabel: "WHERE IT WORKS",
+      roomsTitle: "Scenarios for real spaces",
+      rooms: [
+        {
+          title: "Apartment and house",
+          text: "Lighting and outlets by scene, leak and open-door sensors, remote control while away.",
+        },
+        {
+          title: "Office",
+          text: "Energy saving after hours, lighting zones, simple control without a heavy BMS.",
+        },
+        {
+          title: "Warehouse and industry",
+          text: "Zone monitoring, alerts, selective load control over a clear Wi‑Fi path.",
+        },
+        {
+          title: "Commercial spaces",
+          text: "Storefronts, halls, back rooms — one approach: power, network and scenes for your hours.",
+        },
+      ],
+      closingPill: " Power + Wi‑Fi",
+      closingTitle: "Shall we make your facility smarter?",
+      closingText:
+        "We will pick a device line for your electrics, install it and set up scenes. Write or call — let’s discuss the brief.",
+    },
+  },
+  {
     key: "footer",
     visible: true,
     contentRu: {
@@ -789,6 +1055,7 @@ export const DEFAULT_SECTIONS = [
       companyTitle: "КОМПАНИЯ",
       navLinks: [
         { label: "Дизайн", href: "#design" },
+        { label: "Умный дом", href: "/smart-home" },
         { label: "Услуги", href: "#services" },
         { label: "Проекты", href: "#projects" },
         { label: "О компании", href: "#about" },
@@ -805,6 +1072,7 @@ export const DEFAULT_SECTIONS = [
       companyTitle: "UZŅĒMUMS",
       navLinks: [
         { label: "Dizains", href: "#design" },
+        { label: "Viedā māja", href: "/smart-home" },
         { label: "Pakalpojumi", href: "#services" },
         { label: "Projekti", href: "#projects" },
         { label: "Par uzņēmumu", href: "#about" },
@@ -821,6 +1089,7 @@ export const DEFAULT_SECTIONS = [
       companyTitle: "COMPANY",
       navLinks: [
         { label: "Design", href: "#design" },
+        { label: "Smart home", href: "/smart-home" },
         { label: "Services", href: "#services" },
         { label: "Projects", href: "#projects" },
         { label: "About", href: "#about" },

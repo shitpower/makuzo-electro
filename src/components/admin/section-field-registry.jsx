@@ -11,6 +11,7 @@ export const SECTION_LABELS = {
   about: "О компании",
   careers: "Карьера",
   contacts: "Контакты",
+  smartHome: "Умный дом",
   footer: "Футер",
 };
 
@@ -22,6 +23,7 @@ export const SECTION_HELPERS = {
   about: "Блок «О компании»: статистика, фото и три преимущества.",
   careers: "Вакансии и призыв присоединиться.",
   contacts: "Заголовок и CTA секции. Список телефон/email/адрес/часы — вкладка «Контакты».",
+  smartHome: "Страница /smart-home: питание + Wi‑Fi, категории и сценарии. CTA → контакты.",
   footer: "Бренд, навигация и копирайт. Реквизиты и Instagram — во вкладке «Компания».",
 };
 
@@ -387,6 +389,142 @@ export function renderSectionFields(key, content, onChange) {
             </div>
           ))}
         </>
+      );
+
+    case "smartHome":
+      return (
+        <div className="space-y-4">
+          <FormSection title="Hero">
+            <Field label="Лейбл" value={content.label} onChange={(v) => onChange({ label: v })} />
+            <Field label="Заголовок (короткий)" value={content.title} onChange={(v) => onChange({ title: v })} />
+            <Field
+              label="Заголовок страницы"
+              value={content.pageTitle}
+              onChange={(v) => onChange({ pageTitle: v })}
+            />
+            <Field label="Подзаголовок" value={content.subtitle} onChange={(v) => onChange({ subtitle: v })} multiline />
+            <Field label="Pill «Питание»" value={content.pillPower} onChange={(v) => onChange({ pillPower: v })} />
+            <Field label="Текст CTA" value={content.ctaText} onChange={(v) => onChange({ ctaText: v })} />
+            <MediaPickerField label="Фото" value={content.imageUrl} onChange={(v) => onChange({ imageUrl: v })} />
+          </FormSection>
+          <FormSection title="Как это работает">
+            <Field label="Лейбл" value={content.stepsLabel} onChange={(v) => onChange({ stepsLabel: v })} />
+            <Field label="Заголовок" value={content.stepsTitle} onChange={(v) => onChange({ stepsTitle: v })} />
+            {(content.steps || []).map((step, i) => (
+              <div key={i} className="space-y-2 rounded-lg border border-[var(--border-subtle)] p-4">
+                <p className="text-xs font-bold text-[var(--accent)]">Шаг {i + 1}</p>
+                <Field
+                  label="Заголовок"
+                  value={step.title}
+                  onChange={(v) => {
+                    const steps = [...content.steps];
+                    steps[i] = { ...steps[i], title: v };
+                    onChange({ steps });
+                  }}
+                />
+                <Field
+                  label="Текст"
+                  value={step.text}
+                  onChange={(v) => {
+                    const steps = [...content.steps];
+                    steps[i] = { ...steps[i], text: v };
+                    onChange({ steps });
+                  }}
+                  multiline
+                />
+              </div>
+            ))}
+          </FormSection>
+          <FormSection title="Категории">
+            <Field
+              label="Лейбл"
+              value={content.categoriesLabel}
+              onChange={(v) => onChange({ categoriesLabel: v })}
+            />
+            <Field
+              label="Заголовок"
+              value={content.categoriesTitle}
+              onChange={(v) => onChange({ categoriesTitle: v })}
+            />
+            <Field
+              label="Вступление"
+              value={content.categoriesIntro}
+              onChange={(v) => onChange({ categoriesIntro: v })}
+              multiline
+            />
+            {(content.categories || []).map((cat, i) => (
+              <div key={i} className="space-y-2 rounded-lg border border-[var(--border-subtle)] p-4">
+                <p className="text-xs font-bold text-[var(--accent)]">Категория {i + 1}</p>
+                <MediaPickerField
+                  label="Фото"
+                  value={cat.imageUrl}
+                  onChange={(v) => {
+                    const categories = [...content.categories];
+                    categories[i] = { ...categories[i], imageUrl: v };
+                    onChange({ categories });
+                  }}
+                />
+                <Field
+                  label="Заголовок"
+                  value={cat.title}
+                  onChange={(v) => {
+                    const categories = [...content.categories];
+                    categories[i] = { ...categories[i], title: v };
+                    onChange({ categories });
+                  }}
+                />
+                <Field
+                  label="Текст"
+                  value={cat.text}
+                  onChange={(v) => {
+                    const categories = [...content.categories];
+                    categories[i] = { ...categories[i], text: v };
+                    onChange({ categories });
+                  }}
+                  multiline
+                />
+              </div>
+            ))}
+          </FormSection>
+          <FormSection title="Где работает">
+            <Field label="Лейбл" value={content.roomsLabel} onChange={(v) => onChange({ roomsLabel: v })} />
+            <Field label="Заголовок" value={content.roomsTitle} onChange={(v) => onChange({ roomsTitle: v })} />
+            {(content.rooms || []).map((room, i) => (
+              <div key={i} className="space-y-2 rounded-lg border border-[var(--border-subtle)] p-4">
+                <p className="text-xs font-bold text-[var(--accent)]">Сценарий {i + 1}</p>
+                <Field
+                  label="Заголовок"
+                  value={room.title}
+                  onChange={(v) => {
+                    const rooms = [...content.rooms];
+                    rooms[i] = { ...rooms[i], title: v };
+                    onChange({ rooms });
+                  }}
+                />
+                <Field
+                  label="Текст"
+                  value={room.text}
+                  onChange={(v) => {
+                    const rooms = [...content.rooms];
+                    rooms[i] = { ...rooms[i], text: v };
+                    onChange({ rooms });
+                  }}
+                  multiline
+                />
+              </div>
+            ))}
+          </FormSection>
+          <FormSection title="Закрывающий CTA">
+            <Field label="Pill" value={content.closingPill} onChange={(v) => onChange({ closingPill: v })} />
+            <Field label="Заголовок" value={content.closingTitle} onChange={(v) => onChange({ closingTitle: v })} />
+            <Field
+              label="Текст"
+              value={content.closingText}
+              onChange={(v) => onChange({ closingText: v })}
+              multiline
+            />
+          </FormSection>
+        </div>
       );
 
     case "contacts":

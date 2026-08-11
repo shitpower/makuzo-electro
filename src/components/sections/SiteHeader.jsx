@@ -16,6 +16,7 @@ export function SiteHeader({ locale, phone }) {
   const nav = isEn
     ? [
         { href: "/#design", label: "Design" },
+        { href: "/smart-home", label: "Smart home" },
         { href: "/#services", label: "Services" },
         { href: "/#projects", label: "Projects" },
         { href: "/#about", label: "Company" },
@@ -24,6 +25,7 @@ export function SiteHeader({ locale, phone }) {
     : isLv
       ? [
           { href: "/#design", label: "Dizains" },
+          { href: "/smart-home", label: "Viedā māja" },
           { href: "/#services", label: "Pakalpojumi" },
           { href: "/#projects", label: "Projekti" },
           { href: "/#about", label: "Uzņēmums" },
@@ -31,6 +33,7 @@ export function SiteHeader({ locale, phone }) {
         ]
       : [
           { href: "/#design", label: "Дизайн" },
+          { href: "/smart-home", label: "Умный дом" },
           { href: "/#services", label: "Услуги" },
           { href: "/#projects", label: "Проекты" },
           { href: "/#about", label: "О компании" },

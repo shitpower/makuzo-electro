@@ -41,5 +41,18 @@ export default function sitemap() {
         },
       },
     },
+    {
+      url: `${siteUrl}/smart-home`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          ru: `${siteUrl}/smart-home?lang=ru`,
+          lv: `${siteUrl}/smart-home?lang=lv`,
+          en: `${siteUrl}/smart-home?lang=en`,
+        },
+      },
+    },
   ];
 }

@@ -2,11 +2,11 @@
 
 export const DEFAULT_COMPANY_PROFILE = {
   legalName: "SIA MAKUZO",
-  regNumber: "40103386423",
+  regNumber: "null",
   builderRegNumber: "13248",
   email: "info@makuzo.lv",
   phone: "+371 23887028",
-  streetAddress: "Kaibalas iela 25",
+  streetAddress: "null",
   cityRu: "Рига",
   cityLv: "Rīga",
   cityEn: "Riga",

@@ -108,6 +108,19 @@ export function getSectionContent(section, locale) {
     };
   }
 
+  if (section.key === "smartHome") {
+    const ruCategories = section.contentRu?.categories || [];
+    const categories = primary?.categories?.length ? primary.categories : ruCategories;
+    return {
+      ...primary,
+      imageUrl: pickMediaUrl(primary?.imageUrl) || pickMediaUrl(fallback?.imageUrl) || "",
+      categories: categories.map((cat, index) => ({
+        ...cat,
+        imageUrl: pickMediaUrl(cat?.imageUrl) || pickMediaUrl(ruCategories[index]?.imageUrl) || "",
+      })),
+    };
+  }
+
   if (section.key === "projects") {
     const ruItems = section.contentRu?.items || [];
     const items = primary?.items?.length ? primary.items : ruItems;
