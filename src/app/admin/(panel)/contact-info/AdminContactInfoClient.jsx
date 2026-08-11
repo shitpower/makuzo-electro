@@ -148,7 +148,7 @@ export function AdminContactInfoClient({ section, company }) {
     <div className="space-y-5 p-4 lg:p-6">
       <PageHeader
         title="Контактные данные"
-        subtitle="Список справа в блоке «Контакты»: телефон, email, адрес, часы. Включайте пункты по одному."
+        subtitle="Телефон, email, адрес и график в секции «Контакты». Включайте пункты по одному — пустые поля подтянут данные из «Компания»."
         actions={
           <a href="/admin/company" className="admin-btn focus-ring text-xs">
             → Реквизиты компании

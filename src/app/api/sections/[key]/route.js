@@ -1,8 +1,11 @@
+import { revalidatePath } from "next/cache";
+
 import { createAuditEvent } from "@/db/audit-queries";
 import { getSectionByKey, updateSection } from "@/db/queries";
 import { apiError, apiJson } from "@/lib/api-response";
 import { getRequestId } from "@/lib/request-utils";
 import { requireAdminSession } from "@/lib/session";
+import { SITE_LOCALES } from "@/lib/site-locale";
 import { sectionUpdateSchema } from "@/lib/validation";
 
 export async function GET(request, { params }) {
@@ -56,6 +59,10 @@ export async function PUT(request, { params }) {
     entityId: key,
     metadata: { visible: updated.visible },
   });
+
+  for (const locale of SITE_LOCALES) {
+    revalidatePath(`/${locale}`);
+  }
 
   return apiJson({ section: updated }, {}, { requestId });
 }

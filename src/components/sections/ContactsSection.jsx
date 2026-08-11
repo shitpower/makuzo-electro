@@ -81,7 +81,9 @@ export function ContactsSection({ content, locale, company }) {
   const phone = content?.phones?.[0] || profile.phone || "";
   const email = content?.email || profile.email || "";
   const address = content?.address || formatCompanyAddressShort(profile, locale);
-  const hours = content?.hoursWeekday || "";
+  const hoursWeekday = content?.hoursWeekday || "";
+  const hoursSaturday = content?.hoursSaturday || "";
+  const hours = [hoursWeekday, hoursSaturday].filter(Boolean).join(" · ");
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "#";
   const labels = content?.detailLabels || {};
   const detailsVisible = Boolean(content?.detailsVisible);
@@ -140,6 +142,62 @@ export function ContactsSection({ content, locale, company }) {
           <p className="max-w-[480px] font-[family-name:var(--font-body)] text-[16px] leading-[1.55] text-[#c4c4c4]">
             {content.description}
           </p>
+
+          {showDetails ? (
+            <dl className="grid gap-5 border-t border-[var(--on-dark-line)] pt-5 sm:grid-cols-2">
+              {showPhone ? (
+                <div className="flex flex-col gap-1.5">
+                  <dt className="font-[family-name:var(--font-display)] text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--on-dark-mute)]">
+                    {labels.phone || (isEn ? "Phone" : isLv ? "Tālrunis" : "Телефон")}
+                  </dt>
+                  <dd>
+                    <a
+                      href={telHref}
+                      className="font-[family-name:var(--font-display)] text-[17px] font-medium text-white transition hover:text-[var(--signal)]"
+                    >
+                      {phone}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {showEmail ? (
+                <div className="flex flex-col gap-1.5">
+                  <dt className="font-[family-name:var(--font-display)] text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--on-dark-mute)]">
+                    {labels.email || "Email"}
+                  </dt>
+                  <dd>
+                    <a
+                      href={`mailto:${email}`}
+                      className="font-[family-name:var(--font-display)] text-[17px] font-medium text-white transition hover:text-[var(--signal)]"
+                    >
+                      {email}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {showHours ? (
+                <div className="flex flex-col gap-1.5">
+                  <dt className="font-[family-name:var(--font-display)] text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--on-dark-mute)]">
+                    {labels.hours || (isEn ? "Hours" : isLv ? "Darba laiks" : "График")}
+                  </dt>
+                  <dd className="font-[family-name:var(--font-display)] text-[17px] font-medium text-white">
+                    {hours}
+                  </dd>
+                </div>
+              ) : null}
+              {showAddress ? (
+                <div className="flex flex-col gap-1.5">
+                  <dt className="font-[family-name:var(--font-display)] text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--on-dark-mute)]">
+                    {labels.address || (isEn ? "Address" : isLv ? "Adrese" : "Адрес")}
+                  </dt>
+                  <dd className="font-[family-name:var(--font-display)] text-[17px] font-medium text-white">
+                    {address}
+                  </dd>
+                </div>
+              ) : null}
+            </dl>
+          ) : null}
+
           <div className="flex flex-wrap gap-3 pt-1">
             <button
               type="button"
@@ -189,57 +247,6 @@ export function ContactsSection({ content, locale, company }) {
                 <ButtonLabel>{content.formSubmitLabel}</ButtonLabel>
               </button>
             </form>
-          ) : null}
-
-          {showDetails ? (
-            <div className="mt-2 grid gap-6 border-t border-[var(--on-dark-line)] pt-6 sm:grid-cols-2">
-              {showPhone ? (
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                    {labels.phone || "ТЕЛЕФОН"}
-                  </span>
-                  <a
-                    href={telHref}
-                    className="font-[family-name:var(--font-display)] text-[18px] font-medium text-white"
-                  >
-                    {phone}
-                  </a>
-                </div>
-              ) : null}
-              {showEmail ? (
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                    {labels.email || "EMAIL"}
-                  </span>
-                  <a
-                    href={`mailto:${email}`}
-                    className="font-[family-name:var(--font-display)] text-[18px] font-medium text-white"
-                  >
-                    {email}
-                  </a>
-                </div>
-              ) : null}
-              {showAddress ? (
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                    {labels.address || "АДРЕС"}
-                  </span>
-                  <span className="font-[family-name:var(--font-display)] text-[18px] font-medium text-white">
-                    {address}
-                  </span>
-                </div>
-              ) : null}
-              {showHours ? (
-                <div className="flex flex-col gap-1.5">
-                  <span className="font-[family-name:var(--font-body)] text-[12px] tracking-[0.08em] text-[var(--on-dark-mute)]">
-                    {labels.hours || "ЧАСЫ"}
-                  </span>
-                  <span className="font-[family-name:var(--font-display)] text-[18px] font-medium text-white">
-                    {hours}
-                  </span>
-                </div>
-              ) : null}
-            </div>
           ) : null}
         </div>
 
