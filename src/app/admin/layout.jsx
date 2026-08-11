@@ -3,6 +3,10 @@ import { AdminLayoutClient } from "@/components/admin/AdminLayoutClient";
 export const metadata = {
   title: "Панель управления",
   robots: { index: false, follow: false },
+  icons: {
+    icon: [{ url: "/icon/Makuzo-ico.png", type: "image/png" }],
+    shortcut: "/icon/Makuzo-ico.png",
+  },
 };
 
 /** Shared shell for login + panel (login skips sidebar via pathname). */

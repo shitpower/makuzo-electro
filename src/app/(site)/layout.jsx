@@ -43,7 +43,11 @@ export async function generateMetadata() {
       images: ["/img/logo-on-light.webp"],
     },
     robots: { index: true, follow: true },
-    icons: { icon: "/img/logo-on-light.webp" },
+    icons: {
+      icon: [{ url: "/icon/Makuzo-ico.png", type: "image/png" }],
+      shortcut: "/icon/Makuzo-ico.png",
+      apple: "/icon/Makuzo-ico.png",
+    },
   };
 }
 
