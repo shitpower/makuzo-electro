@@ -5,8 +5,12 @@ import { useState } from "react";
 import { DesignGalleryLightbox } from "@/components/sections/DesignGalleryLightbox";
 import { SiteImage } from "@/components/ui/SiteImage";
 
-export function DesignGalleryGrid({ images, locale, alt = "", columns = "full" }) {
+/**
+ * @param {{ images: string[], displayImages?: string[], locale: string, alt?: string, columns?: 'full' | 'preview' }} props
+ */
+export function DesignGalleryGrid({ images, displayImages, locale, alt = "", columns = "full" }) {
   const [index, setIndex] = useState(null);
+  const shown = displayImages?.length ? displayImages : images;
 
   if (!images?.length) return null;
 
@@ -18,23 +22,26 @@ export function DesignGalleryGrid({ images, locale, alt = "", columns = "full" }
   return (
     <>
       <div className={gridClass}>
-        {images.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            onClick={() => setIndex(i)}
-            className="focus-ring group relative h-[150px] w-full overflow-hidden rounded-[2px] bg-[var(--mist)] sm:h-[190px] md:h-[220px]"
-          >
-            <SiteImage
-              src={src}
-              alt={alt}
-              fill
-              sizes="(max-width: 768px) 50vw, 33vw"
-              className="object-cover transition duration-300 group-hover:scale-[1.03]"
-            />
-            <span className="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/15" />
-          </button>
-        ))}
+        {shown.map((src) => {
+          const fullIndex = images.indexOf(src);
+          return (
+            <button
+              key={src}
+              type="button"
+              onClick={() => setIndex(fullIndex >= 0 ? fullIndex : 0)}
+              className="focus-ring group relative h-[150px] w-full overflow-hidden rounded-[2px] bg-[var(--mist)] sm:h-[190px] md:h-[220px]"
+            >
+              <SiteImage
+                src={src}
+                alt={alt}
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover transition duration-300 group-hover:scale-[1.03]"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-black/0 transition group-hover:bg-black/15" />
+            </button>
+          );
+        })}
       </div>
 
       <DesignGalleryLightbox

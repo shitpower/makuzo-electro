@@ -139,6 +139,9 @@ export function getSectionContent(section, locale) {
     return {
       ...primary,
       imageUrl: pickMediaUrl(primary?.imageUrl) || pickMediaUrl(fallback?.imageUrl) || "",
+      heroImageUrl: pickMediaUrl(primary?.heroImageUrl) || pickMediaUrl(fallback?.heroImageUrl) || "",
+      featureImageUrl:
+        pickMediaUrl(primary?.featureImageUrl) || pickMediaUrl(fallback?.featureImageUrl) || "",
       gallery: gallery.map((url) => pickMediaUrl(url)).filter(Boolean),
     };
   }

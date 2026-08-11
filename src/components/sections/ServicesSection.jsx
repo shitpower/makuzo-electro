@@ -25,20 +25,22 @@ export function ServicesSection({ content }) {
         </div>
 
         <div className="flex flex-col">
-          {items.map((item) => {
-            const isOpen = openNum === item.num;
+          {items.map((item, index) => {
+            const displayNum = String(index + 1).padStart(2, "0");
+            const itemKey = item.id || item.num || `${item.title}-${index}`;
+            const isOpen = openNum === itemKey;
             const bullets = item.bullets || [];
 
             return (
-              <div key={item.num} className="group border-b border-[var(--line)]">
+              <div key={itemKey} className="group border-b border-[var(--line)]">
                 <button
                   type="button"
                   aria-expanded={isOpen}
-                  onClick={() => setOpenNum(isOpen ? null : item.num)}
+                  onClick={() => setOpenNum(isOpen ? null : itemKey)}
                   className="flex w-full items-center gap-4 py-6 text-left md:gap-8 md:py-7"
                 >
                   <span className="w-8 shrink-0 text-[14px] font-semibold tracking-[0.04em] text-[var(--mute)]">
-                    {item.num}
+                    {displayNum}
                   </span>
                   <h3 className="min-w-0 flex-1 text-[clamp(1.125rem,2.4vw,1.875rem)] font-medium text-[var(--ink)] transition-colors group-hover:text-[var(--signal)]">
                     {item.title}

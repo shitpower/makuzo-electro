@@ -95,18 +95,69 @@ export function renderSectionFields(key, content, onChange) {
           </FormSection>
           <FormSection title="Страница /design (полный текст)">
             <Field
-              label="Заголовок страницы"
+              label="Лейбл (eyebrow)"
               value={content.pageTitle}
               onChange={(v) => onChange({ pageTitle: v })}
             />
+            <Field label="Заголовок H1" value={content.headline} onChange={(v) => onChange({ headline: v })} />
             <Field label="Вступление" value={content.intro} onChange={(v) => onChange({ intro: v })} multiline />
+            <MediaPickerField
+              label="Hero-фото (справа от H1)"
+              value={content.heroImageUrl}
+              onChange={(v) => onChange({ heroImageUrl: v })}
+            />
             <Field
-              label="Абзацы (каждый с новой строки)"
+              label="Блок шаблонов — лейбл"
+              value={content.featureEyebrow}
+              onChange={(v) => onChange({ featureEyebrow: v })}
+            />
+            <Field
+              label="Блок шаблонов — заголовок"
+              value={content.featureTitle}
+              onChange={(v) => onChange({ featureTitle: v })}
+            />
+            <Field
+              label="Блок шаблонов — текст"
+              value={content.featureText}
+              onChange={(v) => onChange({ featureText: v })}
+              multiline
+            />
+            <Field
+              label="Абзацы под блоком (через пустую строку)"
               value={(content.paragraphs || []).join("\n\n")}
               onChange={(v) =>
                 onChange({
                   paragraphs: v
                     .split(/\n\s*\n/)
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Фраза про дизайнера"
+              value={content.designerNote}
+              onChange={(v) => onChange({ designerNote: v })}
+              multiline
+            />
+            <MediaPickerField
+              label="Фото блока шаблонов"
+              value={content.featureImageUrl}
+              onChange={(v) => onChange({ featureImageUrl: v })}
+            />
+            <Field
+              label="Лейбл процесса"
+              value={content.processLabel}
+              onChange={(v) => onChange({ processLabel: v })}
+            />
+            <Field
+              label="Шаги процесса (по строке)"
+              value={(content.processSteps || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  processSteps: v
+                    .split("\n")
                     .map((s) => s.trim())
                     .filter(Boolean),
                 })
@@ -152,14 +203,18 @@ export function renderSectionFields(key, content, onChange) {
               onChange={(v) => onChange({ advantagesTitle: v })}
             />
             <Field
-              label="Преимущества (по строке)"
-              value={(content.advantages || []).join("\n")}
+              label="Карточки преимуществ (Заголовок | текст, по строке)"
+              value={(content.advantageCards || []).map((c) => `${c.title || ""} | ${c.text || ""}`).join("\n")}
               onChange={(v) =>
                 onChange({
-                  advantages: v
+                  advantageCards: v
                     .split("\n")
                     .map((s) => s.trim())
-                    .filter(Boolean),
+                    .filter(Boolean)
+                    .map((line) => {
+                      const [title, ...rest] = line.split("|");
+                      return { title: (title || "").trim(), text: rest.join("|").trim() };
+                    }),
                 })
               }
               multiline
@@ -173,19 +228,6 @@ export function renderSectionFields(key, content, onChange) {
               label="Вступление культуры"
               value={content.cultureIntro}
               onChange={(v) => onChange({ cultureIntro: v })}
-              multiline
-            />
-            <Field
-              label="Пункты культуры (по строке)"
-              value={(content.cultureItems || []).join("\n")}
-              onChange={(v) =>
-                onChange({
-                  cultureItems: v
-                    .split("\n")
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-                })
-              }
               multiline
             />
             <Field label="Заключение" value={content.closing} onChange={(v) => onChange({ closing: v })} multiline />
