@@ -5,8 +5,9 @@ import Link from "next/link";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { ButtonLabel } from "@/components/ui/ButtonLabel";
 import { SiteImage } from "@/components/ui/SiteImage";
+import { DEFAULT_LOCALE, withLocale } from "@/lib/site-locale";
 
-export function DesignSection({ content }) {
+export function DesignSection({ content, locale = DEFAULT_LOCALE }) {
   return (
     <AnimatedSection id="design" className="bg-white pb-16 pt-14 md:pb-24 md:pt-20">
       <div className="container-site grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -21,7 +22,10 @@ export function DesignSection({ content }) {
           <p className="max-w-[520px] font-[family-name:var(--font-body)] text-[clamp(1rem,1.4vw,1.125rem)] leading-[1.5] text-[var(--mute)]">
             {content.teaser}
           </p>
-          <Link href={content.ctaHref || "/design"} className="btn-primary mt-2 inline-flex w-fit items-center justify-center gap-2">
+          <Link
+            href={withLocale(locale, content.ctaHref || "/design")}
+            className="btn-primary mt-2 inline-flex w-fit items-center justify-center gap-2"
+          >
             <ButtonLabel arrow>{content.ctaText || "Подробнее"}</ButtonLabel>
           </Link>
         </div>

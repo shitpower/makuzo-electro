@@ -1,41 +1,92 @@
 import { NextResponse } from "next/server";
 
+import { DEFAULT_LOCALE, isSiteLocale, parseSiteLocale } from "./lib/site-locale";
+
 const LOCALE_COOKIE = "locale";
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
 
+/** Legacy public paths (no locale prefix) that must redirect into /[locale]/… */
+const LEGACY_PAGE_PATHS = new Set(["/", "/design", "/privacy", "/smart-home"]);
+
 /**
- * Public locale only — no iron-session (auth lives in admin/(panel)/layout).
- * Keeps the proxy bundle small for homepage TTFB.
+ * @param {string} pathname
+ * @returns {{ locale: 'ru' | 'lv' | 'en'; rest: string } | null}
+ */
+function matchLocalePath(pathname) {
+  const m = pathname.match(/^\/(ru|lv|en)(\/.*)?$/);
+  if (!m || !isSiteLocale(m[1])) return null;
+  return { locale: m[1], rest: m[2] || "/" };
+}
+
+/**
+ * Public locale routing — no iron-session (auth lives in admin/(panel)/layout).
+ * Cookie only drives redirects to locale-prefixed URLs so RSC never calls cookies().
  *
  * @param {import("next/server").NextRequest} request
  */
 export function proxy(request) {
-  const res = NextResponse.next();
-  const qp = request.nextUrl.searchParams.get("lang") || request.nextUrl.searchParams.get("locale");
+  const url = request.nextUrl.clone();
+  const qpRaw = url.searchParams.get("lang") || url.searchParams.get("locale");
+  const qpLocale = qpRaw ? parseSiteLocale(qpRaw) : null;
+  const cookieRaw = request.cookies.get(LOCALE_COOKIE)?.value;
+  const cookieLocale = cookieRaw ? parseSiteLocale(cookieRaw) : null;
 
-  if (qp === "ru" || qp === "lv" || qp === "en" || qp === "ro") {
-    const locale = qp === "ro" ? "lv" : qp;
-    res.cookies.set(LOCALE_COOKIE, locale, {
+  const localized = matchLocalePath(url.pathname);
+
+  if (localized) {
+    const res = NextResponse.next();
+    res.cookies.set(LOCALE_COOKIE, localized.locale, {
       path: "/",
       maxAge: LOCALE_MAX_AGE,
       sameSite: "lax",
       httpOnly: false,
     });
-    res.headers.set("x-lang", locale);
+    res.headers.set("x-lang", localized.locale);
+
+    if (qpRaw) {
+      url.searchParams.delete("lang");
+      url.searchParams.delete("locale");
+      return NextResponse.redirect(url, 308);
+    }
     return res;
   }
 
-  const c = request.cookies.get(LOCALE_COOKIE)?.value;
-  const resolved = c === "lv" || c === "ro" ? "lv" : c === "en" ? "en" : "ru";
-  res.headers.set("x-lang", resolved);
+  if (!LEGACY_PAGE_PATHS.has(url.pathname)) {
+    return NextResponse.next();
+  }
+
+  const locale = qpLocale || cookieLocale || DEFAULT_LOCALE;
+  const rest = url.pathname === "/" ? "" : url.pathname;
+  url.pathname = `/${locale}${rest}`;
+  url.searchParams.delete("lang");
+  url.searchParams.delete("locale");
+
+  const res = NextResponse.redirect(url, 308);
+  res.cookies.set(LOCALE_COOKIE, locale, {
+    path: "/",
+    maxAge: LOCALE_MAX_AGE,
+    sameSite: "lax",
+    httpOnly: false,
+  });
+  res.headers.set("x-lang", locale);
   return res;
 }
 
 /**
- * Only HTML pages that need locale cookie / x-lang.
+ * Only HTML pages that need locale cookie / redirects.
  * Admin auth is NOT here — see admin/(panel)/layout.jsx (Node session).
- * API / static / images never hit this proxy.
  */
 export const config = {
-  matcher: ["/", "/design", "/privacy", "/smart-home"],
+  matcher: [
+    "/",
+    "/design",
+    "/privacy",
+    "/smart-home",
+    "/ru",
+    "/ru/:path*",
+    "/lv",
+    "/lv/:path*",
+    "/en",
+    "/en/:path*",
+  ],
 };

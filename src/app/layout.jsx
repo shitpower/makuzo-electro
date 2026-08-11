@@ -2,8 +2,6 @@ import "./globals.css";
 
 import { Mulish, Space_Grotesk } from "next/font/google";
 
-import { getSiteLocaleServer } from "@/lib/site-locale";
-
 /** Body / UI — Cyrillic + Latin */
 const mulish = Mulish({
   subsets: ["cyrillic", "latin"],
@@ -20,12 +18,10 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-export default async function RootLayout({ children }) {
-  const locale = await getSiteLocaleServer();
-
+export default function RootLayout({ children }) {
   return (
     <html
-      lang={locale === "lv" ? "lv" : locale === "en" ? "en" : "ru"}
+      lang="ru"
       data-scroll-behavior="smooth"
       className={`${mulish.variable} ${spaceGrotesk.variable}`}
     >

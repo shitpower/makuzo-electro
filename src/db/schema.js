@@ -24,10 +24,11 @@ export const media = pgTable("media", {
   filename: text("filename").notNull(),
   mimeType: text("mime_type"),
   size: integer("size"),
-  /** Base64-encoded file bytes, stored directly in Postgres. */
+  /** Base64-encoded file bytes (legacy). Prefer githubUrl / Vercel Blob when set. */
   data: text("data"),
-  /** Legacy / optional GitHub mirror -no longer required for new uploads. */
+  /** Legacy / optional GitHub mirror path. */
   githubPath: text("github_path"),
+  /** Public CDN URL (Vercel Blob or GitHub raw). */
   githubUrl: text("github_url"),
   altRu: text("alt_ru"),
   altLv: text("alt_lv"),
@@ -35,15 +36,22 @@ export const media = pgTable("media", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const inquiries = pgTable("inquiries", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  phone: text("phone").notNull(),
-  email: text("email"),
-  message: text("message"),
-  isRead: boolean("is_read").notNull().default(false),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-});
+export const inquiries = pgTable(
+  "inquiries",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    phone: text("phone").notNull(),
+    email: text("email"),
+    message: text("message"),
+    isRead: boolean("is_read").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("inquiries_created_at_idx").on(table.createdAt),
+    index("inquiries_is_read_idx").on(table.isRead),
+  ],
+);
 
 export const siteSettings = pgTable("site_settings", {
   id: integer("id").primaryKey().default(1),

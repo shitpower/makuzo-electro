@@ -1,58 +1,31 @@
+import { SITE_LOCALES } from "@/lib/site-locale";
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://makuzo.lv";
 
+const PAGES = [
+  { path: "", changeFrequency: "weekly", priority: 1 },
+  { path: "/design", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/privacy", changeFrequency: "yearly", priority: 0.4 },
+  { path: "/smart-home", changeFrequency: "monthly", priority: 0.8 },
+];
+
 export default function sitemap() {
-  return [
-    {
-      url: siteUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-      alternates: {
-        languages: {
-          ru: `${siteUrl}?lang=ru`,
-          lv: `${siteUrl}?lang=lv`,
-          en: `${siteUrl}?lang=en`,
+  const now = new Date();
+  return PAGES.flatMap((page) =>
+    SITE_LOCALES.map((locale) => {
+      const suffix = page.path;
+      const url = `${siteUrl}/${locale}${suffix}`;
+      return {
+        url,
+        lastModified: now,
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        alternates: {
+          languages: Object.fromEntries(
+            SITE_LOCALES.map((l) => [l, `${siteUrl}/${l}${suffix}`]),
+          ),
         },
-      },
-    },
-    {
-      url: `${siteUrl}/design`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          ru: `${siteUrl}/design?lang=ru`,
-          lv: `${siteUrl}/design?lang=lv`,
-          en: `${siteUrl}/design?lang=en`,
-        },
-      },
-    },
-    {
-      url: `${siteUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4,
-      alternates: {
-        languages: {
-          ru: `${siteUrl}/privacy?lang=ru`,
-          lv: `${siteUrl}/privacy?lang=lv`,
-          en: `${siteUrl}/privacy?lang=en`,
-        },
-      },
-    },
-    {
-      url: `${siteUrl}/smart-home`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          ru: `${siteUrl}/smart-home?lang=ru`,
-          lv: `${siteUrl}/smart-home?lang=lv`,
-          en: `${siteUrl}/smart-home?lang=en`,
-        },
-      },
-    },
-  ];
+      };
+    }),
+  );
 }

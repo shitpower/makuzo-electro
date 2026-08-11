@@ -8,6 +8,13 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
     imageSizes: [32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    localPatterns: [
+      { pathname: "/img/**" },
+      { pathname: "/icon/**" },
+      { pathname: "/api/media/**" },
+      // Omit search → allow ?path=… for GitHub proxy assets
+      { pathname: "/api/proxy-image" },
+    ],
     remotePatterns: [
       {
         protocol: "https",
@@ -16,6 +23,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "**.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
       },
     ],
   },

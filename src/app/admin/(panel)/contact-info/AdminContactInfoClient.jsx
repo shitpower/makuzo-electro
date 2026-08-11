@@ -198,7 +198,7 @@ export function AdminContactInfoClient({ section, company }) {
         footer={
           <>
             <a
-              href={`/?lang=${activeLocale}#contacts`}
+              href={`/${activeLocale}#contacts`}
               target="_blank"
               rel="noreferrer"
               className="admin-btn-ghost focus-ring inline-flex min-h-11 items-center gap-2 text-xs"

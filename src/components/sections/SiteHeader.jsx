@@ -6,38 +6,40 @@ import { FiMenu, FiX, FiPhone } from "react-icons/fi";
 
 import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
 import { MakuzoLogo } from "@/components/ui/MakuzoLogo";
+import { withLocale } from "@/lib/site-locale";
 
 export function SiteHeader({ locale, phone }) {
   const isLv = locale === "lv";
   const isEn = locale === "en";
   const menuId = useId();
   const [menuOpen, setMenuOpen] = useState(false);
+  const home = withLocale(locale, "/");
 
   const nav = isEn
     ? [
-        { href: "/#design", label: "Design" },
-        { href: "/smart-home", label: "Smart home" },
-        { href: "/#services", label: "Services" },
-        { href: "/#projects", label: "Projects" },
-        { href: "/#about", label: "Company" },
-        { href: "/#contacts", label: "Contacts" },
+        { href: withLocale(locale, "/#design"), label: "Design" },
+        { href: withLocale(locale, "/smart-home"), label: "Smart home" },
+        { href: withLocale(locale, "/#services"), label: "Services" },
+        { href: withLocale(locale, "/#projects"), label: "Projects" },
+        { href: withLocale(locale, "/#about"), label: "Company" },
+        { href: withLocale(locale, "/#contacts"), label: "Contacts" },
       ]
     : isLv
       ? [
-          { href: "/#design", label: "Dizains" },
-          { href: "/smart-home", label: "Viedā māja" },
-          { href: "/#services", label: "Pakalpojumi" },
-          { href: "/#projects", label: "Projekti" },
-          { href: "/#about", label: "Uzņēmums" },
-          { href: "/#contacts", label: "Kontakti" },
+          { href: withLocale(locale, "/#design"), label: "Dizains" },
+          { href: withLocale(locale, "/smart-home"), label: "Viedā māja" },
+          { href: withLocale(locale, "/#services"), label: "Pakalpojumi" },
+          { href: withLocale(locale, "/#projects"), label: "Projekti" },
+          { href: withLocale(locale, "/#about"), label: "Uzņēmums" },
+          { href: withLocale(locale, "/#contacts"), label: "Kontakti" },
         ]
       : [
-          { href: "/#design", label: "Дизайн" },
-          { href: "/smart-home", label: "Умный дом" },
-          { href: "/#services", label: "Услуги" },
-          { href: "/#projects", label: "Проекты" },
-          { href: "/#about", label: "О компании" },
-          { href: "/#contacts", label: "Контакты" },
+          { href: withLocale(locale, "/#design"), label: "Дизайн" },
+          { href: withLocale(locale, "/smart-home"), label: "Умный дом" },
+          { href: withLocale(locale, "/#services"), label: "Услуги" },
+          { href: withLocale(locale, "/#projects"), label: "Проекты" },
+          { href: withLocale(locale, "/#about"), label: "О компании" },
+          { href: withLocale(locale, "/#contacts"), label: "Контакты" },
         ];
 
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : "#contacts";
@@ -79,7 +81,7 @@ export function SiteHeader({ locale, phone }) {
   return (
     <header className="relative z-50 bg-white">
       <div className="container-site flex h-[72px] items-center justify-between gap-3 sm:h-20 md:h-[124px]">
-        <Link href="/" className="focus-ring flex shrink-0 items-center rounded-sm">
+        <Link href={home} className="focus-ring flex shrink-0 items-center rounded-sm">
           <MakuzoLogo className="h-9 w-auto sm:h-10 md:h-14 lg:h-16" priority />
         </Link>
 

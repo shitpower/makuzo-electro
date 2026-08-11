@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { loadMediaFile } from "@/lib/media-storage";
 import { getRequestId } from "@/lib/request-utils";
 
-/** Public route — serves DB-stored image bytes for <img>/next/image. */
+/** Public route — serves media for next/image (localPatterns) and direct <img>. */
 export async function GET(request, { params }) {
   const requestId = getRequestId(request);
   const { id } = await params;
@@ -15,6 +15,16 @@ export async function GET(request, { params }) {
   const loaded = await loadMediaFile(mediaId);
   if (!loaded) {
     return NextResponse.json({ error: "Not found", requestId }, { status: 404 });
+  }
+
+  if (loaded.redirectUrl) {
+    return NextResponse.redirect(loaded.redirectUrl, {
+      status: 308,
+      headers: {
+        "Cache-Control": "public, max-age=31536000, immutable",
+        "X-Request-Id": requestId,
+      },
+    });
   }
 
   const { item, buffer } = loaded;

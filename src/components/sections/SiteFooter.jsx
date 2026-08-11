@@ -6,6 +6,7 @@ import {
   formatCompanyLines,
   normalizeCompanyProfile,
 } from "@/lib/company-profile";
+import { withLocale } from "@/lib/site-locale";
 
 const DEFAULT_NAV = {
   ru: [
@@ -40,7 +41,12 @@ export function SiteFooter({ content = {}, locale, company }) {
   const privacyLabel =
     content.privacyLabel ||
     (isEn ? "Privacy policy" : isLv ? "Privātuma politika" : "Политика конфиденциальности");
-  const privacyHref = content.privacyHref || "/privacy";
+  const privacyHref = withLocale(locale, content.privacyHref || "/privacy");
+  const homeHref = withLocale(locale, "/");
+  const localizedNav = navLinks.map((link) => ({
+    ...link,
+    href: withLocale(locale, link.href || "#"),
+  }));
   const tagline = isEn
     ? "ELECTRICAL · ENGINEERING · AUTOMATION"
     : isLv
@@ -58,7 +64,7 @@ export function SiteFooter({ content = {}, locale, company }) {
       <div className="container-site flex flex-col gap-10 md:gap-12">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start lg:gap-16">
           <div className="flex max-w-[520px] flex-col gap-5">
-            <Link href="/" className="focus-ring inline-block w-fit rounded-sm">
+            <Link href={homeHref} className="focus-ring inline-block w-fit rounded-sm">
               <MakuzoLogo variant="second" className="h-14 w-auto sm:h-16 md:h-[4.5rem]" />
             </Link>
             <p className="font-[family-name:var(--font-display)] text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--signal)]">
@@ -77,7 +83,7 @@ export function SiteFooter({ content = {}, locale, company }) {
                 {content.navTitle || (isEn ? "SECTIONS" : isLv ? "SADAĻAS" : "РАЗДЕЛЫ")}
               </p>
               <ul className="flex flex-col gap-2.5 font-[family-name:var(--font-body)] text-[14px] text-[var(--on-dark-mute)]">
-                {navLinks.map((link) => (
+                {localizedNav.map((link) => (
                   <li key={`${link.href}-${link.label}`}>
                     <a href={link.href} className="transition hover:text-white">
                       {link.label}

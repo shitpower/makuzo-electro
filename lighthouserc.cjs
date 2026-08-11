@@ -5,7 +5,7 @@ module.exports = {
       numberOfRuns: 1,
       startServerCommand: "npm run start",
       startServerReadyPattern: "ready",
-      url: ["http://127.0.0.1:3000/"],
+      url: ["http://127.0.0.1:3000/ru"],
       settings: {
         preset: "desktop",
       },

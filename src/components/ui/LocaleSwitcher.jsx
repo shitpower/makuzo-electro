@@ -3,11 +3,12 @@
 import { useRouter, usePathname } from "next/navigation";
 import clsx from "clsx";
 
-const LOCALES = [
-  { code: "ru", label: "RU" },
-  { code: "lv", label: "LV" },
-  { code: "en", label: "EN" },
-];
+import { SITE_LOCALES } from "@/lib/site-locale";
+
+const LOCALES = SITE_LOCALES.map((code) => ({
+  code,
+  label: code.toUpperCase(),
+}));
 
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
 
@@ -16,13 +17,20 @@ function writeLocaleCookie(next) {
   globalThis.document.cookie = `locale=${next};path=/;max-age=${LOCALE_MAX_AGE};samesite=lax`;
 }
 
+/** @param {string} pathname @param {string} nextLocale */
+function swapLocaleInPath(pathname, nextLocale) {
+  const stripped = pathname.replace(/^\/(ru|lv|en)(?=\/|$)/, "") || "/";
+  if (stripped === "/") return `/${nextLocale}`;
+  return `/${nextLocale}${stripped}`;
+}
+
 export function LocaleSwitcher({ locale }) {
   const router = useRouter();
   const pathname = usePathname();
 
   function switchLocale(next) {
     writeLocaleCookie(next);
-    router.push(`${pathname}?lang=${next}`);
+    router.push(swapLocaleInPath(pathname || "/", next));
     router.refresh();
   }
 

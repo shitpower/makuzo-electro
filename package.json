@@ -20,6 +20,7 @@
     "db:push": "node scripts/db-push.js",
     "db:studio": "node scripts/db-studio.js",
     "db:migrate": "node scripts/apply-security-migration.js",
+    "db:indexes": "node scripts/apply-inquiries-indexes.js",
     "db:verify": "node scripts/verify-db.js",
     "db:audit": "node scripts/audit-db-tables.js",
     "db:cleanup": "node scripts/db-cleanup-unused.js",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "@vercel/blob": "^2.8.0",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.2",

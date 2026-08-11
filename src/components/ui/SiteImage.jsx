@@ -1,10 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import clsx from "clsx";
 
 import { normalizeCmsMediaSrc } from "@/lib/cms-media-src";
 
+/**
+ * Server-friendly next/image wrapper for CMS + static assets.
+ * Local /api/media and /api/proxy-image are optimized via images.localPatterns.
+ */
 export function SiteImage({
   src,
   alt = "",
@@ -20,9 +22,7 @@ export function SiteImage({
   const normalized = normalizeCmsMediaSrc(src);
   if (!normalized) return null;
 
-  const isProxy = normalized.startsWith("/api/proxy-image");
-  const isApiMedia = normalized.startsWith("/api/media/");
-  const unoptimized = unoptimizedProp ?? (isProxy || isApiMedia);
+  const unoptimized = unoptimizedProp ?? false;
 
   if (fill) {
     return (

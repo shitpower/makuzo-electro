@@ -1,4 +1,8 @@
-import { cookies } from "next/headers";
+export const SITE_LOCALES = /** @type {const} */ (["ru", "lv", "en"]);
+export const DEFAULT_LOCALE = "ru";
+
+/** ISR window for public CMS pages (seconds). */
+export const SITE_REVALIDATE_SECONDS = 300;
 
 const CASES_DEFAULT_IMAGES = {
   stats: "/img/Background.png",
@@ -10,6 +14,60 @@ export function parseSiteLocale(value) {
   if (value === "lv" || value === "ro") return "lv";
   if (value === "en") return "en";
   return "ru";
+}
+
+/** @param {unknown} value @returns {value is 'ru' | 'lv' | 'en'} */
+export function isSiteLocale(value) {
+  return value === "ru" || value === "lv" || value === "en";
+}
+
+/**
+ * Resolve `[locale]` route param without cookies()/headers() — keeps pages static/ISR.
+ * @param {string | string[] | undefined} param
+ * @returns {'ru' | 'lv' | 'en'}
+ */
+export function resolveLocaleParam(param) {
+  const raw = Array.isArray(param) ? param[0] : param;
+  if (isSiteLocale(raw)) return raw;
+  return DEFAULT_LOCALE;
+}
+
+/**
+ * Prefix an internal path with locale. Leaves hashes, tel:, mailto:, absolute URLs alone.
+ * @param {'ru' | 'lv' | 'en'} locale
+ * @param {string} href
+ */
+export function withLocale(locale, href) {
+  if (!href) return `/${locale}`;
+  if (
+    href.startsWith("#") ||
+    href.startsWith("tel:") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("blob:") ||
+    href.startsWith("data:")
+  ) {
+    return href;
+  }
+
+  const [pathPart, hash = ""] = href.split("#");
+  const hashSuffix = hash ? `#${hash}` : "";
+  let path = pathPart || "/";
+
+  const stripped = path.match(/^\/(ru|lv|en)(?=\/|$)/);
+  if (stripped) {
+    path = path.slice(stripped[0].length) || "/";
+  }
+
+  if (!path.startsWith("/")) path = `/${path}`;
+  if (path === "/") return `/${locale}${hashSuffix}`;
+  return `/${locale}${path}${hashSuffix}`;
+}
+
+/** @returns {{ locale: string }[]} */
+export function siteLocaleStaticParams() {
+  return SITE_LOCALES.map((locale) => ({ locale }));
 }
 
 function pickMediaUrl(value) {
@@ -42,35 +100,6 @@ function resolveCaseItems(content, ruContent) {
       return { ...item, variant, imageUrl };
     }),
   };
-}
-
-function pickLocaleFromSearchParams(searchParams) {
-  if (!searchParams) return null;
-
-  if (typeof searchParams.get === "function") {
-    const fromQuery = searchParams.get("lang") ?? searchParams.get("locale");
-    return fromQuery ? parseSiteLocale(fromQuery) : null;
-  }
-
-  if (typeof searchParams === "object") {
-    const fromQuery =
-      typeof searchParams.lang === "string"
-        ? searchParams.lang
-        : typeof searchParams.locale === "string"
-          ? searchParams.locale
-          : null;
-    return fromQuery ? parseSiteLocale(fromQuery) : null;
-  }
-
-  return null;
-}
-
-export async function getSiteLocaleServer(searchParams) {
-  const localeFromQuery = pickLocaleFromSearchParams(searchParams);
-  if (localeFromQuery) return localeFromQuery;
-
-  const store = await cookies();
-  return parseSiteLocale(store.get("locale")?.value);
 }
 
 /** @param {object} section @param {'ru' | 'lv' | 'en'} locale */

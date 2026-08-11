@@ -26,7 +26,7 @@ export default async function AdminDashboardPage() {
         actions={
           <>
             <a
-              href="/?lang=ru"
+              href="/ru"
               target="_blank"
               rel="noreferrer"
               className="admin-btn focus-ring text-xs"
@@ -35,7 +35,7 @@ export default async function AdminDashboardPage() {
               Сайт RU
             </a>
             <a
-              href="/?lang=lv"
+              href="/lv"
               target="_blank"
               rel="noreferrer"
               className="admin-btn focus-ring text-xs"

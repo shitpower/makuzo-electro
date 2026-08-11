@@ -169,7 +169,7 @@ function SectionEditor({ section }) {
       footer={
         <>
           <a
-            href={`/?lang=${activeLocale}`}
+            href={`/${activeLocale}`}
             target="_blank"
             rel="noreferrer"
             className="admin-btn-ghost focus-ring inline-flex min-h-11 items-center gap-2 text-xs"
@@ -202,7 +202,7 @@ export function AdminContentClient({ sections, sectionSpacing }) {
         subtitle="Управление секциями лендинга. Футер и реквизиты компании — отдельные вкладки в меню."
         actions={
           <a
-            href={`/?lang=${activeLocale}`}
+            href={`/${activeLocale}`}
             target="_blank"
             rel="noreferrer"
             className="admin-btn focus-ring text-xs"

@@ -162,7 +162,7 @@ export function AdminFooterClient({ section }) {
         footer={
           <>
             <a
-              href={`/?lang=${activeLocale}`}
+              href={`/${activeLocale}`}
               target="_blank"
               rel="noreferrer"
               className="admin-btn-ghost focus-ring inline-flex min-h-11 items-center gap-2 text-xs"
