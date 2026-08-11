@@ -18,10 +18,10 @@ export const DEFAULT_SECTIONS = [
     visible: true,
     contentRu: {
       locationTag: "РИГА · ЛАТВИЯ",
-      title: "Электрификация объектов любой сложности",
+      title: "Электромонтаж объектов любой сложности",
       titleHighlight: "любой сложности",
       subtitle:
-        "Современные инженерные решения по электрификации промышленных, коммерческих, общественных и частных объектов. Пять направлений: электромонтаж, электроизмерения, слаботочные системы, электрощиты и автоматизация.",
+        "Современные инженерные решения по электромонтажу промышленных, коммерческих, общественных и частных объектов. Пять направлений: электромонтаж, электроизмерения, слаботочные системы, электрощиты и автоматизация.",
       ctaText: "Обсудить проект",
       ctaSecondaryText: "Смотреть услуги",
       ctaHref: "#contacts",
@@ -42,10 +42,10 @@ export const DEFAULT_SECTIONS = [
     },
     contentEn: {
       locationTag: "RIGA · LATVIA",
-      title: "Electrification of facilities of any complexity",
+      title: "Electrical installation of facilities of any complexity",
       titleHighlight: "any complexity",
       subtitle:
-        "Modern engineering solutions for electrification of industrial, commercial, public and private facilities. Five areas: electrical installation, electrical measurements, low-current systems, electrical switchboards and automation.",
+        "Modern engineering solutions for electrical installation of industrial, commercial, public and private facilities. Five areas: electrical installation, electrical measurements, low-current systems, electrical switchboards and automation.",
       ctaText: "Discuss project",
       ctaSecondaryText: "View services",
       ctaHref: "#contacts",
@@ -194,16 +194,16 @@ export const DEFAULT_SECTIONS = [
       ],
       features: [
         {
-          title: "Эксперты электрификации",
-          text: "Проектируем и монтируем электросети, слаботочные системы и системы автоматизации для объектов любой сложности.",
+          title: "Электромонтаж",
+          text: "Сети, слаботочка и автоматика — от квартиры до цеха.",
         },
         {
           title: "Сертифицированные специалисты",
-          text: "Зарегистрированы в реестре строительных коммерсантов Латвии. Все необходимые сертификаты.",
+          text: "В реестре строительных коммерсантов Латвии, с нужными сертификатами.",
         },
         {
-          title: "Полный цикл сервиса",
-          text: "От технического решения и сметы до монтажа, документации и гарантийного обслуживания.",
+          title: "Полный цикл",
+          text: "Решение, смета, монтаж, документы и гарантия.",
         },
       ],
       imageUrl:
@@ -223,16 +223,16 @@ export const DEFAULT_SECTIONS = [
       ],
       features: [
         {
-          title: "Elektroinstalācijas eksperti",
-          text: "Projektējam un montējam elektrotīklus, vājstrāvas sistēmas un automatizācijas sistēmas objektiem jebkurā sarežģītībā.",
+          title: "Elektroinstalācija",
+          text: "Tīkli, vājstrāva un automatizācija — no dzīvokļa līdz ceham.",
         },
         {
           title: "Sertificēti speciālisti",
-          text: "Reģistrēti Latvijas būvkomersantu reģistrā. Visas nepieciešamās sertifikātes.",
+          text: "Latvijas būvkomersantu reģistrā, ar nepieciešamajiem sertifikātiem.",
         },
         {
-          title: "Pilns servisa cikls",
-          text: "No tehniskā risinājuma un tāmes līdz montāžai, dokumentācijai un garantijas apkalpošanai.",
+          title: "Pilns cikls",
+          text: "Risinājums, tāme, montāža, dokumenti un garantija.",
         },
       ],
       imageUrl:
@@ -252,16 +252,16 @@ export const DEFAULT_SECTIONS = [
       ],
       features: [
         {
-          title: "Electrification experts",
-          text: "We design and install power networks, low-current systems and automation systems for facilities of any complexity.",
+          title: "Electrical installation",
+          text: "Power, low-current and automation — from apartments to workshops.",
         },
         {
           title: "Certified specialists",
-          text: "Registered in the Latvian Register of Construction Merchants. All required certificates.",
+          text: "Listed in Latvia’s construction merchants register, with required certificates.",
         },
         {
-          title: "Full service cycle",
-          text: "From technical solution and estimate to installation, documentation and warranty service.",
+          title: "Full cycle",
+          text: "Solution, estimate, install, paperwork and warranty.",
         },
       ],
       imageUrl:
@@ -515,7 +515,7 @@ export const DEFAULT_SECTIONS = [
       label: "ПРОЕКТЫ",
       title: "Наши проекты",
       description:
-        "От квартир и частных домов до магазинов, складов и производственных площадок — типы объектов, с которыми мы работаем.",
+        "От квартир и домов до магазинов, складов и производств.",
       items: [
         {
           tag: "ЧАСТНЫЙ СЕКТОР",
@@ -550,7 +550,7 @@ export const DEFAULT_SECTIONS = [
       label: "PROJEKTI",
       title: "Mūsu projekti",
       description:
-        "No dzīvokļiem un privātmājām līdz veikaliem, noliktavām un ražošanas objektiem — projektu veidi, ar kuriem strādājam.",
+        "No dzīvokļiem un mājām līdz veikaliem, noliktavām un ražošanai.",
       items: [
         {
           tag: "PRIVĀTAIS SEKTORS",
@@ -585,7 +585,7 @@ export const DEFAULT_SECTIONS = [
       label: "PROJECTS",
       title: "Our projects",
       description:
-        "From apartments and private homes to shops, warehouses and production sites — the types of projects we work on.",
+        "From apartments and homes to shops, warehouses and production sites.",
       items: [
         {
           tag: "PRIVATE SECTOR",
@@ -624,7 +624,7 @@ export const DEFAULT_SECTIONS = [
       label: "КАРЬЕРА",
       title: "Присоединяйтесь к команде",
       description:
-        "С ростом числа и масштаба проектов мы активно развиваемся и ищем новых коллег — инженеров, монтажников и специалистов по автоматике.",
+        "Ищем инженеров, монтажников и специалистов по автоматике.",
       buttonText: "Узнать больше",
       buttonHref: "#contacts",
       roles: [
@@ -638,7 +638,7 @@ export const DEFAULT_SECTIONS = [
       label: "KARJERA",
       title: "Pievienojieties komandai",
       description:
-        "Ar projektu skaita un apjoma pieaugumu mēs aktīvi attīstāmies un meklējam jaunus kolēģus — inženierus, montētājus un automatizācijas speciālistus.",
+        "Meklējam inženierus, montētājus un automatizācijas speciālistus.",
       buttonText: "Uzzināt vairāk",
       buttonHref: "#contacts",
       roles: [
@@ -652,7 +652,7 @@ export const DEFAULT_SECTIONS = [
       label: "CAREERS",
       title: "Join our team",
       description:
-        "As the number and scale of projects grow, we are actively expanding and looking for new colleagues — engineers, installers and automation specialists.",
+        "Looking for engineers, installers and automation specialists.",
       buttonText: "Learn more",
       buttonHref: "#contacts",
       roles: [
@@ -1054,7 +1054,7 @@ export const DEFAULT_SECTIONS = [
     visible: true,
     contentRu: {
       brandText:
-        "Проектируем и реализуем инженерные системы для частных, коммерческих и промышленных объектов по всей Латвии.",
+        "Электромонтаж и инженерия для частных, коммерческих и промышленных объектов по Латвии.",
       navTitle: "РАЗДЕЛЫ",
       companyTitle: "КОМПАНИЯ",
       navLinks: [
@@ -1071,7 +1071,7 @@ export const DEFAULT_SECTIONS = [
     },
     contentLv: {
       brandText:
-        "Projektējam un īstenojam inženiersistēmas privātiem, komerciāliem un rūpniecības objektiem visā Latvijā.",
+        "Elektroinstalācija un inženierija privātiem, komerciāliem un rūpniecības objektiem Latvijā.",
       navTitle: "SADAĻAS",
       companyTitle: "UZŅĒMUMS",
       navLinks: [
@@ -1088,7 +1088,7 @@ export const DEFAULT_SECTIONS = [
     },
     contentEn: {
       brandText:
-        "We design and deliver engineering systems for private, commercial and industrial facilities throughout Latvia.",
+        "Electrical installation and engineering for private, commercial and industrial sites across Latvia.",
       navTitle: "SECTIONS",
       companyTitle: "COMPANY",
       navLinks: [
