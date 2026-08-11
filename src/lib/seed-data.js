@@ -788,8 +788,9 @@ export const DEFAULT_SECTIONS = [
       label: "УМНЫЙ ДОМ",
       title: "Умный дом",
       pageTitle: "Умный дом на Wi‑Fi",
+      lead: "Умный дом без лишней сложности.",
       subtitle:
-        "Рекомендуем и внедряем устройства, которым достаточно питания и Wi‑Fi — без сложного хаба как обязательного условия.",
+        "Подбираем и внедряем Wi‑Fi устройства для освещения, климата, безопасности и автоматизации.",
       pillPower: "Питание",
       ctaText: "Обсудить проект",
       imageUrl:
@@ -875,8 +876,9 @@ export const DEFAULT_SECTIONS = [
       label: "VIEDĀ MĀJA",
       title: "Viedā māja",
       pageTitle: "Viedā māja ar Wi‑Fi",
+      lead: "Viedā māja bez liekas sarežģītības.",
       subtitle:
-        "Iesakām un uzstādām ierīces, kurām pietiek ar barošanu un Wi‑Fi — bez sarežģīta huba kā obligāta priekšnoteikuma.",
+        "Atlasām un uzstādām Wi‑Fi ierīces apgaismojumam, klimatam, drošībai un automatizācijai.",
       pillPower: "Barošana",
       ctaText: "Apspriest projektu",
       imageUrl:
@@ -961,9 +963,10 @@ export const DEFAULT_SECTIONS = [
     contentEn: {
       label: "SMART HOME",
       title: "Smart home",
-      pageTitle: "Wi‑Fi smart home",
+      pageTitle: "Smart home on Wi‑Fi",
+      lead: "Smart home without unnecessary complexity.",
       subtitle:
-        "We recommend and install devices that only need power and Wi‑Fi — no complex hub as a hard requirement.",
+        "We select and install Wi‑Fi devices for lighting, climate, security and automation.",
       pillPower: "Power",
       ctaText: "Discuss a project",
       imageUrl:

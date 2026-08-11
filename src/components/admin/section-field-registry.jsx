@@ -402,6 +402,7 @@ export function renderSectionFields(key, content, onChange) {
               value={content.pageTitle}
               onChange={(v) => onChange({ pageTitle: v })}
             />
+            <Field label="Lead (акцент)" value={content.lead} onChange={(v) => onChange({ lead: v })} />
             <Field label="Подзаголовок" value={content.subtitle} onChange={(v) => onChange({ subtitle: v })} multiline />
             <Field label="Pill «Питание»" value={content.pillPower} onChange={(v) => onChange({ pillPower: v })} />
             <Field label="Текст CTA" value={content.ctaText} onChange={(v) => onChange({ ctaText: v })} />
