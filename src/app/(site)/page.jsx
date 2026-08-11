@@ -55,7 +55,7 @@ export default async function HomePage() {
       {sectionsMap.services ? <ServicesSection content={services} /> : null}
       {sectionsMap.projects ? <ProjectsSection content={projects} /> : null}
       {sectionsMap.about ? <AboutSection content={about} /> : null}
-      {sectionsMap.careers ? <CareersSection content={careers} /> : null}
+      {sectionsMap.careers ? <CareersSection content={careers} locale={locale} /> : null}
       {sectionsMap.contacts ? (
         <ContactsSection content={contacts} locale={locale} company={company} />
       ) : null}
