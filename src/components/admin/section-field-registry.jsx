@@ -176,7 +176,7 @@ export function renderSectionFields(key, content, onChange) {
                 })
               }
               multiline
-              helper="Например /img/design-template-mount.jpg"
+              helper="Например /img/design-template-mount.webp"
             />
             <Field
               label="Сколько фото в превью на /design"
