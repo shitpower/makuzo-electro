@@ -101,11 +101,6 @@ export function renderSectionFields(key, content, onChange) {
             />
             <Field label="Вступление" value={content.intro} onChange={(v) => onChange({ intro: v })} multiline />
             <Field
-              label="Заголовок блока"
-              value={content.sectionTitle}
-              onChange={(v) => onChange({ sectionTitle: v })}
-            />
-            <Field
               label="Абзацы (каждый с новой строки)"
               value={(content.paragraphs || []).join("\n\n")}
               onChange={(v) =>
@@ -133,46 +128,22 @@ export function renderSectionFields(key, content, onChange) {
               helper="Например /img/design-template-mount.jpg"
             />
             <Field
-              label="Лейбл процесса"
-              value={content.processLabel}
-              onChange={(v) => onChange({ processLabel: v })}
+              label="Сколько фото в превью на /design"
+              value={String(content.galleryPreviewCount ?? 3)}
+              onChange={(v) => onChange({ galleryPreviewCount: Math.max(1, Number(v) || 3) })}
+            />
+            <Field label="Лейбл галереи" value={content.galleryLabel} onChange={(v) => onChange({ galleryLabel: v })} />
+            <Field label="Заголовок превью галереи" value={content.galleryTitle} onChange={(v) => onChange({ galleryTitle: v })} />
+            <Field label="Кнопка «Вся галерея»" value={content.galleryCta} onChange={(v) => onChange({ galleryCta: v })} />
+            <Field
+              label="Заголовок страницы /design/gallery"
+              value={content.galleryPageTitle}
+              onChange={(v) => onChange({ galleryPageTitle: v })}
             />
             <Field
-              label="Шаги процесса (по строке)"
-              value={(content.processSteps || []).join("\n")}
-              onChange={(v) =>
-                onChange({
-                  processSteps: v
-                    .split("\n")
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-                })
-              }
-              multiline
-            />
-            <Field
-              label="Примечание после процесса"
-              value={content.processNote}
-              onChange={(v) => onChange({ processNote: v })}
-              multiline
-            />
-            <Field label="Кнопка «Подробнее»" value={content.detailCta} onChange={(v) => onChange({ detailCta: v })} />
-            <Field
-              label="Заголовок окна «Подробнее»"
-              value={content.detailTitle}
-              onChange={(v) => onChange({ detailTitle: v })}
-            />
-            <Field
-              label="Текст окна «Подробнее» (абзацы через пустую строку)"
-              value={(content.detailBody || []).join("\n\n")}
-              onChange={(v) =>
-                onChange({
-                  detailBody: v
-                    .split(/\n\s*\n/)
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-                })
-              }
+              label="Вступление страницы галереи"
+              value={content.galleryPageIntro}
+              onChange={(v) => onChange({ galleryPageIntro: v })}
               multiline
             />
             <Field
@@ -199,12 +170,130 @@ export function renderSectionFields(key, content, onChange) {
               onChange={(v) => onChange({ cultureTitle: v })}
             />
             <Field
-              label="Текст культуры работ"
+              label="Вступление культуры"
               value={content.cultureIntro}
               onChange={(v) => onChange({ cultureIntro: v })}
               multiline
             />
+            <Field
+              label="Пункты культуры (по строке)"
+              value={(content.cultureItems || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  cultureItems: v
+                    .split("\n")
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+                })
+              }
+              multiline
+            />
             <Field label="Заключение" value={content.closing} onChange={(v) => onChange({ closing: v })} multiline />
+            <Field label="Текст кнопки «Узнать подробнее»" value={content.detailCta} onChange={(v) => onChange({ detailCta: v })} />
+          </FormSection>
+          <FormSection title="Окно «Узнать подробнее»">
+            <Field
+              label="Заголовок"
+              value={content.detail?.title}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), title: v } })}
+            />
+            <Field
+              label="Подзаголовок"
+              value={content.detail?.subtitle}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), subtitle: v } })}
+            />
+            <Field
+              label="Вступление"
+              value={content.detail?.intro}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), intro: v } })}
+              multiline
+            />
+            <Field
+              label="Заголовок блока"
+              value={content.detail?.sectionTitle}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), sectionTitle: v } })}
+            />
+            <Field
+              label="Абзацы (через пустую строку)"
+              value={(content.detail?.paragraphs || []).join("\n\n")}
+              onChange={(v) =>
+                onChange({
+                  detail: {
+                    ...(content.detail || {}),
+                    paragraphs: v
+                      .split(/\n\s*\n/)
+                      .map((s) => s.trim())
+                      .filter(Boolean),
+                  },
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Лейбл процесса"
+              value={content.detail?.processLabel}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), processLabel: v } })}
+            />
+            <Field
+              label="Шаги процесса (по строке)"
+              value={(content.detail?.processSteps || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  detail: {
+                    ...(content.detail || {}),
+                    processSteps: v
+                      .split("\n")
+                      .map((s) => s.trim())
+                      .filter(Boolean),
+                  },
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Примечание процесса"
+              value={content.detail?.processNote}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), processNote: v } })}
+              multiline
+            />
+            <Field
+              label="Заголовок «Что это даёт»"
+              value={content.detail?.advantagesTitle}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), advantagesTitle: v } })}
+            />
+            <Field
+              label="Пункты «Что это даёт» (по строке)"
+              value={(content.detail?.advantages || []).join("\n")}
+              onChange={(v) =>
+                onChange({
+                  detail: {
+                    ...(content.detail || {}),
+                    advantages: v
+                      .split("\n")
+                      .map((s) => s.trim())
+                      .filter(Boolean),
+                  },
+                })
+              }
+              multiline
+            />
+            <Field
+              label="Заголовок «Работаем аккуратно»"
+              value={content.detail?.cultureTitle}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), cultureTitle: v } })}
+            />
+            <Field
+              label="Текст «Работаем аккуратно»"
+              value={content.detail?.cultureIntro}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), cultureIntro: v } })}
+              multiline
+            />
+            <Field
+              label="Заключение в окне"
+              value={content.detail?.closing}
+              onChange={(v) => onChange({ detail: { ...(content.detail || {}), closing: v } })}
+              multiline
+            />
           </FormSection>
         </div>
       );

@@ -6,7 +6,7 @@ const LOCALE_COOKIE = "locale";
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
 
 /** Legacy public paths (no locale prefix) that must redirect into /[locale]/… */
-const LEGACY_PAGE_PATHS = new Set(["/", "/design", "/privacy", "/smart-home"]);
+const LEGACY_PAGE_PATHS = new Set(["/", "/design", "/design/gallery", "/privacy", "/smart-home"]);
 
 /**
  * @param {string} pathname
@@ -80,6 +80,7 @@ export const config = {
   matcher: [
     "/",
     "/design",
+    "/design/gallery",
     "/privacy",
     "/smart-home",
     "/ru",
