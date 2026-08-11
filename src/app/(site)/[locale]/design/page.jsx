@@ -72,9 +72,15 @@ export default async function DesignPage({ params }) {
             <FiArrowLeft aria-hidden />
             {isEn ? "Back" : isLv ? "Atpakaļ" : "На главную"}
           </Link>
-          <h1 className="section-title max-w-[900px]">{content.pageTitle || content.title}</h1>
+          <p className="section-label">{content.label || (isEn ? "DESIGN" : isLv ? "DIZAINS" : "ДИЗАЙН")}</p>
+          <h1 className="section-title max-w-[900px]">{content.title}</h1>
+          {content.pageTitle && content.pageTitle !== content.title ? (
+            <p className="max-w-[720px] font-[family-name:var(--font-display)] text-[clamp(1.25rem,2.5vw,1.75rem)] font-medium leading-snug text-[var(--ink)]">
+              {content.pageTitle}
+            </p>
+          ) : null}
           {content.subtitle ? (
-            <p className="font-[family-name:var(--font-display)] text-[clamp(1.25rem,2.5vw,1.75rem)] font-medium text-[var(--signal)]">
+            <p className="font-[family-name:var(--font-display)] text-[clamp(1.125rem,2vw,1.5rem)] font-medium text-[var(--signal)]">
               {content.subtitle}
             </p>
           ) : null}

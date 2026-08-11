@@ -6,7 +6,7 @@ import { FiArrowRight, FiChevronDown } from "react-icons/fi";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 export function ServicesSection({ content }) {
-  const items = content?.items || [];
+  const items = (content?.items || []).filter((item) => item.visible !== false);
   const [openNum, setOpenNum] = useState(null);
 
   return (

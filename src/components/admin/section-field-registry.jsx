@@ -18,7 +18,7 @@ export const SECTION_LABELS = {
 export const SECTION_HELPERS = {
   hero: "Первый экран: заголовок, кнопки, фон.",
   design: "Короткий блок на главной + полный текст на /design.",
-  services: "Список услуг с раскрывающимися пунктами.",
+  services: "Список услуг с пунктами. Каждую услугу можно скрыть тумблером «На сайте».",
   projects: "Карточки проектов с фотографиями.",
   about: "Блок «О компании»: статистика, фото и три преимущества.",
   careers: "Вакансии и призыв присоединиться.",
@@ -242,7 +242,21 @@ export function renderSectionFields(key, content, onChange) {
           />
           {(content.items || []).map((item, i) => (
             <div key={i} className="space-y-3 rounded-lg border border-[var(--border-subtle)] p-4">
-              <p className="text-xs font-bold text-[var(--accent)]">Услуга {item.num || i + 1}</p>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-xs font-bold text-[var(--accent)]">Услуга {item.num || i + 1}</p>
+                <label className="flex min-h-10 items-center gap-2 rounded-lg border border-[var(--border-subtle)] px-3 text-xs text-[var(--text-secondary)]">
+                  <input
+                    type="checkbox"
+                    checked={item.visible !== false}
+                    onChange={(e) => {
+                      const items = [...content.items];
+                      items[i] = { ...items[i], visible: e.target.checked };
+                      onChange({ items });
+                    }}
+                  />
+                  На сайте
+                </label>
+              </div>
               <Field
                 label="Номер"
                 value={item.num}

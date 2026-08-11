@@ -279,6 +279,7 @@ export const DEFAULT_SECTIONS = [
       items: [
         {
           num: "01",
+          visible: true,
           title: "Электромонтаж",
           description: "Монтаж силовых и осветительных сетей, оборудования и систем «Умный дом».",
           bullets: [
@@ -296,6 +297,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "02",
+          visible: true,
           title: "Электроизмерения",
           description: "Измерения, аудит и тепловизионная диагностика электроустановок.",
           bullets: [
@@ -312,6 +314,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "03",
+          visible: true,
           title: "Слаботочные системы",
           description: "Пожарная и охранная сигнализация, видеонаблюдение, СКУД и СКС.",
           bullets: [
@@ -325,6 +328,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "04",
+          visible: true,
           title: "Электрощиты",
           description: "Вводно-распределительные, учёта, силовые, освещения и управления.",
           bullets: [
@@ -337,6 +341,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "05",
+          visible: true,
           title: "Автоматизация",
           description: "Промышленная автоматика, управление освещением, вентиляцией и процессами.",
           bullets: [
@@ -356,6 +361,7 @@ export const DEFAULT_SECTIONS = [
       items: [
         {
           num: "01",
+          visible: true,
           title: "Elektroinstalācija",
           description:
             "Spēka un apgaismojuma tīklu, iekārtu un «Viedās mājas» sistēmu montāža.",
@@ -374,6 +380,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "02",
+          visible: true,
           title: "Elektromērījumi",
           description:
             "Mērījumi, audits un elektroinstalāciju termogrāfiskā diagnostika.",
@@ -391,6 +398,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "03",
+          visible: true,
           title: "Vājstrāvas sistēmas",
           description:
             "Ugunsgrēka un apsardzes signalizācija, video novērošana, pieejas kontrole un SKS.",
@@ -405,6 +413,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "04",
+          visible: true,
           title: "Elektrosadales skapji",
           description:
             "Ievada un sadalības, uzskaites, spēka, apgaismojuma un vadības skapji.",
@@ -418,6 +427,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "05",
+          visible: true,
           title: "Automatizācija",
           description:
             "Rūpnieciskā automatizācija, apgaismojuma, ventilācijas un procesu vadība.",
@@ -438,6 +448,7 @@ export const DEFAULT_SECTIONS = [
       items: [
         {
           num: "01",
+          visible: true,
           title: "Electrical installation",
           description: "Installation of power and lighting networks, equipment and smart home systems.",
           bullets: [
@@ -455,6 +466,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "02",
+          visible: true,
           title: "Electrical measurements",
           description: "Measurements, audits and thermal imaging diagnostics of electrical installations.",
           bullets: [
@@ -471,6 +483,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "03",
+          visible: true,
           title: "Low-current systems",
           description: "Fire and security alarms, video surveillance, access control and structured cabling.",
           bullets: [
@@ -484,6 +497,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "04",
+          visible: true,
           title: "Electrical switchboards",
           description: "Main distribution, metering, power, lighting and control panels.",
           bullets: [
@@ -496,6 +510,7 @@ export const DEFAULT_SECTIONS = [
         },
         {
           num: "05",
+          visible: true,
           title: "Automation",
           description: "Industrial automation, lighting, ventilation and process control.",
           bullets: [
