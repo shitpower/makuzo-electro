@@ -26,7 +26,7 @@ export const DEFAULT_SECTIONS = [
       ctaSecondaryText: "Смотреть услуги",
       ctaHref: "#contacts",
       bgImageUrl:
-        "/img/hero-bg.webp",
+        "/img/hero-bg.png",
     },
     contentLv: {
       locationTag: "RĪGA · LATVIJA",
@@ -38,7 +38,7 @@ export const DEFAULT_SECTIONS = [
       ctaSecondaryText: "Skatīt pakalpojumus",
       ctaHref: "#contacts",
       bgImageUrl:
-        "/img/hero-bg.webp",
+        "/img/hero-bg.png",
     },
     contentEn: {
       locationTag: "RIGA · LATVIA",
@@ -50,7 +50,7 @@ export const DEFAULT_SECTIONS = [
       ctaSecondaryText: "View services",
       ctaHref: "#contacts",
       bgImageUrl:
-        "/img/hero-bg.webp",
+        "/img/hero-bg.png",
     },
   },
   {
