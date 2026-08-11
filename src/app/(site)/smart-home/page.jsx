@@ -194,7 +194,7 @@ export default async function SmartHomePage() {
 
           <div className="relative overflow-visible rounded-[2px] lg:origin-center lg:scale-[1.08]">
             <SiteImage
-              src="/img/smart-homes.png"
+              src="/img/smart-homes.webp"
               alt={
                 isEn
                   ? "Makuzo smart home system"
@@ -207,6 +207,7 @@ export default async function SmartHomePage() {
               className="block h-auto w-full"
               sizes="(max-width: 1024px) 100vw, 55vw"
               priority
+              quality={92}
             />
           </div>
         </div>

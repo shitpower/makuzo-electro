@@ -15,6 +15,7 @@
     "test:e2e": "playwright test",
     "lighthouse:ci": "lhci autorun",
     "images:optimize": "node scripts/optimize-images.js",
+    "images:optimize-site": "node scripts/optimize-site-images.js",
     "db:generate": "drizzle-kit generate --config=drizzle.config.js",
     "db:push": "node scripts/db-push.js",
     "db:studio": "node scripts/db-studio.js",

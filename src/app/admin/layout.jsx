@@ -4,8 +4,11 @@ export const metadata = {
   title: "Панель управления",
   robots: { index: false, follow: false },
   icons: {
-    icon: [{ url: "/icon/Makuzo-ico.png", type: "image/png" }],
-    shortcut: "/icon/Makuzo-ico.png",
+    icon: [
+      { url: "/icon/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon/Makuzo-ico.png", type: "image/png" },
+    ],
+    shortcut: "/icon/favicon-32.png",
   },
 };
 

@@ -15,7 +15,7 @@ export function SiteImage({
   priority,
   sizes,
   unoptimized: unoptimizedProp,
-  quality,
+  quality = 90,
 }) {
   const normalized = normalizeCmsMediaSrc(src);
   if (!normalized) return null;

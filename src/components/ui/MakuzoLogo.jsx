@@ -28,6 +28,7 @@ export function MakuzoLogo({ className, priority = false, variant = "default" })
       width={logo.width}
       height={logo.height}
       priority={priority}
+      quality={95}
       sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, 280px"
       className={clsx("w-auto object-contain", className)}
     />
