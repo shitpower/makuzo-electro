@@ -865,10 +865,10 @@ export const DEFAULT_SECTIONS = [
           text: "Витрины, залы, подсобки — единый подход: питание, сеть и сценарии под режим работы.",
         },
       ],
-      closingPill: " Питание + Wi‑Fi",
-      closingTitle: "Сделаем объект умнее?",
+      closingPill: "Питание + Wi‑Fi",
+      closingTitle: "Сделаем объект умнее.",
       closingText:
-        "Подберём линейку устройств под вашу электрику, смонтируем и настроим сценарии. Напишите или позвоните — обсудим задачу.",
+        "Подберём устройства под вашу электрику, смонтируем и настроим сценарии — от подключения до автоматизации.",
     },
     contentLv: {
       label: "VIEDĀ MĀJA",
@@ -952,10 +952,10 @@ export const DEFAULT_SECTIONS = [
           text: "Vitrīnas, zāles, palīgtelpas — vienota pieeja: barošana, tīkls un scenāriji atbilstoši darba režīmam.",
         },
       ],
-      closingPill: " Barošana + Wi‑Fi",
-      closingTitle: "Padarīsim jūsu objektu viedāku?",
+      closingPill: "Barošana + Wi‑Fi",
+      closingTitle: "Padarīsim jūsu objektu viedāku.",
       closingText:
-        "Izvēlēsimies ierīču lineāru atbilstoši jūsu elektroinstalācijai, uzstādīsim un noskaņosim scenārijus. Rakstiet vai zvaniet — apspriedīsim uzdevumu.",
+        "Izvēlēsimies ierīces atbilstoši jūsu elektroinstalācijai, uzstādīsim un noskaņosim scenārijus — no pieslēguma līdz automatizācijai.",
     },
     contentEn: {
       label: "SMART HOME",
@@ -1039,10 +1039,10 @@ export const DEFAULT_SECTIONS = [
           text: "Storefronts, halls, back rooms — one approach: power, network and scenes for your hours.",
         },
       ],
-      closingPill: " Power + Wi‑Fi",
-      closingTitle: "Shall we make your facility smarter?",
+      closingPill: "Power + Wi‑Fi",
+      closingTitle: "Shall we make your facility smarter.",
       closingText:
-        "We will pick a device line for your electrics, install it and set up scenes. Write or call — let’s discuss the brief.",
+        "We will pick devices for your electrics, install them and set up scenes — from power-up to automation.",
     },
   },
   {
