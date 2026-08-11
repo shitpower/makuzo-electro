@@ -23,12 +23,14 @@ export function DesignGalleryLightbox({ images, index, onClose, onChange, locale
 
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
   const dragRef = useRef(null);
   const stageRef = useRef(null);
 
   useEffect(() => {
     setZoom(1);
     setOffset({ x: 0, y: 0 });
+    setDragging(false);
   }, [index]);
 
   useEffect(() => {
@@ -96,20 +98,32 @@ export function DesignGalleryLightbox({ images, index, onClose, onChange, locale
   }
 
   function onPointerDown(e) {
+    // Only left mouse button (0) or touch/pen
     if (zoom <= 1) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
     dragRef.current = { x: e.clientX, y: e.clientY, ox: offset.x, oy: offset.y };
+    setDragging(true);
   }
 
   function onPointerMove(e) {
     if (!dragRef.current || zoom <= 1) return;
+    if (e.pointerType === "mouse" && e.buttons !== 1) {
+      dragRef.current = null;
+      setDragging(false);
+      return;
+    }
+    e.preventDefault();
     const dx = e.clientX - dragRef.current.x;
     const dy = e.clientY - dragRef.current.y;
     setOffset({ x: dragRef.current.ox + dx, y: dragRef.current.oy + dy });
   }
 
-  function onPointerUp() {
+  function onPointerUp(e) {
+    if (e.pointerType === "mouse" && e.button !== 0 && e.type === "pointerup") return;
     dragRef.current = null;
+    setDragging(false);
   }
 
   if (!open || !current) return null;
@@ -171,22 +185,33 @@ export function DesignGalleryLightbox({ images, index, onClose, onChange, locale
 
         <div
           ref={stageRef}
-          className={`relative aspect-[4/3] w-full overflow-hidden rounded-[2px] bg-black/40 sm:aspect-[16/10] ${
+          className={`relative aspect-[4/3] w-full touch-none overflow-hidden rounded-[2px] bg-black/40 select-none sm:aspect-[16/10] ${
             zoom > 1 ? "cursor-grab active:cursor-grabbing" : "cursor-default"
           }`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
+          onContextMenu={(e) => e.preventDefault()}
+          onDragStart={(e) => e.preventDefault()}
         >
           <div
-            className="absolute inset-0 transition-transform duration-150 ease-out"
+            className={`pointer-events-none absolute inset-0 ${
+              dragging ? "" : "transition-transform duration-150 ease-out"
+            }`}
             style={{
               transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
               transformOrigin: "center center",
             }}
           >
-            <SiteImage src={current} alt={alt} fill sizes="100vw" className="object-contain" priority />
+            <SiteImage
+              src={current}
+              alt={alt}
+              fill
+              sizes="100vw"
+              className="pointer-events-none object-contain select-none"
+              priority
+            />
           </div>
         </div>
 
