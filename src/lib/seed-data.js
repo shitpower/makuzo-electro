@@ -669,8 +669,9 @@ export const DEFAULT_SECTIONS = [
     contentRu: {
       label: "КОНТАКТЫ",
       title: "Обсудим ваш проект?",
-      description: "Напишите или позвоните — подготовим техническое решение и смету под ваш объект.",
-      primaryCta: "Написать",
+      description:
+        "Напишите нам — подготовим техническое решение и предварительную смету под ваш объект.",
+      primaryCta: "Написать нам",
       secondaryCta: "Позвонить",
       detailsVisible: false,
       detailVisibility: {
@@ -707,8 +708,8 @@ export const DEFAULT_SECTIONS = [
       label: "KONTAKTI",
       title: "Apspriedīsim jūsu projektu?",
       description:
-        "Rakstiet vai zvaniet — sagatavosim tehnisko risinājumu un tāmi jūsu objektam.",
-      primaryCta: "Rakstīt",
+        "Rakstiet mums — sagatavosim tehnisko risinājumu un provizorisko tāmi jūsu objektam.",
+      primaryCta: "Rakstīt mums",
       secondaryCta: "Zvanīt",
       detailsVisible: false,
       detailVisibility: {
@@ -745,8 +746,8 @@ export const DEFAULT_SECTIONS = [
       label: "CONTACTS",
       title: "Shall we discuss your project?",
       description:
-        "Write or call — we will prepare a technical solution and estimate for your facility.",
-      primaryCta: "Write",
+        "Write to us — we will prepare a technical solution and preliminary estimate for your facility.",
+      primaryCta: "Write to us",
       secondaryCta: "Call",
       detailsVisible: false,
       detailVisibility: {
@@ -1050,7 +1051,7 @@ export const DEFAULT_SECTIONS = [
     visible: true,
     contentRu: {
       brandText:
-        "Инженерные решения для электрификации и слаботочных систем — промышленным, коммерческим и частным объектам по всей Латвии.",
+        "Проектируем и реализуем инженерные системы для частных, коммерческих и промышленных объектов по всей Латвии.",
       navTitle: "РАЗДЕЛЫ",
       companyTitle: "КОМПАНИЯ",
       navLinks: [
@@ -1067,7 +1068,7 @@ export const DEFAULT_SECTIONS = [
     },
     contentLv: {
       brandText:
-        "Inženiertehniskie risinājumi elektroinstalācijai un vājstrāvas sistēmām — rūpniecības, komerciāliem un privātiem objektiem visā Latvijā.",
+        "Projektējam un īstenojam inženiersistēmas privātiem, komerciāliem un rūpniecības objektiem visā Latvijā.",
       navTitle: "SADAĻAS",
       companyTitle: "UZŅĒMUMS",
       navLinks: [
@@ -1084,7 +1085,7 @@ export const DEFAULT_SECTIONS = [
     },
     contentEn: {
       brandText:
-        "Engineering solutions for electrification and low-current systems — for industrial, commercial and private facilities throughout Latvia.",
+        "We design and deliver engineering systems for private, commercial and industrial facilities throughout Latvia.",
       navTitle: "SECTIONS",
       companyTitle: "COMPANY",
       navLinks: [
